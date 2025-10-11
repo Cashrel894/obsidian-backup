@@ -16,6 +16,7 @@
 [[Compiler, Assembler, Linker, Loader (CALL)]]
 [[Synchronous Digital System (SDS)]]
 [[Combinational Blocks]]
+[[State]]
 [[RISC-V Single-Cycle Datapath]]
 
 ## 课程简介
