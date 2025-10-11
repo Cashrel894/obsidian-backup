@@ -18,7 +18,6 @@
 [[Combinational Blocks]]
 [[RISC-V Single-Cycle Datapath]]
 
-
 ## 课程简介
 
 - 所属大学：UC Berkeley
