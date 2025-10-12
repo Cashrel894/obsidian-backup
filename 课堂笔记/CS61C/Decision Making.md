@@ -9,7 +9,7 @@ beg: branch if equal
 除此之外还有：
 - bne: branch if not equal
 - blt: branch if less than
-- bge: branch if greater than
+- bge: branch if greater  than or equal to
 - 此外 blt 和 bge 还有对应的无符号版本：bltu bgeu
 - **不存在** ble 和 bgt
 

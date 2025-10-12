@@ -18,6 +18,7 @@
 [[Combinational Blocks]]
 [[State]]
 [[RISC-V Single-Cycle Datapath]]
+[[RISC-V Single-Cycle Control]]
 
 ## 课程简介
 
