@@ -20,3 +20,4 @@ johns_location.upcase!  #=> "BARCELONA"
 desired_location        #=> "BARCELONA"
 johns_location          #=> "BARCELONA"
 ```
+
