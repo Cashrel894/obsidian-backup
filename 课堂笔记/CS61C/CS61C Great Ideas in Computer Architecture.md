@@ -20,6 +20,7 @@
 [[RISC-V Single-Cycle Datapath]]
 [[RISC-V Single-Cycle Control]]
 [[RISC-V 5-Stage Pipeline]]
+[[Caches]]
 
 ## 课程简介
 
