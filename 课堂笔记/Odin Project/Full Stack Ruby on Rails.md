@@ -3,3 +3,5 @@
 [[Ruby Variables]]
 [[Input and Output]]
 [[Conditional Logic]]
+[[Ruby Loops]]
+[[Ruby Arrays]]
