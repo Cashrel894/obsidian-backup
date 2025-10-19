@@ -5,3 +5,4 @@
 [[Conditional Logic]]
 [[Ruby Loops]]
 [[Ruby Arrays]]
+[[Ruby hash]]
