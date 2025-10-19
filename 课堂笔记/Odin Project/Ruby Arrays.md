@@ -7,6 +7,11 @@ Array.new(3, true)      #=> [true, true, true]
 ```
 
 ```ruby 
+users = %w(john david peter)
+users = ["john", "david", "peter"]
+```
+
+```ruby 
 str_array = ["This", "is", "a", "small", "array"]
 
 str_array[0]            #=> "This"
@@ -59,6 +64,7 @@ a.concat(b)   #=> [1, 2, 3, 3, 4, 5]
 
 ```ruby 
 [1, 1, 1, 2, 2, 3, 4] - [1, 4]  #=> [2, 2, 3]
+[1, 1, 1, 2, 2, 3, 4] & [1, 4]  #=> [1, 1, 1, 4]
 ```
 
 ```ruby 
@@ -69,6 +75,7 @@ num_array.methods       #=> A very long list of methods
 [1, 2].empty?           #=> false
 
 [1, 2, 3].length        #=> 3
+[1, 2, 3].size          #=> 3
 
 [1, 2, 3].reverse       #=> [3, 2, 1]
 
@@ -77,6 +84,8 @@ num_array.methods       #=> A very long list of methods
 
 [1, 2, 3].join          #=> "123"
 [1, 2, 3].join("-")     #=> "1-2-3"
+
+[1, 2, 3, 4, 5].sample  #=> 随机返回一个元素
 ```
 
 ```ruby 
@@ -171,4 +180,21 @@ irb :002 > a.sort
 ```ruby 
 irb :001 > [1, 2, 3].product([4, 5]) 
 => [[1, 4], [1, 5], [2, 4], [2, 5], [3, 4], [3, 5]]
+```
+![[../../附件/Pasted image 20251019195855.png]]
+
+```ruby 
+numbers << nil
+# [1, 3, 3, 5, 5, nil]
+
+numbers.compact
+# [1, 3, 3, 5, 5]
+```
+
+```ruby 
+# Faster, because this changes the users array
+users.concat(new_users)  
+
+# Slower, because this creates a new array
+users += new_users
 ```
