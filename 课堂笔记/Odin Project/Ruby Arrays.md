@@ -130,3 +130,45 @@ irb :002 > numbers.select { |number| number > 4 }
 irb :003 > numbers 
 => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
+
+```ruby 
+irb: 001 > a = [1, 2, [3, 4, 5], [6, 7]] 
+=> [1, 2, [3, 4, 5], [6, 7]] 
+irb: 002 > a.flatten 
+=> [1, 2, 3, 4, 5, 6, 7]
+```
+
+```ruby 
+irb: 001 > a = [1, 2, 3, 4, 5] 
+=> [1, 2, 3, 4, 5] 
+irb: 002 > a.each_index { |i| puts "This is index #{i}" } 
+This is index 0 
+This is index 1 
+This is index 2 
+This is index 3 
+This is index 4 
+=> [1, 2, 3, 4, 5]
+```
+
+```ruby 
+irb: 001 > a = [1, 2, 3, 4, 5] 
+=> [1, 2, 3, 4, 5] 
+irb: 002 > a.each_with_index { |val, idx| puts "#{idx+1}. #{val}" } 
+1. 1 
+2. 2 
+3. 3 
+4. 4 
+5. 5 => [1, 2, 3, 4, 5]
+```
+
+```ruby 
+irb :001 > a = [5, 3, 8, 2, 4, 1] 
+=> [5, 3, 8, 2, 4, 1] 
+irb :002 > a.sort 
+=> [1, 2, 3, 4, 5, 8]
+```
+
+```ruby 
+irb :001 > [1, 2, 3].product([4, 5]) 
+=> [[1, 4], [1, 5], [2, 4], [2, 5], [3, 4], [3, 5]]
+```
