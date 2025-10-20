@@ -99,7 +99,8 @@ my_numbers.reduce(1000) { |sum, number| sum + number }
 .any?
 .all?
 .none?
-.find
+.include?
+.one?
 ```
 
 ```ruby 
@@ -111,8 +112,4 @@ my_numbers.reduce(1000) { |sum, number| sum + number }
 ```ruby 
 > names.grep(/J/)
 => ["James", "Joe", "Jim"]
-```
-
-```ruby 
-
 ```
