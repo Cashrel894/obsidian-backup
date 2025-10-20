@@ -6,3 +6,4 @@
 [[Ruby Loops]]
 [[Ruby Arrays]]
 [[Ruby hash]]
+[[Basic Enumerable Methods]]
