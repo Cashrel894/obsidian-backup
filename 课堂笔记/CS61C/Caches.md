@@ -9,3 +9,9 @@
 ![[../../附件/Pasted image 20251018174205.png]]
 
 ![[../../附件/Pasted image 20251018174441.png]]
+
+## Cache Terminology
+![[../../附件/Pasted image 20251019215536.png]]
+![[../../附件/Pasted image 20251019215627.png]]
+![[../../附件/Pasted image 20251019215657.png]]
+![[../../附件/Pasted image 20251019220133.png]]
