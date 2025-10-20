@@ -41,3 +41,11 @@
 ## Block Replacement Policy
 ![[../../附件/Pasted image 20251020133623.png]]
 ![[../../附件/Pasted image 20251020133648.png]]
+
+## Average Memory Access Time (AMAT)
+![[../../附件/Pasted image 20251020134223.png]]
+![[../../附件/Pasted image 20251020134236.png]]
+![[../../附件/Pasted image 20251020134524.png]]
+![[../../附件/Pasted image 20251020134635.png]]
+![[../../附件/Pasted image 20251020134722.png]]
+
