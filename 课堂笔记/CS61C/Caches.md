@@ -15,3 +15,15 @@
 ![[../../附件/Pasted image 20251019215627.png]]
 ![[../../附件/Pasted image 20251019215657.png]]
 ![[../../附件/Pasted image 20251019220133.png]]
+
+## Write Back 
+![[../../附件/Pasted image 20251020131538.png]]
+
+## Block Size Tradeoff 
+![[../../附件/Pasted image 20251020131615.png]]
+![[../../附件/Pasted image 20251020131630.png]]
+## Cache Misses 
+![[../../附件/Pasted image 20251020131340.png]]
+![[../../附件/Pasted image 20251020131349.png]]
+
+## Fully Assocaited Caches
