@@ -69,6 +69,19 @@ friends.map { |friend| friend.upcase }
 ```
 
 ```ruby 
+array = %w(a b c)
+
+array.map.with_index { |ch, idx| [ch, idx] }
+
+# [["a", 0], ["b", 1], ["c", 2]]
+```
+
+```ruby 
+["11", "21", "5"].map(&:to_i)
+["orange", "apple", "banana"].map(&:class)
+```
+
+```ruby 
 my_numbers = [5, 6, 7, 8]
 
 my_numbers.reduce { |sum, number| sum + number }
@@ -80,4 +93,26 @@ my_numbers = [5, 6, 7, 8]
 
 my_numbers.reduce(1000) { |sum, number| sum + number }
 #=> 1026
+```
+
+```ruby 
+.any?
+.all?
+.none?
+.find
+```
+
+```ruby 
+> names = ["James", "Bob", "Joe", "Mark", "Jim"]
+> names.group_by{|name| name.length}
+=> {5=>["James"], 3=>["Bob", "Joe", "Jim"], 4=>["Mark"]}
+```
+
+```ruby 
+> names.grep(/J/)
+=> ["James", "Joe", "Jim"]
+```
+
+```ruby 
+
 ```
