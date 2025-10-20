@@ -25,5 +25,19 @@
 ## Cache Misses 
 ![[../../附件/Pasted image 20251020131340.png]]
 ![[../../附件/Pasted image 20251020131349.png]]
+![[../../附件/Pasted image 20251020132429.png]]
+![[../../附件/Pasted image 20251020132553.png]]
+## Fully Associative Caches
+![[../../附件/Pasted image 20251020132240.png]]
+![[../../附件/Pasted image 20251020132251.png]]
+![[../../附件/Pasted image 20251020132347.png]]
 
-## Fully Assocaited Caches
+## Set Associative Cache 
+![[../../附件/Pasted image 20251020133006.png]]
+![[../../附件/Pasted image 20251020133131.png]]
+![[../../附件/Pasted image 20251020133209.png]]
+![[../../附件/Pasted image 20251020133234.png]]
+
+## Block Replacement Policy
+![[../../附件/Pasted image 20251020133623.png]]
+![[../../附件/Pasted image 20251020133648.png]]
