@@ -263,11 +263,69 @@ puts sparky.name            # => "Spartacus"
 attr_accessor :name, :height, :weight
 ```
 
-注意：以下写法不会调用 setter，而是会被视作初始化局部变量，因此不会改变属性的值。
+**注意**：以下写法不会调用 setter，而是会被视作初始化局部变量，因此不会改变属性的值。
 ```ruby 
 def change_info(n, h, w)
   name = n
   height = h
   weight = w
 end
+```
+因此需要使用 self 调用 setter
+```ruby 
+def change_info(n, h, w)
+  self.name = n
+  self.height = h
+  self.weight = w
+end
+```
+
+## Class Methods 
+```ruby 
+# ... rest of code ommitted for brevity
+
+def self.what_am_i         # Class method definition
+  "I'm a GoodDog class!"
+end
+
+GoodDog.what_am_i          # => I'm a GoodDog class!
+```
+
+## Class Variables 
+```ruby 
+class GoodDog
+  @@number_of_dogs = 0
+
+  def initialize
+    @@number_of_dogs += 1
+  end
+
+  def self.total_number_of_dogs
+    @@number_of_dogs
+  end
+end
+
+puts GoodDog.total_number_of_dogs   # => 0
+
+dog1 = GoodDog.new
+dog2 = GoodDog.new
+
+puts GoodDog.total_number_of_dogs   # => 2
+```
+
+## Constants 
+```ruby 
+class GoodDog
+  DOG_YEARS = 7
+
+  attr_accessor :name, :age
+
+  def initialize(n, a)
+    self.name = n
+    self.age  = a * DOG_YEARS
+  end
+end
+
+sparky = GoodDog.new("Sparky", 4)
+puts sparky.age             # => 28
 ```
