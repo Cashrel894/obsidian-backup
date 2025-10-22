@@ -71,3 +71,203 @@ Object
 Kernel
 BasicObject
 ```
+
+## Initialize
+```ruby 
+class GoodDog
+  def initialize
+    puts "This object was initialized!"
+  end
+end
+
+sparky = GoodDog.new        # => "This object was initialized!"
+```
+
+```ruby 
+class GoodDog
+  def initialize(name)
+    @name = name
+  end
+end
+
+sparky = GoodDog.new("Sparky")
+```
+
+## Composition
+```ruby 
+class Engine
+  def start
+    puts "Engine starting..."
+  end
+end
+
+class Car
+  def initialize
+    @engine = Engine.new  # Engine instance is created when Car is created
+  end
+
+  def start
+    @engine.start
+  end
+end
+
+my_car = Car.new
+my_car.start  # Engine is an integral part of Car
+```
+## Aggregation 
+```ruby 
+class Passenger
+end
+
+class Car
+  def initialize(passengers)
+    @passengers = passengers  # Passengers are given to the Car at creation
+  end
+end
+
+# Passengers can exist without Car
+passengers = [Passenger.new, Passenger.new]
+my_car = Car.new(passengers)
+```
+
+>  **Composition:** The container owns the contained objects, and their lifecycles are tightly linked.
+>  **Aggregation:** The container does not own the contained objects; they can exist independently.
+
+## Instance Methods 
+```ruby 
+class GoodDog
+  def initialize(name)
+    @name = name
+  end
+
+  def speak
+    "Arf!"
+  end
+end
+
+sparky = GoodDog.new("Sparky")
+puts sparky.speak
+```
+
+## Accessor Methods 
+在 Ruby 中，不能直接获取实例变量，而是需要通过调用实例方法间接获取：
+```ruby 
+puts sparky.name
+```
+
+```ruby 
+NoMethodError: undefined method `name' for #<GoodDog:0x007f91821239d0 @name="Sparky">
+```
+
+```ruby 
+class GoodDog
+  def initialize(name)
+    @name = name
+  end
+
+  def get_name
+    @name
+  end
+
+  def speak
+    "#{@name} says arf!"
+  end
+end
+
+sparky = GoodDog.new("Sparky")
+puts sparky.speak
+puts sparky.get_name
+```
+
+要修改实例变量也是同理：
+```ruby 
+class GoodDog
+  def initialize(name)
+    @name = name
+  end
+
+  def get_name
+    @name
+  end
+
+  def set_name=(name)
+    @name = name
+  end
+
+  def speak
+    "#{@name} says arf!"
+  end
+end
+
+sparky = GoodDog.new("Sparky")
+puts sparky.speak
+puts sparky.get_name
+sparky.set_name = "Spartacus"
+puts sparky.get_name
+```
+方法名最后的 `=` 使 ruby 将该方法视作 setter 方法。
+
+通常，getter 和 setter 方法的名字和要访问的属性名一致：
+```ruby 
+class GoodDog
+  def initialize(name)
+    @name = name
+  end
+
+  def name                  # This was renamed from "get_name"
+    @name
+  end
+
+  def name=(n)              # This was renamed from "set_name="
+    @name = n
+  end
+
+  def speak
+    "#{@name} says arf!"
+  end
+end
+
+sparky = GoodDog.new("Sparky")
+puts sparky.speak
+puts sparky.name            # => "Sparky"
+sparky.name = "Spartacus"
+puts sparky.name            # => "Spartacus"
+```
+
+> [!note] 
+> setter 方法总是返回它的参数，其他返回值都会被忽略。
+
+这样访问实例变量也太麻烦了，所以 ruby 又提供了一种替代方式：
+```ruby 
+class GoodDog
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def speak
+    "#{@name} says arf!"
+  end
+end
+
+sparky = GoodDog.new("Sparky")
+puts sparky.speak
+puts sparky.name            # => "Sparky"
+sparky.name = "Spartacus"
+puts sparky.name            # => "Spartacus"
+```
+单独设置 `attr_getter` 和 `attr_setter` 也是可以的。
+
+```ruby 
+attr_accessor :name, :height, :weight
+```
+
+注意：以下写法不会调用 setter，而是会被视作初始化局部变量，因此不会改变属性的值。
+```ruby 
+def change_info(n, h, w)
+  name = n
+  height = h
+  weight = w
+end
+```
