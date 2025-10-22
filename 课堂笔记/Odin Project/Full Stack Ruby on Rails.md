@@ -9,3 +9,4 @@
 [[Basic Enumerable Methods]]
 [[Nested Collections]]
 [[Ruby Object Oriented Programming]]
+[[Ruby Error Handling]]
