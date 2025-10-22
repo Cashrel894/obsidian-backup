@@ -429,3 +429,130 @@ class Dog < Mammal
   include Swimmable         # mixing in Swimmable module
 end
 ```
+
+ruby 查找方法时，总是先自身的方法开始，接着从 include 的最后一个 module 查到第一个，最后才查继承的 superclass。
+```ruby 
+class GoodDog < Animal
+  include Swimmable
+  include Climbable
+end
+
+puts "---GoodDog method lookup---"
+puts GoodDog.ancestors
+```
+
+```ruby 
+---GoodDog method lookup---
+GoodDog
+Climbable
+Swimmable
+Animal
+Walkable
+Object
+Kernel
+BasicObject
+```
+
+## More Modules
+Module 还有其他的作用：
+
+比如，可以作为 namespace 使用：
+```ruby 
+module Mammal
+  class Dog
+    def speak(sound)
+      p "#{sound}"
+    end
+  end
+
+  class Cat
+    def say_name(name)
+      p "#{name}"
+    end
+  end
+end
+```
+
+```ruby 
+buddy = Mammal::Dog.new
+kitty = Mammal::Cat.new
+buddy.speak('Arf!')           # => "Arf!"
+kitty.say_name('kitty')       # => "kitty"
+```
+
+另一个是作为方法的容器：
+```ruby 
+module Conversions
+  def self.farenheit_to_celsius(num)
+    (num - 32) * 5 / 9
+  end
+end
+```
+
+```ruby 
+value = Conversions.farenheit_to_celsius(32) # better
+
+value = Conversions::farenheit_to_celsius(32)
+```
+
+## Private, Protected, and Public (Method Access Control)
+```ruby 
+class GoodDog
+  DOG_YEARS = 7
+
+  attr_accessor :name, :age
+
+  def initialize(n, a)
+    self.name = n
+    self.age = a
+  end
+
+  private
+
+  def human_years
+    age * DOG_YEARS
+  end
+end
+
+sparky = GoodDog.new("Sparky", 4)
+sparky.human_years
+```
+
+```ruby 
+NoMethodError: private method `human_years' called for
+  #<GoodDog:0x007f8f431441f8 @name="Sparky", @age=4>
+```
+
+```ruby 
+class Person
+  def initialize(age)
+    @age = age
+  end
+
+  def older?(other_person)
+    age > other_person.age
+  end
+
+  protected
+
+  attr_reader :age
+end
+
+malory = Person.new(64)
+sterling = Person.new(42)
+
+malory.older?(sterling)  # => true
+sterling.older?(malory)  # => false
+
+malory.age
+  # => NoMethodError: protected method `age' called for #<Person: @age=64>
+```
+
+## Some Object Methods 
+```ruby 
+.class 
+.superclass 
+.ancestors 
+.instance_of?
+```
+编程时需要注意不要覆盖掉 Object 内置方法。
