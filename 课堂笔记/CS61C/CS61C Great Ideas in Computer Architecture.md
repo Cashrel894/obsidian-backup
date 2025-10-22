@@ -21,7 +21,7 @@
 [[RISC-V Single-Cycle Control]]
 [[RISC-V 5-Stage Pipeline]]
 [[Caches]]
-
+[[Parallelism]]
 ## 课程简介
 
 - 所属大学：UC Berkeley
