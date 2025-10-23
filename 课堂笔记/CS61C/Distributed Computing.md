@@ -10,3 +10,6 @@
 ## Manager-Worder Framework
 ![[../../附件/Pasted image 20251023131147.png]]
 ![[../../附件/Pasted image 20251023131216.png]]
+
+## MapReduce
+![[../../附件/Pasted image 20251023141618.png]]
