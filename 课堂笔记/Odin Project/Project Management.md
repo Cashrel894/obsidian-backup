@@ -1,4 +1,6 @@
 #OdinProject 
+[[Semantic Versioning]]
+
 按照惯例，一个 Ruby 项目应当将所有的 class 独立为一个文件，并将所有 Ruby 文件（除了 main. rb）放入 lib 文件夹中：
 ```
 project_name
