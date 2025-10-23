@@ -18,3 +18,8 @@
 
 ## Cache Coherency 
 ![[../../附件/Pasted image 20251023112825.png]]
+![[../../附件/Pasted image 20251023120241.png]]
+![[../../附件/Pasted image 20251023120255.png]]
+![[../../附件/Pasted image 20251023120305.png]]
+![[../../附件/Pasted image 20251023120326.png]]
+![[../../附件/Pasted image 20251023120341.png]]
