@@ -29,3 +29,10 @@
 ![[../../附件/Pasted image 20251025165657.png]]
 ![[../../附件/Pasted image 20251025165805.png]]
 ![[../../附件/Pasted image 20251025165825.png]]
+![[../../附件/Pasted image 20251025170358.png]]
+![[../../附件/Pasted image 20251025170819.png]]
+
+## Caches vs. Virtual Memory 
+![[../../附件/Pasted image 20251025170928.png]]
+![[../../附件/Pasted image 20251025171035.png]]
+![[../../附件/Pasted image 20251025171416.png]]
