@@ -23,6 +23,7 @@
 [[Caches]]
 [[Parallelism]]
 [[Virtual Memory]]
+[[OS basics]]
 ## 课程简介
 
 - 所属大学：UC Berkeley
