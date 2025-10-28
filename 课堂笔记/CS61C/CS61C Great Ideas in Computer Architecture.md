@@ -25,6 +25,7 @@
 [[Virtual Memory]]
 [[OS basics]]
 [[Applications of Parallel Computers]]
+[[Dependability]]
 ## 课程简介
 
 - 所属大学：UC Berkeley
