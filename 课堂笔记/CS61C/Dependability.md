@@ -20,5 +20,4 @@
 
 ## RAID (Redundant Arrays of (Inexpensive) Disks)
 ![[../../附件/Pasted image 20251028171833.png]]
-
-
+![[../../附件/Pasted image 20251028171954.png]]
