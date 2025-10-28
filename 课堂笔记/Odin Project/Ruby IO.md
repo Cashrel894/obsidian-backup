@@ -38,3 +38,73 @@ hello world
 => nil 
 ```
 
+我们可以对 IO 流进行一些操作：
+```ruby
+[1] pry(main)> IO.sysopen '/Users/joelquenneville/Desktop/lorem.txt'
+=> 8
+[2] pry(main)> lorem = IO.new(8)
+=> #<IO:fd 8>
+[3] pry(main)> lorem.gets
+=> "Lorem ipsum\n"
+[4] pry(main)> lorem.pos
+=> 12
+[5] pry(main)> lorem.gets
+=> "dolor\n"
+[6] pry(main)> lorem.gets
+=> "sit amet...\n"
+[7] pry(main)> lorem.pos
+=> 30
+[8] pry(main)> lorem.gets
+=> nil
+[9] pry(main)> lorem.eof?
+=> true
+[10] pry(main)> lorem.rewind
+=> 0
+[11] pry(main)> lorem.pos
+=> 0
+```
+
+```ruby 
+[1] pry(main)> fd = IO.sysopen '/Users/joelquenneville/Desktop/test.txt', 'w+'
+=> 8
+[2] pry(main)> io = IO.new(fd)
+=> #<IO:fd 8>
+[3] pry(main)> io.puts 'hello world'
+=> nil
+[4] pry(main)> io.puts 'goodbye world'
+=> nil
+[5] pry(main)> io.gets
+=> nil
+[6] pry(main)> io.eof?
+=> true
+[7] pry(main)> io.rewind
+=> 0
+[8] pry(main)> io.gets
+=> "hello world\n"
+[9] pry(main)> io.pos
+=> 12
+[10] pry(main)> io.puts "middle"
+=> nil
+[11] pry(main)> io.rewind
+=> 0
+[12] pry(main)> io.read
+=> "hello world\nmiddle\n world\n"
+```
+
+## Subclasses of class IO
+- `File`
+- `Socket` `TCPSocket` 等
+- `StringIO` (实际上并不是 IO 的子类，但两者用法上极其相似)
+```ruby 
+[1] pry(main)> string_io = StringIO.new('hello world')
+=> #<StringIO:0x007feacb0cd4e8>
+[2] pry(main)> string_io.gets
+=> "hello world"
+[3] pry(main)> string_io.puts 'goodby world'
+=> nil
+[4] pry(main)> string_io.rewind
+=> 0
+[5] pry(main)> string_io.read
+=> "hello worldgoodby world\n"
+```
+- `Tempfile`
