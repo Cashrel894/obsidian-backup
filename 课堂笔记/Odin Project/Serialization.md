@@ -37,3 +37,44 @@ JSON.dump {name => "David", height: 124, age: 28}
 ```
 可以看出，在 Ruby 中 JSON 和 YAML 的使用方式可以说完全一致。
 
+## MessageBack
+MessageBack 是一种人类不可读的二进制序列化语言，相比于 YAML 和 JSON，它的优势是序列化得到的代码更短，适合服务器更好地存储和传输，但不适合作为配置文件使用。
+
+```ruby 
+gem install msgpack
+```
+
+```ruby 
+require 'msgpack'
+  
+msg = {:height => 47, :width => 32, :depth => 16}.to_msgpack
+
+obj = MessageBack.unpack(msg)
+```
+
+## Modularizing with Mixins
+```ruby 
+require 'json'
+
+module BasicSerializable
+	@@serializer = JSON
+	
+	def serialize
+		obj = {}
+		instance_variables.map do |var|
+			obj[var] = instance_variable_get(var)
+		end
+		@@serializer.dump obj 
+	end
+	
+	def unserialize(string)
+		obj = @@serializer.parse(string)
+		obj.keys.each do |key|
+			instance_variable_set(key, obj[key])
+		end
+		
+	end
+end
+```
+
+
