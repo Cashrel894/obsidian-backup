@@ -93,8 +93,39 @@ hello world
 
 ## Subclasses of class IO
 - `File`
+```ruby
+f = File.open('langs.txt', 'w')
+f.puts "Ruby"
+f.close
+```
+
+```ruby 
+File.open('langs.txt', 'w') do |f|
+	f.puts "Ruby"
+	f.write "Java\n"
+	f << "Python\n"
+end
+```
+
+```ruby 
+File.exist? 'tempfile'
+File.new 'tempfile', 'w'
+File.mtime 'tempfile'
+f.size 
+File.rename 'tempfile', 'tempfile2'
+```
+
+```ruby 
+while line = f.gets do 
+	puts line 
+end
+
+File.readlines(fname).each do |line|
+	puts line 
+end 
+```
 - `Socket` `TCPSocket` 等
-- `StringIO` (实际上并不是 IO 的子类，但两者用法上极其相似)
+- `StringIO` (实际上 `StringIO` 和 `Socket` 并不是 IO 的子类，但用法上极其相似)
 ```ruby 
 [1] pry(main)> string_io = StringIO.new('hello world')
 => #<StringIO:0x007feacb0cd4e8>
@@ -108,3 +139,35 @@ hello world
 => "hello worldgoodby world\n"
 ```
 - `Tempfile`
+- `Dir`
+```ruby 
+Dir.mkdir 'tmp'
+Dir.exist? 'tmp'
+Dir.pwd
+Dir.chdir 'tmp'
+Dir.rmdir 'tmp'
+fls = Dir.entries '.'
+fls.inspect
+Dir.home
+Dir.home 'root'
+```
+
+## Executing external programs
+```ruby 
+system 'ls'
+`ls`
+%x[ls]
+```
+
+```ruby 
+f = open("!ls -l |head -3")
+puts $?.success?
+```
+
+## Redirecting
+```ruby 
+$stdout = File.open 'output.log', 'a'
+puts 'Java'
+$stdout.close
+$stdout = STDOUT 
+```
