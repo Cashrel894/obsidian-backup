@@ -74,6 +74,17 @@ end
 #=> NoMatchingPatternError
 ```
 
+```ruby
+a = 1
+b = 2
+case 3
+in ^(a + b)
+  "matched"
+else
+  "not matched"
+end
+#=> "matched"
+```
 ## Alternative Pattern
 ```ruby
 case 0
@@ -96,6 +107,7 @@ end
 # => match
 ```
 
+unless 同样有效。
 ## Array Pattern
 ```ruby
 arr = [1, 2]
@@ -226,6 +238,17 @@ end
 # => banana
 ```
 
+只提取单个键时，可以如下简写：
+```ruby
+case {a: 1, b: 2, c: 3}
+in a:
+  "matched: #{a}"
+else
+  "not matched"
+end
+#=> "matched: 1"
+```
+
 同样，最外层的大括号也可以省略：
 ```ruby
 case { a: 'apple', b: 'banana' }
@@ -258,6 +281,26 @@ in { a: 'ant', b: 'ball' }
 end
 ```
 
+不过，空 Hash 是例外，它只会匹配空 Hash，并且大括号是不可省略的：
+```ruby
+case {a: 1, b: 2, c: 3}
+in {}
+  "matched"
+else
+  "not matched"
+end
+#=> "not matched"
+
+case {}
+in {}
+  "matched"
+else
+  "not matched"
+end
+#=> "matched"
+```
+
+
 如果不想匹配含有多余键值对的 Hash，可以使用 `**nil`：
 ```ruby
 case { a: 'ant', b: 'ball' }
@@ -270,3 +313,115 @@ end
 # => match
 ```
 
+## Rightward Assignment
+类似 js 中的“解构”机制，可以用模式匹配的语法解构 Array 和 Hash：
+```ruby
+login = { username: 'hornby', password: 'iliketrains' }
+
+login => { username: username }
+
+puts "Logged in with username #{username}"
+
+#=> "Logged in with username hornby"
+```
+
+## Find Pattern 
+```ruby
+case [1, 2, 3, 4, 5]
+in [*pre, 2, 3, *post]
+  p pre
+  p post
+end
+
+# => [1]
+# => [4, 5]
+```
+
+```ruby
+case [1, 2, "a", 4, "b", "c", 7, 8, 9]
+in [*pre, String => x, String => z, *post]
+  p pre
+  p x
+  p z
+  p post
+end
+
+# => [1, 2, "a", 4]
+# => "b"
+# => "c"
+# => [7, 8, 9]
+```
+
+```ruby
+name = 'Jill'
+age = 32
+job_title = 'leet coder'
+
+case data
+in [*, { name: ^name, age: ^age, first_language: first_language, job_title: ^job_title }, *]
+else
+  first_language = nil
+end
+
+puts first_language
+
+# => italian
+```
+
+## deconstruct and deconstruct_keys
+```ruby
+class Point
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+
+  def deconstruct
+    puts "deconstruct called"
+    [@x, @y]
+  end
+
+  def deconstruct_keys(keys)
+    puts "deconstruct_keys called with #{keys.inspect}"
+    {x: @x, y: @y}
+  end
+end
+
+case Point.new(1, -2)
+in px, Integer  # sub-patterns and variable binding works
+  "matched: #{px}"
+else
+  "not matched"
+end
+# prints "deconstruct called"
+"matched: 1"
+
+case Point.new(1, -2)
+in x: 0.. => px
+  "matched: #{px}"
+else
+  "not matched"
+end
+# prints: deconstruct_keys called with [:x]
+#=> "matched: 1"
+```
+
+```ruby
+class SuperPoint < Point
+end
+
+case Point.new(1, -2)
+in SuperPoint(x: 0.. => px)
+  "matched: #{px}"
+else
+  "not matched"
+end
+#=> "not matched"
+
+case SuperPoint.new(1, -2)
+in SuperPoint[x: 0.. => px] # [] or () parentheses are allowed
+  "matched: #{px}"
+else
+  "not matched"
+end
+#=> "matched: 1"
+```
