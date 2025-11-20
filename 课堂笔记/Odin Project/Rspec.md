@@ -375,3 +375,59 @@ describe NumberGame do
 end
 ```
 
+## double
+```ruby
+describe FindNumber do
+  # There are two ways to specify the messages that a double can receive.
+
+  describe '#initialize' do
+    # Doubles are strict, which means you must specify (allow) any messages
+    # that they can receive. If a double receives a message that has not been
+    # allowed, it will trigger an error.
+
+    # This first example creates the double, then allows specific methods.
+    context 'when creating the double and allowing method(s) in two steps' do
+      let(:random_number) { double('random_number') }
+      subject(:game) { described_class.new(0, 9, random_number) }
+
+      context 'when random_number is 8' do
+        it 'returns 8' do
+          allow(random_number).to receive(:value).and_return(8)
+          solution = game.answer
+          expect(solution).to eq(8)
+        end
+      end
+    end
+
+    # This second example creates the double & specific methods together.
+    context 'when creating the double and allowing method(s) in one step' do
+      # A hash can be used to define allowed messages and return values.
+      # When passing a hash as the last argument, the { } are not required.
+      # let(:random_number) { double('random_number', { value: 3 }) }
+      let(:random_number) { double('random_number', value: 3) }
+      subject(:game) { described_class.new(0, 9, random_number) }
+
+      context 'when random_number is 3' do
+        it 'returns 3' do
+          solution = game.answer
+          expect(solution).to eq(3)
+        end
+      end
+    end
+
+    # When testing the same method in multiple tests, it is possible to add
+    # method names to subject.
+    context 'when adding method names to subject for multiple tests' do
+      let(:random_number) { double('random_number', value: 5) }
+      subject(:game_solution) { described_class.new(0, 9, random_number).answer }
+
+      context 'when random_number is 5' do
+        it 'returns 5' do
+          expect(game_solution).to eq(5)
+        end
+      end
+    end
+  end
+end
+```
+
