@@ -76,3 +76,23 @@ end
 # 特别地，对于'has_<what>?'谓词，对应的测试方法是'have_<what>'
 # 对于'include?'，对应的是'include'
 ```
+
+## truthy & falsy
+回顾：在 ruby 中，只有 nil 和 false 为假值。
+```ruby
+describe '...' do
+  it '...' do
+    expect(1).to be_truthy
+  end
+  
+  it '...' do
+    expect(nil).to be_falsy
+  end
+end
+```
+
+## eq, eql, equal and be
+>  ‘*eq*' checks for **equal VALUE**.
+>  '*eql*' checks for equal **VALUE and TYPE**.
+>  '*equal*' checks for **OBJECT IDENTITY**.
+>  '*be*' checks for **OBJECT IDENTITY**. 
