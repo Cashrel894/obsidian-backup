@@ -225,3 +225,94 @@ describe 'defining custom matchers' do
   end
 end
 ```
+
+## shared_examples
+```ruby
+include_examples "name"      # include the examples in the current context
+it_behaves_like "name"       # include the examples in a nested context
+it_should_behave_like "name" # include the examples in a nested context
+matching metadata            # include the examples in the current context
+```
+
+```ruby 
+require "set"
+
+RSpec.shared_examples "a collection" do
+  let(:collection) { described_class.new([7, 2, 4]) }
+
+  context "initialized with 3 items" do
+    it "says it has three items" do
+      expect(collection.size).to eq(3)
+    end
+  end
+
+  describe "#include?" do
+    context "with an item that is in the collection" do
+      it "returns true" do
+        expect(collection.include?(7)).to be(true)
+      end
+    end
+
+    context "with an item that is not in the collection" do
+      it "returns false" do
+        expect(collection.include?(9)).to be(false)
+      end
+    end
+  end
+end
+
+RSpec.describe Array do
+  it_behaves_like "a collection"
+end
+
+RSpec.describe Set do
+  it_behaves_like "a collection"
+end
+```
+
+```ruby
+require "set"
+
+RSpec.shared_examples "a collection object" do
+  describe "<<" do
+    it "adds objects to the end of the collection" do
+      collection << 1
+      collection << 2
+      expect(collection.to_a).to match_array([1, 2])
+    end
+  end
+end
+
+RSpec.describe Array do
+  it_behaves_like "a collection object" do
+    let(:collection) { Array.new }
+  end
+end
+
+RSpec.describe Set do
+  it_behaves_like "a collection object" do
+    let(:collection) { Set.new }
+  end
+end
+```
+
+```ruby
+RSpec.shared_examples "a measurable object" do |measurement, measurement_methods|
+  measurement_methods.each do |measurement_method|
+    it "should return #{measurement} from ##{measurement_method}" do
+      expect(subject.send(measurement_method)).to eq(measurement)
+    end
+  end
+end
+
+RSpec.describe Array, "with 3 items" do
+  subject { [1, 2, 3] }
+  it_should_behave_like "a measurable object", 3, [:size, :length]
+end
+
+RSpec.describe String, "of 6 characters" do
+  subject { "FooBar" }
+  it_should_behave_like "a measurable object", 6, [:size, :length]
+end
+
+```
