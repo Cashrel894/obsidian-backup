@@ -43,10 +43,17 @@ end
 ## predicate
 ```ruby
 describe Array do
-  context '...' do
-    it 'is an array' do
-      expect(subject).to be_an(Array) # subject隐性指向Array的一个实例
-    end
+  it 'is empty' do
+    expect(subject.empty?).to eq true
   end
+  
+  it 'is empty' do
+    expect(subject).to be_empty 
+  end
+  
+  it { is_expected.to be_empty }
 end
+# 以上三种写法是一样的
+# 在rspec中，对以‘?’结尾的方法（即谓词）的测试，都可以用对应的'be_<how>'形式进行测试
+# 特别地，对于'has_<what>?'谓词，对应的测试方法是'have_<what>'
 ```
