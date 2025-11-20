@@ -96,3 +96,108 @@ end
 >  '*eql*' checks for equal **VALUE and TYPE**.
 >  '*equal*' checks for **OBJECT IDENTITY**.
 >  '*be*' checks for **OBJECT IDENTITY**. 
+
+## all & contain_exactly
+```ruby
+describe Array do
+  subject(:numbers) { [11, 17, 21] }
+
+  it 'is all odd numbers' do
+    expect(numbers).to all(be_odd)
+  end
+
+  it 'is all under 25' do
+    expect(numbers).to all(be < 25)
+  end
+
+  it 'contains exactly 21, 11, 17' do
+    # The order does not matter.
+    expect(numbers).to contain_exactly(21, 11, 17)
+  end
+end
+```
+
+## start_with & end_with
+```ruby
+describe String do
+  subject(:sample_word) { 'spaceship' }
+
+  context 'when using start_with' do
+    it 'starts with s' do
+      expect(sample_word).to start_with('s')
+    end
+
+    it 'starts with spa' do
+      expect(sample_word).to start_with('spa')
+    end
+
+    it 'starts with space' do
+      expect(sample_word).to start_with('space')
+    end
+
+    it 'starts with the whole word' do
+      expect(sample_word).to start_with('spaceship')
+    end
+  end
+
+  context 'when using end_with' do
+    it 'ends with p' do
+      expect(sample_word).to end_with('p')
+    end
+
+    it 'ends with hip' do
+      expect(sample_word).to end_with('hip')
+    end
+
+    it 'ends with ship' do
+      expect(sample_word).to end_with('ship')
+    end
+
+    it 'ends with the whole word' do
+      expect(sample_word).to end_with('spaceship')
+    end
+  end
+end
+```
+
+## change
+```ruby
+describe Array do
+  subject(:drinks) { %w[coffee tea water] }
+
+  # When testing for a change to occur, notice that unlike previous matchers
+  # we've seen, 'change' accepts a block of code.
+  # https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/change/
+
+  context 'when testing for a change' do
+    it 'will change the length to 4' do
+      expect { drinks << 'juice' }.to change { drinks.length }.to(4)
+    end
+
+    it 'will change the length from 3 to 4' do
+      expect { drinks << 'juice' }.to change { drinks.length }.from(3).to(4)
+    end
+
+    # The above two tests are too tightly coupled to a specific array length.
+    # The test should instead be written for any length of array, for example:
+    it 'will increase the length by one' do
+      expect { drinks << 'juice' }.to change { drinks.length }.by(1)
+    end
+
+    # There are additional ways to be more descriptive about the change.
+    it 'will increase the length by at most one' do
+      expect { drinks << 'juice' }.to change { drinks.length }.by_at_most(1)
+    end
+
+    # Alternate form for 'change' matcher using (object, :attribute):
+    it 'will increase the length by one' do
+      expect { drinks << 'juice' }.to change(drinks, :length).by(1)
+    end
+
+    # You can compound change matchers together.
+    it 'will decrease by one and end with tea' do
+      expect { drinks.pop }.to change { drinks.length }.by(-1).and change { drinks.last }.to('tea')
+    end
+  end
+end
+```
