@@ -14,6 +14,18 @@ describe String do
 end
 ```
 
+## Comparators
+```ruby
+describe Number do
+  it '...' do
+    expect(3).to be >= 2
+  end
+  
+  it '...' do
+    expect(3).to be_positive.and be < 10
+  end
+end
+```
 
 ## let
 ```ruby
@@ -38,6 +50,12 @@ describe Array do
     end
   end
 end
+```
+
+```ruby
+describe SingleDigit do
+  subject(:random_digit) { SingleDigit.new } # 显式指定subject（推荐）
+  ...
 ```
 
 ## predicate
