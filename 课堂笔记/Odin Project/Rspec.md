@@ -316,3 +316,62 @@ RSpec.describe String, "of 6 characters" do
 end
 
 ```
+
+## allow & receive
+可以使用 allow 和 receive 来允许使用指定返回值模拟方法调用，而不实际调用方法。
+```ruby
+describe NumberGame do
+  describe '#player_turn' do
+  # In order to test the behavior of #player_turn, we need to use a method
+  # stub for #player_input to return a valid_input ('3'). To stub a method,
+  # we 'allow' the test subject (game_loop) to receive the :method_name
+  # and to return a specific value.
+  # https://rspec.info/features/3-12/rspec-mocks/basics/allowing-messages/
+  # http://testing-for-beginners.rubymonstas.org/test_doubles.html
+  # https://edpackard.medium.com/the-no-problemo-basic-guide-to-doubles-and-stubs-in-rspec-1af3e13b158
+
+  subject(:game_loop) { described_class.new }
+
+  context 'when user input is valid' do
+    # To test the behavior, we want to test that the loop stops before the
+    # puts 'Input error!' line. In order to test that this method is not
+    # called, we use a message expectation.
+    # https://rspec.info/features/3-12/rspec-mocks/
+
+    it 'stops loop and does not display error message' do
+      valid_input = '3'
+      allow(game_loop).to receive(:player_input).and_return(valid_input)
+      # To use a message expectation, move 'Assert' before 'Act'.
+      expect(game_loop).not_to receive(:puts).with('Input error!')
+      game_loop.player_turn
+    end
+  end
+  
+  context 'when user inputs an incorrect value once, then a valid input' do
+      # As the 'Arrange' step for tests grows, you can use a before hook to
+      # separate the test from the set-up.
+      # https://rspec.info/features/3-12/rspec-core/hooks/before-and-after-hooks/
+      # https://www.tutorialspoint.com/rspec/rspec_hooks.htm
+
+      before do
+        # A method stub can be called multiple times and return different values.
+        # https://rspec.info/features/3-12/rspec-mocks/configuring-responses/returning-a-value/
+        # This method stub for :player_input will return the invalid 'letter' input,
+        # then it will return the 'valid_input'
+        letter = 'd'
+        valid_input = '8'
+        allow(game_loop).to receive(:player_input).and_return(letter, valid_input)
+      end
+
+      # When using message expectations, you can specify how many times you
+      # expect the message to be received.
+      # https://rspec.info/features/3-12/rspec-mocks/setting-constraints/receive-counts/
+      it 'completes loop and displays error message once' do
+        expect(game_loop).to receive(:puts).with('Input error!').once
+        game_loop.player_turn
+      end
+    end
+  end
+end
+```
+
