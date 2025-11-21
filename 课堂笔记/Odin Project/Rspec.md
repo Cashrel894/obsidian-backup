@@ -1,4 +1,22 @@
 #OdinProject 
+## Principle of Unit Tests
+通常而言，方法可以被分为四类：
+1. Command： 改变实例的状态，但无返回值。
+2. Query：返回一个值，但不改变状态。
+3. Script：只调用其他方法，通常无返回值。
+4. Looping Script：不断调用其他方法，直到满足特定条件，通常无返回值。
+
+而那些需要被测试的方法有：
+- Public 的 Command 或 Query 方法。
+- 被 Public 的 Script 或 Looping Script 调用的 Command 或 Query 方法。此外，像这样的 Command 或 Query 方法也应该被设为 Public，给予用户更高的灵活性。
+- 向另一个类发出 Command 的方法，需要检查 Command 是否被正确发出。
+- Looping Script 本身的行为，如终止条件。
+
+不需要进行测试的方法有：
+- 只是创建实例、而没有调用其他方法的 `#initialize` 方法。
+- 只包含 `puts` 或 `gets` 的函数。
+- Private 方法，除非被 Public 的 Script 方法调用。
+
 ## Basics
 ```ruby
 describe String do
