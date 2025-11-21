@@ -431,4 +431,9 @@ describe FindNumber do
 end
 ```
 
-5
+## verifying double
+double 的升级版，会检查目标类是否含有指定的方法。如果没有，则会抛出异常。
+```ruby
+let(:random_number) { instance_double(RandomNumber, value: 8) }
+```
+
