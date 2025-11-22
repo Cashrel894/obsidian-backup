@@ -8,7 +8,7 @@
 
 而那些需要被测试的方法有：
 - Public 的 Command 或 Query 方法。
-- 被 Public 的 Script 或 Looping Script 调用的 Command 或 Query 方法。此外，像这样的 Command 或 Query 方法也应该被设为 Public，给予用户更高的灵活性。
+- 被 Public 的 Script 或 Looping Script 调用的 Command 或 Query 方法。或者，可以测试该 Script 本身的正确性。
 - 向另一个类发出 Command 的方法，需要检查 Command 是否被正确发出。
 - Looping Script 本身的行为，如终止条件。
 
