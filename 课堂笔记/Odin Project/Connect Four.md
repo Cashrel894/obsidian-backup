@@ -11,7 +11,7 @@
 include Referee
 initialize(width = 7, height = 6, grid = nil) # Create an board with the specific width, height and grid.
 invalid_column?(col) # Check if a specfic column is invalid(full or out of range) so that marks can't be placed on it.
-place(col, mark) # Place a player's mark on a valid column.
+place!(col, mark) # Place a player's mark on a valid column.
 ```
 
 ## Module Referee
@@ -37,9 +37,9 @@ winner() # Returns the winner(0 or 1) of an over game without a tie.
 @player_markers
 @board
 @current_player
-initialize(player_markers = ['X', 'O'], board = nil, current_player = 0) # Creates a game instance with specific player markers, board, and current player.
+initialize(player_markers = ['X', 'O'], current_player = 0, board = nil) # Creates a game instance with specific player markers, board, and current player.
 run() # Executes the main game logics.
-rotate_players() # Rotates the current player.
+rotate_players!() # Rotates the current player.
 player_input() # Gets a valid move input from the current player.
 display_board() # Print the board state onto the terminal.
 ```
