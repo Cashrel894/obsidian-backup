@@ -12,7 +12,7 @@
 include Referee
 initialize(width = 7, height = 6, grid = nil) # Create an board with the specific width, height and grid.
 invalid_column?(col) # Check if a specfic column is invalid(full or out of range) so that marks can't be placed on it.
-place(col, mark) # Place a player's mark('X' or 'O' or custom ones) on a specific column.
+place(col, mark) # Place a player's mark on a valid column.
 display() # Print itself onto the terminal.
 ```
 
