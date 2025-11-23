@@ -6,12 +6,12 @@
 	- Updates game states according to player's choices.
 - Displays visible game states.
 ```ruby
-@width # The number of colomns.
-@height # The number of cells that a colomn contains.
-@grid # a 2D array, the first dimension stores all the colomns, and the second stores the cells in a certain colomn. nil for an empty cell, 0 for the first player, 1 for the second player.
+@width # The number of columns.
+@height # The number of cells that a column contains.
+@grid # a 2D array, the first dimension stores all the columns, and the second stores the cells in a certain column. nil for an empty cell, 0 for the first player, 1 for the second player.
 include Referee
-initialize(width=7,height=6) # Create a new board with the specific width and height.
-invalid_colomn?(col) # Check if a specfic column is invalid(full or out of range) so that marks can't be placed on it.
+initialize(width = 7, height = 6, grid = nil) # Create an board with the specific width, height and grid.
+invalid_column?(col) # Check if a specfic column is invalid(full or out of range) so that marks can't be placed on it.
 place(col, mark) # Place a player's mark('X' or 'O' or custom ones) on a specific column.
 display() # Print itself onto the terminal.
 ```
