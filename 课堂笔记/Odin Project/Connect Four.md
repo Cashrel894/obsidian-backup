@@ -4,7 +4,6 @@
 - Manages player moves.
 	- Validates player's choices.
 	- Updates game states according to player's choices.
-- Displays visible game states.
 ```ruby
 @width # The number of columns.
 @height # The number of cells that a column contains.
@@ -13,7 +12,6 @@ include Referee
 initialize(width = 7, height = 6, grid = nil) # Create an board with the specific width, height and grid.
 invalid_column?(col) # Check if a specfic column is invalid(full or out of range) so that marks can't be placed on it.
 place(col, mark) # Place a player's mark on a valid column.
-display() # Print itself onto the terminal.
 ```
 
 ## Module Referee
@@ -21,7 +19,8 @@ display() # Print itself onto the terminal.
 - Figures out the winner (or a tie).
 ```ruby
 game_over?() # Checks whether the game is over.
-game_result() # Returns the winner of an over game(0 or 1) or :TIE if there's a tie.
+tie?() # Checks whether there's a tie.
+winner() # Returns the winner(0 or 1) of an over game without a tie.
 ```
 
 ## Class Game
@@ -30,6 +29,7 @@ game_result() # Returns the winner of an over game(0 or 1) or :TIE if there's a 
 	- Circularly requests moves, places marks, checks win conditions, rotates players, and end the cycle with an ending message if the game is finally over.
 - Stores all the game states. (e.g., a Board instance)
 - Implements a human-computer interface.
+	- Shows the current board state.
 	- Prompts and asks the current player for the next move.
 		- Reasks if the move is invalid (with an exception message).
 	- Announces the end of the game and feedbacks the winner or a tie.
@@ -41,4 +41,5 @@ initialize(player_markers=['X', 'O'], board=nil, current_player=:X) # Creates a 
 run() # Executes the main game logics.
 rotate_players() # Rotates the current player.
 player_input() # Gets a valid move input from the current player.
+display_board() # Print the board state onto the terminal.
 ```
