@@ -13,11 +13,13 @@ reviews.taster_name.value_counts()
 ```
 
 ## Maps
+`map`：单列映射
 ```python
 review_points_mean = reviews.points.mean()
 reviews.points.map(lambda p: p - review_points_mean)
 ```
 
+`apply`：全 Dataframe 级别映射，`axis` 为 0 或 'index' 时按列映射，`axis` 为 1 或 'columns' 时按行映射，
 ```python
 def remean_points(row):
     row.points = row.points - review_points_mean
@@ -25,3 +27,13 @@ def remean_points(row):
 
 reviews.apply(remean_points, axis='columns')
 ```
+
+```python
+review_points_mean = reviews.points.mean()
+reviews.points - review_points_mean
+```
+
+```python
+reviews.country + " - " + reviews.region_1
+```
+![[../../附件/Pasted image 20251206144248.png]]
