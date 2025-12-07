@@ -54,3 +54,5 @@ np.diff(highs) # 创建目标Array的差分数组。新Array的第一个元素�
 | `np.char.find`       | The position within each element that a search string is found first             |
 | `np.char.rfind`      | The position within each element that a search string is found last              |
 | `np.char.startswith` | Whether each element starts with the search string                               |
+
+当一个运算符作用在两个相同大小的 Array 上时，该运算会对 Array 中每个相应元素对进行，并以 Array 的形式返回结果。

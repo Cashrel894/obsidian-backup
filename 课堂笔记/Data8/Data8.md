@@ -4,3 +4,4 @@
 [[Programming in Python]]
 [[Data Types]]
 [[Numpy Sequences]]
+[[Tables]]
