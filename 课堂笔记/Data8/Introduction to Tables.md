@@ -10,7 +10,19 @@ table.select('col1', 'col2') # 返回一张只包含指定列的新表格
 table.drop('col') # 返回一张丢弃指定列的新表格
 table.sort('col') # 返回一张根据指定列升序排序的新表格
 table.sort('col', descending=True) # 降序排序
-table.where('col', 'content') # 返回一张新表格，只包含指定列为指定内容的行。
 table.num_columns # 表格的列数
 table.num_rows # 表格的行数
+```
+
+```python
+table.where('col', 'content') # 返回一张新表格，只包含指定列为指定内容的行
+table.where('col', are.equal_to('content')) # 或者接受一个谓词，描述选中的行所需要满足的性质
+# 一些其他谓词：
+are.equal_to
+are.not_equal_to
+are.above
+are.above_or_equal_to
+are.below
+are.between
+are.between_or_equal_to
 ```
