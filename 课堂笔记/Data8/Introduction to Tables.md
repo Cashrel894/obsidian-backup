@@ -18,11 +18,11 @@ table.num_rows # 表格的行数
 table.where('col', 'content') # 返回一张新表格，只包含指定列为指定内容的行
 table.where('col', are.equal_to('content')) # 或者接受一个谓词，描述选中的行所需要满足的性质
 # 一些其他谓词：
-are.equal_to
+are.equal_to # 可省略
 are.not_equal_to
 are.above
 are.above_or_equal_to
 are.below
-are.between
-are.between_or_equal_to
+are.between # 左闭右开
+are.between_or_equal_to # 闭区间
 ```

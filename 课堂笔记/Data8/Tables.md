@@ -1,3 +1,3 @@
 #Data8 
 [[Table basics]]
-[[Sorting Rows]]
+[[Selecting Rows]]
