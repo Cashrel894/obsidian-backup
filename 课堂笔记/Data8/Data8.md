@@ -3,3 +3,4 @@
 [[Causality and Experiments]]
 [[Programming in Python]]
 [[Data Types]]
+[[Numpy Sequences]]
