@@ -11,5 +11,6 @@ table.drop('col') # 返回一张丢弃指定列的新表格
 table.sort('col') # 返回一张根据指定列升序排序的新表格
 table.sort('col', descending=True) # 降序排序
 table.where('col', 'content') # 返回一张新表格，只包含指定列为指定内容的行。
-
+table.num_columns # 表格的列数
+table.num_rows # 表格的行数
 ```
