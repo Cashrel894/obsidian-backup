@@ -5,3 +5,4 @@
 [[Data Types]]
 [[Numpy Sequences]]
 [[Tables]]
+[[Visualization]]
