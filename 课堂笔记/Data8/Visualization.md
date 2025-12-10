@@ -24,3 +24,5 @@ name_of_table.method(column_label_of_common_axis)
 # 默认以其他所有列为y轴
 ```
 ![[../../附件/Pasted image 20251210202659.png]]
+![[../../附件/Pasted image 20251210215541.png]]
+![[../../附件/Pasted image 20251210215613.png]]
