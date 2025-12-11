@@ -2,3 +2,4 @@
 [[Table basics]]
 [[Selecting Rows]]
 [[Grouping]]
+[[Binning]]

@@ -16,6 +16,18 @@ icecream.barh('Flavor', 'Number of Cartons') # barh = bar_horizontal
 ```
 ![[../../附件/Pasted image 20251209153334.png]]
 
+## Histogram
+不同数值 bin 的概率分布可视化。
+```python
+millions.hist('Adjusted Gross', unit="Million Dollars")
+```
+![[../../附件/Pasted image 20251211082857.png]]
+```python
+millions.hist('Adjusted Gross', bins=np.arange(300,2001,100), unit="Million Dollars")
+```
+
+
+
 ## Overlaid Graphs
 ```python
 name_of_table.method(column_label_of_common_axis, array_of_labels_of_variables_to_plot)
