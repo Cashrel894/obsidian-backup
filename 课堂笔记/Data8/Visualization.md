@@ -22,9 +22,32 @@ icecream.barh('Flavor', 'Number of Cartons') # barh = bar_horizontal
 millions.hist('Adjusted Gross', unit="Million Dollars")
 ```
 ![[../../附件/Pasted image 20251211082857.png]]
+
+### Density
 ```python
 millions.hist('Adjusted Gross', bins=np.arange(300,2001,100), unit="Million Dollars")
 ```
+注意：y 轴指的是 **bin 中元素对应的百分比（以%为单位） / bin 的宽度**，即***概率密度***。也就是说，每个长方形的**面积**才是 bin 的百分比，从而遵循了***面积原理***。
+
+例如上图中：
+![[../../附件/Pasted image 20251211091328.png]]
+
+由此可知，所有长方体的面积之和为 **100%**。
+
+之所以用面积表示概率，是因为直方图后续可以被拟合为一条平滑的 **概率密度曲线**，其在一个区间上的定积分就是这个区间所对应的概率。
+
+```python
+uneven = make_array(300, 350, 400, 500, 1800)
+millions.hist('Adjusted Gross', bins=uneven, unit="Million Dollars")
+```
+![[../../附件/Pasted image 20251211091859.png]]
+有时，bin 的宽度不一定均匀，此时面积准则依旧生效。
+
+此时，如果用概率（或数量）代替概率密度，就会导致可视化严重失真：
+```python
+millions.hist('Adjusted Gross', bins=uneven, normed=False)
+```
+![[../../附件/Pasted image 20251211092117.png]]
 
 
 
