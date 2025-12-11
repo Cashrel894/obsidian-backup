@@ -6,3 +6,4 @@
 [[Numpy Sequences]]
 [[Tables]]
 [[Visualization]]
+[[Functions and Tables]]
