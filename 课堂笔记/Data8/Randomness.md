@@ -27,4 +27,13 @@ np.count_nonzero(tosses == 'Heads')
 ```
 ```
 3
-``` 
+```
+
+```python
+pets = make_array('Cat', 'Dog')
+np.append(pets, 'Another Pet')
+```
+```
+array(['Cat', 'Dog', 'Another Pet'], dtype='<U11')
+```
+
