@@ -7,3 +7,4 @@
 [[Tables]]
 [[Visualization]]
 [[Functions and Tables]]
+[[Randomness]]
