@@ -1,4 +1,6 @@
 #Data8 
+[[Simulation]]
+
 ```python
 two_groups = make_array('treatment', 'control')
 np.random.choice(two_groups)
