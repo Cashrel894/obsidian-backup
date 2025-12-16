@@ -8,3 +8,4 @@
 [[Visualization]]
 [[Functions and Tables]]
 [[Randomness]]
+[[Sampling and Empirical Distributions]]
