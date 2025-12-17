@@ -9,3 +9,4 @@
 [[Functions and Tables]]
 [[Randomness]]
 [[Sampling and Empirical Distributions]]
+[[Testing Hypotheses]]
