@@ -4,6 +4,10 @@ tbl.sample(n) # 返回由tbl中n个随机行组成的Table。默认有放回
 tbl.sample(n, with_replacement=False) # 无放回
 ```
 
+```python
+tbl.sample_proportions(sample_size, model_proportions) # 从一个指定概率分布中抽取sample_size个元素，并计算每个元素采样频率，以与model_proportions相同顺序返回。
+```
+
 ***确定抽样 (Deterministic Sample)***：直接指定所要采样的元素。例如指定 `[3, 18, 100]` 号元素。
 另例：`top.where('Title', are.containing('Harry Potter'))`
 
