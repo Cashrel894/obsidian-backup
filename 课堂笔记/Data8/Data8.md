@@ -10,3 +10,4 @@
 [[Randomness]]
 [[Sampling and Empirical Distributions]]
 [[Testing Hypotheses]]
+[[Comparing Two Samples]]
