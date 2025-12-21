@@ -11,4 +11,4 @@
 [[Sampling and Empirical Distributions]]
 [[Testing Hypotheses]]
 [[Comparing Two Samples]]
-[[Estim]]
+[[Estimation]]
