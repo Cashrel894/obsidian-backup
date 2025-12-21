@@ -9,3 +9,15 @@
 
 **原理**：根据大数定律，重新取样得到的样本分布仍然与原始样本相似，从而与总体相似，故而可以用于对总体的估计中。
 ![[../../附件/Pasted image 20251221120554.png]]
+
+接下来，为了检验估计的准确程度，可以检查实际值是否落在所有 Bootstrap 样本的估计值的分布的 2.5%~97.5% 范围，以排除偶然因素影响。
+
+> To summarize what the simulation shows, suppose you are estimating the population median by the following process:
+- Draw a large random sample from the population.
+- Bootstrap your random sample and get an estimate from the new random sample.
+- Repeat the above bootstrap step thousands of times, and get thousands of estimates.
+- Pick off the “middle 95%” interval of all the estimates.
+
+这种过程被称为 ***Bootstrap 百分位法(The Bootstrap Percentile Method)***。
+
+这样所得到的估计区间，在 95% 的情况下总是能包含实际值。这里的 95% 就被称为***置信度***，得到的估计区间称为***置信区间***。
