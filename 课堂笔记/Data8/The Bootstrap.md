@@ -28,3 +28,4 @@
 3. 百分位法有其局限，比如数据不符合正态分布、原始样本量很小等。
 
 使用置信区间，我们还可以用于 [[Testing Hypotheses]]。如果零假设认为某个统计量为某个特定值，那么我们只需要检查这个特定值是否在 p-value 截止值对应的置信区间中（即，5%的截止值对应 95% 置信区间），即可接受或拒绝零假设。
+https://inferentialthinking.com/chapters/13/4/using-confidence-intervals/index.html
