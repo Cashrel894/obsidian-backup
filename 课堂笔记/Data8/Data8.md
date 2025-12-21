@@ -12,3 +12,4 @@
 [[Testing Hypotheses]]
 [[Comparing Two Samples]]
 [[Estimation]]
+[[Why the Mean Matters]]
