@@ -12,6 +12,7 @@
 
 一般来说，一组数据的范围不会超出 **平均值 $\displaystyle \pm$ 标准差 * 3** 。
 
+
 ***切比雪夫定理***：对于任意数据，以及任意的正实数 $\displaystyle z$，落在 **平均值 $\displaystyle \pm$ 标准差 * $\displaystyle z$** 的元素至少占比 $\displaystyle 1-\frac{1}{z^{2}}$。
 
 ## The Normal Distribution
