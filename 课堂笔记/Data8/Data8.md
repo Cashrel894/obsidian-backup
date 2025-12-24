@@ -13,3 +13,4 @@
 [[Comparing Two Samples]]
 [[Estimation]]
 [[Why the Mean Matters]]
+[[Prediction]]
