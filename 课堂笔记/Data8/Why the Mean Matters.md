@@ -9,6 +9,7 @@
 ***离差(Deviation)***：某个数据值与全体数据平均值的差，可正可负。
 ***方差(Variance)***：全体数据的离差的平方的平均值。
 ***标准差(Standard Deviation)***：方差的算术平方根。
+***标准单位(Standard Units)***：$\displaystyle \frac{数据值-均值}{标准差}$。常用于数据的中心化处理。
 
 一般来说，一组数据的范围不会超出 **平均值 $\displaystyle \pm$ 标准差 * 3** 。
 
