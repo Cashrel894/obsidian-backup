@@ -14,4 +14,3 @@
 [[Estimation]]
 [[Why the Mean Matters]]
 [[Prediction]]
-[[The Method of Least Squares]]
