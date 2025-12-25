@@ -15,3 +15,8 @@
 此时，回归的准确性也并不均匀，而是关于 x 有一定变化。
 
 ## Numerical Diagnotistics
+***对于线性回归，残差的均值为 0，标准差为 $\displaystyle \sqrt{ 1-r^{2} } \cdot y的标准差$。***
+
+由此可以推出 ![[../../附件/Pasted image 20251225183002.png]]
+
+进而我们可以换个视角看线性相关系数 r：![[../../附件/Pasted image 20251225183030.png]]
