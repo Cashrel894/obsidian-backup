@@ -15,3 +15,4 @@
 [[Why the Mean Matters]]
 [[Prediction]]
 [[Inference for Regression]]
+[[Clas]]
