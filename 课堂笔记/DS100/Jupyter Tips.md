@@ -10,3 +10,5 @@ help(print)
 %matplotlib inline # 使matplotlib图像在notebook中直接显示
 %%time # 在运行结果的最后打印当前代码块的用时信息
 ```
+
+![[../../附件/Pasted image 20251230210414.png]]
