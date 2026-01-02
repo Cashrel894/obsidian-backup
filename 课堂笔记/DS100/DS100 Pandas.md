@@ -53,7 +53,7 @@ s[s > 0]
 ```
 
 ## DataFrame
-### initialization
+### Initialization
 ```python
 import pandas as pd
 elections = pd.read_csv("data/elections.csv")
@@ -106,7 +106,7 @@ pd.DataFrame({
 })
 ```
 
-### index
+### Index
 注意：`DataFrame` 中的 index 可以是不唯一的。
 ```python
 # Creating a DataFrame from a CSV file and specifying the index column
@@ -125,7 +125,7 @@ elections.set_index("Party")
 elections.reset_index(inplace=True) 
 elections.index
 ```
-### column
+### Column
 `DataFrame` 中的 column 名必须唯一。
 ```python
 elections.columns
@@ -141,7 +141,7 @@ elections.shape
 (187, 6)
 ```
 
-## slicing
+## Slicing
 ```python
 # Extract the first 5 rows of the DataFrame
 elections.head(5)
@@ -210,3 +210,17 @@ logical_operator = (babynames["Sex"] == "F")
 babynames[logical_operator].head()
 ```
 
+![[../../附件/Pasted image 20260102095443.png]]
+
+```python
+names = ["Bella", "Alex", "Narges", "Lisa"]
+babynames["Name"].isin(names).head()
+babynames[babynames["Name"].isin(names)].head()
+
+# Identify whether names begin with the letter "N"
+babynames["Name"].str.startswith("N").head()
+# Extracting names that begin with the letter "N"
+babynames[babynames["Name"].str.startswith("N")].head()
+```
+
+### Column Modification
