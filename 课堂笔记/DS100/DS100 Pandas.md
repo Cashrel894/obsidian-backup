@@ -224,3 +224,24 @@ babynames[babynames["Name"].str.startswith("N")].head()
 ```
 
 ### Column Modification
+```python
+# Create a Series of the length of each name. 
+babyname_lengths = babynames["Name"].str.len()
+
+# Add a column named "name_lengths" that includes the length of each name
+babynames["name_lengths"] = babyname_lengths
+babynames.head(5)
+```
+
+```python
+# Rename “name_lengths” to “Length”
+babynames = babynames.rename(columns={"name_lengths":"Length"})
+babynames.head()
+```
+
+```python
+# Drop our new "Length" column from the DataFrame
+babynames = babynames.drop("Length", axis="columns") # 若不指定axis，则默认删除行
+babynames.head(5)
+```
+
