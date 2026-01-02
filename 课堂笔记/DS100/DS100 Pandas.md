@@ -194,3 +194,19 @@ elections["Candidate"]
 ```
 ![[../../附件/Pasted image 20260101223223.png]]
 
+```python
+# Ask yourself: why is :9 is the correct slice to select the first 10 rows?
+babynames_first_10_rows = babynames.loc[:9, :]
+
+# Notice how we have exactly 10 elements in our boolean array argument
+babynames_first_10_rows[[True, False, True, False, True, False, True, False, True, False]]
+```
+
+```python
+# First, use a logical condition to generate a boolean array
+logical_operator = (babynames["Sex"] == "F")
+
+# Then, use this boolean array to filter the DataFrame
+babynames[logical_operator].head()
+```
+
