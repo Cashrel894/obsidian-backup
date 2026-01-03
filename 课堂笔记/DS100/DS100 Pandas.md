@@ -189,7 +189,7 @@ elections[["Year", "Candidate", "Party", "Popular vote"]]
 ```
 ![[../../附件/Pasted image 20260101223208.png]]
 
-注：使用 `[]` 选取列时，不支持 slice 操作。
+注：使用 `[]` 选取列时，不支持 slice 操作。而选取行时，只能用与 `iloc` 相似的 slice 操作。
 ```python
 elections["Candidate"]
 ```
