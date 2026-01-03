@@ -107,7 +107,7 @@ pd.DataFrame({
 ```
 
 ### Index
-注意：`DataFrame` 中的 index 可以是不唯一的。
+注意：`DataFrame` 中的 index 可以是不唯一的。此外，行的下标和行的 index 标签是不一样的。
 ```python
 # Creating a DataFrame from a CSV file and specifying the index column
 elections = pd.read_csv("data/elections.csv", index_col = "Candidate")
@@ -189,6 +189,7 @@ elections[["Year", "Candidate", "Party", "Popular vote"]]
 ```
 ![[../../附件/Pasted image 20260101223208.png]]
 
+注：使用 `[]` 选取列时，不支持 slice 操作。
 ```python
 elections["Candidate"]
 ```
