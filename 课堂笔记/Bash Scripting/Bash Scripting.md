@@ -86,7 +86,12 @@ done < input.txt
 
 3. Reads from command line arguments
 ```bash
-echo "Hello, $1!" # $n表示访问第n个命令行参数
+$0 # 脚本名
+$1 # 第1个参数
+$2 # 第2个参数
+$# # 参数个数
+$@ # 所有参数（每个参数相互独立）
+$* # 所有参数（合并为一个数据）
 ```
 
 ### Outputs
