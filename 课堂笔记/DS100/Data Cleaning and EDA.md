@@ -66,3 +66,14 @@ pd.read_json('data/elections.json')
 
 当然最重要的**不是如何填补缺失值**，**而是思考值之所以缺失的原因**，这样才能帮助我们决定这些缺失值有没有必要填补、是否有重要意义。
 
+## EDA and Data Wrangling
+There are several ways to approach EDA and Data Wrangling:
+- Examine the **data and metadata**: what is the date, size, organization, and structure of the data?
+- Examine each **field/attribute/dimension** individually.
+- Examine pairs of related dimensions (e.g. breaking down grades by major).
+- Along the way, we can:
+    - **Visualize** or summarize the data.
+    - **Validate assumptions** about data and its collection process. Pay particular attention to when the data was collected.
+    - Identify and **address anomalies**.
+    - Apply data transformations and corrections (we’ll cover this in the upcoming lecture).
+    - **Record everything you do!** Developing in Jupyter Notebook promotes _reproducibility_ of your own work!
