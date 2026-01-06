@@ -32,7 +32,37 @@ pd.read_csv("data/elections.txt", sep='\t')
 pd.read_json('data/elections.json')
 ```
 
-## Variable Types
+### Variable Types
 ![[Pasted image 20260106211056.png]]
 
-## Granularity
+## Granularity, Temporality and Faithfulness
+> The **granularity** of a dataset is what a single row represents. You can also think of it as the level of detail included in the data. To determine the data’s granularity, ask: what does each row in the dataset represent? **Fine-grained data contains a high level of detail**, with a single row representing a small individual unit. For example, each record may represent one person. **Coarse-grained data is encoded such that a single row represents a large individual unit** – for example, each record may represent a group of people.
+
+> The **temporality** of a dataset describes the periodicity over which the data was collected as well as when the data was most recently collected or updated.
+> Time and date fields of a dataset could represent a few things:
+> 1. **when the “event” happened**
+> 2. **when the data was collected, or when it was entered into the system**
+> 3. **when the data was copied into the database**
+
+> Data used in research or industry is often “messy” – there may be errors or inaccuracies that impact the **faithfulness** of the dataset. Signs that data may not be faithful include:
+> - **Unrealistic** or “incorrect” values, such as negative counts, locations that don’t exist, or dates set in the future
+> - **Violations of obvious dependencies**, like an age that does not match a birthday
+> - Clear signs that data was entered by hand, which can lead to **spelling errors** or fields that are incorrectly shifted
+> - Signs of **data falsification**, such as fake email addresses or repeated use of the same names
+> - **Duplicated** records or fields containing the same information
+> - **Truncated** data, e.g. Microsoft Excel would limit the number of rows to 655536 and the number of columns to 255
+
+### Missing Data
+当出现数据缺失时，有多种解决方案：
+1. 直接丢弃。
+2. 保留为 `NaN` 值。
+3. 执行**数据插补** (**imputation**)，即利用其他数据推断缺失值。
+
+常用的数据插补方法：
+1. **平均值插补**：顾名思义
+2. **Hot Deck 插补**：用全体数据中与当前对象最相似的对象填补
+3. **回归填补**：建立回归模型，用预测值填补
+4. **多重填补**：使用多种填补方式分别生成填补值，然后综合归纳
+
+当然最重要的**不是如何填补缺失值**，**而是思考值之所以缺失的原因**，这样才能帮助我们决定这些缺失值有没有必要填补、是否有重要意义。
+
