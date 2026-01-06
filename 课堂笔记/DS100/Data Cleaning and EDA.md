@@ -35,3 +35,4 @@ pd.read_json('data/elections.json')
 ## Variable Types
 ![[Pasted image 20260106211056.png]]
 
+## Granularity
