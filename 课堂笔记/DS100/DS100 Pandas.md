@@ -351,6 +351,13 @@ df.groupby("letter").count()
 elections.groupby("Year").filter(lambda sf: sf["%"].max() < 45).head(9)
 ```
 
+```python
+# Run this cell to print sub-DataFrames of a groupby object; no further action is needed.
+for n, g in elections[elections["Year"] >= 1980].groupby("Party"):
+    print(f"Name: {n}") # By the way, this is an "f string", a great feature of Python
+    display(g)
+```
+
 ## Pivot
 ```python
 # The `pivot_table` method is used to generate a Pandas pivot table
