@@ -78,7 +78,7 @@ ssn_data["SSN"].str.extractall(pattern_cg) # 以Multi-indexed DataFrame的形式
 ```
 ![[Pasted image 20260118164307.png]]
 
-
+![[Pasted image 20260119175906.png]]
 ## Capture Groups
 ```python
 text = "Observations: 03:04:53 - Horse awakens. \
