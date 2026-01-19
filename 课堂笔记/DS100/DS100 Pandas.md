@@ -263,6 +263,12 @@ babynames.describe()
 ![[../../附件/Pasted image 20260102220445.png]]
 
 ```python
+# df.info() displays name and type of each column, and
+# number of non-null entries in each column
+babynames.info()
+```
+
+```python
 # Sample a single row
 babynames.sample()
 
