@@ -14,3 +14,12 @@ git log --stat # 显示每个文件的修改信息（仅增/删行数）
 git log --name-status # 显示每个受影响文件的状态（新建/修改/删除）
 # More on https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
 ```
+
+```shell
+git diff # 查询已修改但未stage的文件的修改（与最后一次提交相比）
+git diff --staged # 查询已stage文件的修改
+```
+
+```shell
+git revert # 通过创建最后一次提交的“逆提交”，来撤销最后一次提交
+```
