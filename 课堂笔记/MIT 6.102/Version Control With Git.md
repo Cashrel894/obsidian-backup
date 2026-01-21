@@ -9,10 +9,16 @@ git lol hello.txt # 仅查看与hello.txt相关的提交树
 
 ```shell
 git log -p/--patch # 展示每个commit的diff信息
-git log -[k] # 显示最后k个提交
+git log -<k> # 显示最后k个提交
 git log --stat # 显示每个文件的修改信息（仅增/删行数）
 git log --name-status # 显示每个受影响文件的状态（新建/修改/删除）
 # More on https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
+```
+
+```shell
+git show <commit id> # 显示某个commit的信息和diff
+git show <commit id>: # 显示某个commit下的文件树
+git show <commit id>:<filename> # 显示某文件在某commit中的内容
 ```
 
 ```shell
@@ -22,4 +28,9 @@ git diff --staged # 查询已stage文件的修改
 
 ```shell
 git revert # 通过创建最后一次提交的“逆提交”，来撤销最后一次提交
+git revert <commit id> # 也可以指定某一次提交进行撤回
+```
+
+```shell
+git checkout <commit id> -- path/to/file # 将某个文件替换为其历史版本。注意，这会自动stage该文件
 ```
