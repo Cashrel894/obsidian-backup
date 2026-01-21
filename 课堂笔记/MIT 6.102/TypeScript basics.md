@@ -175,3 +175,35 @@ function integerDivision(a: number, b: number): { quotient: number, remainder: n
 ```ts
 const { quotient, remainder } = integerDivision(23, 7);
 ```
+
+## Enumerations
+ts 可以自定义枚举类型：
+```ts
+enum Month {
+    JANUARY, FEBRUARY, MARCH, APRIL,
+    MAY, JUNE, JULY, AUGUST,
+    SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER,
+}
+
+enum PenColor {
+    BLACK, GRAY, RED, PINK, ORANGE,
+    YELLOW, GREEN, CYAN, BLUE, MAGENTA,
+}
+```
+
+可以像正常类型一样声明变量：
+```ts
+let drawingColor: PenColor;
+```
+
+枚举类型变量的赋值：
+```ts
+drawingColor = PenColor.RED;
+```
+
+## API documentation
+API，全称 Application Programming Interface。TypeScript/JavaScript API 有着大量的 API 文档可供查阅：
+- [MDN JavaScript reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference), for general features of JavaScript, and for web-browser-specific APIs.
+- [Node.js reference](https://nodejs.org/api/), for outside-the-browser APIs specific to Node.js.
+- [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html), for features specific to TypeScript.
+
