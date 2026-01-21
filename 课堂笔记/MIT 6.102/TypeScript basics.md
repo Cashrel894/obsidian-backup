@@ -53,7 +53,57 @@ let numbers: Set<number>;         // a Set of numbers
 let turtles: Map<string, Turtle>; // a Map with string keys and Turtle values
 ```
 
-
+声明 Array 的语法糖（和 cpp 更像了=/，只不过 cpp 里数组和 Vector 确实不是一回事）：
 ```ts
 let cities: string[]; // also an Array of strings
+```
+
+## Iteration
+和 Python 的 `for x in arr` 有点像，虽然 ts 也有 `const x in arr` 的语法，但行为与 `of` 不一样，不应在遍历 Array/Set/Map 时使用。
+```ts
+for (const city of cities) {
+    console.log(city);
+}
+
+for (const num of numbers) {
+    console.log(num);
+}
+```
+
+```ts
+for (const key of turtles.keys()) {
+    console.log(key + ": " + turtles.get(key));
+}
+
+for (const value of turtles.values()) {
+    console.log(value); // prints each Turtle
+}
+
+for (const [key, value] of turtles.entries()) {
+    console.log(key + ": " + value);
+}
+```
+
+注意：不应在遍历过程中修改所遍历的对象，尤其是在删除时。这可能会导致意料之外的结果。
+
+使用下标遍历：
+```ts
+for (let ii = 0; ii < arr.length; ii++) { // 纯正C语言口音
+	...
+}
+```
+
+实际上这在 ts 中并没有那么必要，如果需要用到下标，可以使用以下语法：
+```ts
+for (const [ii, x] of arr.entries()) {
+	...
+}
+```
+就如同将 Array 视为 Map，将 index 视为 key 一样。
+
+```ts
+const prices: Map<string, number> = new Map();
+prices.set("apple", 5);
+prices.get("apple")   // returns 5
+prices.get("banana")  // returns undefined
 ```
