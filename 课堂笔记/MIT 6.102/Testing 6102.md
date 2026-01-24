@@ -133,3 +133,6 @@ describe("multiplication", function() {
 以上我们所讨论的都属于**单元测试**的范畴，即独立地测试某个模块的行为是否符合预期。
 
 而**集成测试**(Integration Testing) 会结合测试多个模块乃至整个程序。集成测试同样重要，因为一个程序通常涉及到多个模块的相互作用。
+
+## Regression Testing
+**回归测试**(Regression Testing) 是指在修复其他漏洞、增加新功能或进行代码优化后重新运行已测试代码的测试，来防止原来的代码因新的改动出现**退化**(Regress)。
