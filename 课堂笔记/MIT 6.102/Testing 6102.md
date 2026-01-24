@@ -136,3 +136,9 @@ describe("multiplication", function() {
 
 ## Regression Testing
 **回归测试**(Regression Testing) 是指在修复其他漏洞、增加新功能或进行代码优化后重新运行已测试代码的测试，来防止原来的代码因新的改动出现**退化**(Regress)。
+
+此外，每次修复一个 Bug 后，引入导致该 Bug 的输入作为测试用例，这个用例就被称为**回归测试用例**。这也可以用于**测试先行调试**，即先将导致 Bug 的输入加入测试套件，再修改实现使之通过。
+
+**回归测试**往往与**自动测试**相结合，通称为**自动回归测试**(Automated Regression Testing)。
+
+## Iterative test-first programming
