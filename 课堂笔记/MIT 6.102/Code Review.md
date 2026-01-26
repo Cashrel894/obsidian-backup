@@ -37,3 +37,19 @@ https://medium.com/@rabinovichsagi/effectively-naming-software-thingies-fcea9d78
 
 ### Use Whitespace and Punctuation
 ### Don't Use Global Variables
+### Functions Should Return Results, Not Print Them
+### Avoid Special-Case Code
+程序员应当尽可能避免处理特殊情况。例如，在编写一个函数时，应当先编写通用代码，再考虑通用代码无法覆盖的部分解决特殊情况，否则可能导致代码的冗余。
+
+### Code At The Right Length
+单个函数不应该超过一页，单行代码不应该超过 80 个字符。
+
+## Refactoring
+**重构**(Refactor) 是指在不改变代码行为的前提下，改善代码以期提高软件的 SFB/ETU/RFC。
+
+重构可大可小，大规模的重构则可能引入新的问题。安全的重构应当注意以下方面：
+- Make small steps.
+- Comment out old code temporarily.
+- Use static checking to guide your changes.
+- Run tests after every change.
+- Delete old code and commit to version control after every smal steps.
