@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "课堂笔记/Calculus/基本积分表.md",
+                "file": "课堂笔记/MIT 6.102/Code Review.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "基本积分表"
+              "title": "Code Review"
             }
           }
         ]
@@ -170,8 +170,8 @@
   },
   "active": "8c7f2caa69cfc1a5",
   "lastOpenFiles": [
-    "课堂笔记/MIT 6.102/Code Review.md",
     "课堂笔记/Calculus/基本积分表.md",
+    "课堂笔记/MIT 6.102/Code Review.md",
     "附件/Pasted image 20260118162115.png",
     "课堂笔记/DS100/Regular Expressions.md",
     "附件/Pasted image 20260118161759.png",
