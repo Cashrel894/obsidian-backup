@@ -4,6 +4,7 @@
 [[Static Checking]]
 [[Testing 6102]] （IMPORTANT! ）
 [[Code Review]]
+[[Specification]]
 
 ## The goals of 6.102
 Our primary goal in this course is learning how to produce software that is:
