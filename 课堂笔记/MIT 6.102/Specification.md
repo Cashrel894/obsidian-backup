@@ -44,3 +44,39 @@ effects: modifies `array1` by adding the elements of `array2` to the end of 
 注意：除非明确说明，应该默认模块没有任何副作用，包括修改 mutable 的参数等。
 
 ## Exceptions
+**异常**(Exception) 也可以是函数在某些特定情况下的输出，用于处理可能的意外情况。在 ts 中，模块抛出的异常可以用 `@throws` 块描述。
+
+异常可以用于标识 Bug 的存在，也可以标识可能的错误的来源，使得调用者可以捕获并响应这些错误。例如：
+```ts
+/**
+ * Compute the integer square root.
+ * @param x integer value to take square root of
+ * @returns square root of x
+ * @throws NotPerfectSquareError if x is not a perfect square
+ */
+function integerSquareRoot(x: number): number
+```
+
+```ts
+/**
+ * If the array1 !== array2, adds the elements of array2 to the end of array1.
+ * @returns true if array1 changed as a result
+ * @throws AliasingError if array1 === array2
+ */
+function addAll(array1: Array<string>, array2: Array<string>): boolean
+```
+
+**注意**：`throws` 只应描述**前置条件成立的前提下**的可能错误，标识 Bug 的异常不应该在规范中被描述，因为抛出异常只是前置条件不成立时的诸多可能行为的一种。
+
+## Special Values
+另一种处理意外情况的方法是返回一个特殊值，如 `undefined`。
+```ts
+/**
+ * Compute the integer square root.
+ * @param x integer value to take square root of
+ * @returns square root of x if x is a perfect square, undefined otherwise
+ */
+function integerSquareRoot(x: number): number|undefined
+```
+
+此时，需要客户端自行处理特殊值，例如 `assert(ret !== undefined)` 等。
