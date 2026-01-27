@@ -20,6 +20,7 @@
 
 注意，当前置条件不满足时，实现者**没有义务**满足后置条件。然而，根据 Fail Fast 原则，更好的选择时当前置条件不满足时直接抛出异常，从而快速暴露客户端侧的 Bug。
 
+在 ts 中，分别用 `@param` 和 `@returns` 描述参数和返回值。
 ```ts
 /**
  * Find a value in an array.
@@ -31,3 +32,15 @@
 function find(arr: Array<number>, val: number): number
 ```
 
+## Specifications for Mutating Functions
+有时，函数不仅会返回某些值，还可能产生一些副作用，如：
+```ts
+addAll(array1: Array<string>, array2: Array<string>): boolean
+```
+```
+requires: `array1` and `array2` are not the same object
+effects: modifies `array1` by adding the elements of `array2` to the end of it, and returns true if and only if `array1` changed as a result of call
+```
+注意：除非明确说明，应该默认模块没有任何副作用，包括修改 mutable 的参数等。
+
+## Exceptions
