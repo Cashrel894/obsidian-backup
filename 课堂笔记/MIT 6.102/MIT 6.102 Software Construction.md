@@ -7,6 +7,7 @@
 [[Specification]]
 [[Designing Specifications]]
 
+
 ## The goals of 6.102
 Our primary goal in this course is learning how to produce software that is:
 - **Safe from bugs**. Correctness (correct behavior right now) and defensiveness (correct behavior in the future) are required in any software we build.
