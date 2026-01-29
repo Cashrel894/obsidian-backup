@@ -22,8 +22,51 @@
 - **Mutator**：修改对象。
 
 ## An Abstract Type is Defined by its Operations
-规范是单个函数的防火墙，而相似地，抽象数据类型是一系列**相关函数**（即类型参与的操作）和**数据**的防火墙。
+规范是单个函数的防火墙，而相似地，抽象数据类型是一系列**相关函数**（即类型参与的操作）和**数据**的防火墙。实现抽象数据类型的具体方式，就称为**表示**(Representation)。
 
 ## Designing an Abstract Type
 设计一个抽象数据结构涉及以下核心原则：
-- 
+- 只包含**少量**、**简单**的操作，但可以通过操作的组合提供强大的功能。
+- 每个操作都应提供**一致的**、**良定义的**行为，能够覆盖绝大多数应用情况。
+- 提供的操作应当**充分地**覆盖客户端可能需要的行为。
+- 同一个抽象类型内不应该混杂**通用**(General-purpose)和**领域特定**(Domain-specfic)的功能。
+	- 例如，表示纸牌牌组的 `Deck` 类的 `add` 方法不应该接受 `int` 等类型的对象，也不应该在 `Array` 类加入 `dealCards` 等领域特定的方法。
+
+## Representation independence
+一个好的抽象数据类型应当是具有**表示独立性**(Representation Independence) 的。
+- 也就是说，抽象数据类型的使用应当是**独立于**它的表示的。因此，更改表示并不会影响它的使用。
+```ts
+/** MyString represents an immutable sequence of characters. */
+class MyString { 
+
+    //////////////////// Example creator operation ///////////////
+    /**
+     * @param s 
+     * @returns MyString representing the sequence of characters in s
+     */
+    public constructor(s: string) { ... }
+
+    //////////////////// Example observer operations ///////////////
+    /**
+     * @returns number of characters in this string
+     */
+    public length(): number { ... }
+
+    /**
+     * @param i character position (requires 0 <= i < string length)
+     * @returns character at position i
+     */
+    public charAt(i: number): string { ... }
+
+    //////////////////// Example producer operation ///////////////
+    /** 
+     * Get the substring between start (inclusive) and end (exclusive).
+     * @param start starting index
+     * @param end ending index.  Requires 0 <= start <= end <= string length.
+     * @returns string consisting of charAt(start)...charAt(end-1)
+     */
+    public substring(start: number, end: number): MyString { ... }
+
+    /////// no mutator operations (why not?)
+}
+```
