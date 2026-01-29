@@ -70,3 +70,5 @@ class MyString {
     /////// no mutator operations (why not?)
 }
 ```
+
+而大部分编程语言的**访问控制**机制允许我们将表示设置为 private，不允许外界访问，
