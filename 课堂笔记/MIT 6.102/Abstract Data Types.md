@@ -93,3 +93,22 @@ class MyString {
 |                                                                                                                | [](https://web.mit.edu/6.102/www/sp25/classes/06-abstract-data-types/#@static_method_2)Static method                  | [](https://web.mit.edu/6.102/www/sp25/classes/06-abstract-data-types/#@object-assign)[`Object.assign()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)                                                                                      |     |
 | [](https://web.mit.edu/6.102/www/sp25/classes/06-abstract-data-types/#@representation_5)Representation         | [](https://web.mit.edu/6.102/www/sp25/classes/06-abstract-data-types/#@private_fields)`private` fields                |                                                                                                                                                                                                                                                                                               |     |
 
+## Testing an Abstract Data Type
+测试一个抽象数据类型的核心思想和 [[Testing 6102]] 是一致的，我们只需要分别测试它的所有操作即可。
+
+只不过，对某一操作的测试往往会不可避免地涉及到另一个操作。例如，测试 Creator、Producer 或 Mutator 都需要调用 Observer；测试 Observer 又需要 Creator 来创建对象。
+
+```ts
+// testing strategy for each operation of MyString:
+//
+// constructor, length(), charAt(), substring():
+//    partition on string length: 0, 1, >1
+// length(), charAt(), substring():
+//    partition on this: produced by constructor, produced by substring()
+// charAt(): 
+//    partition on i=0, 0<i<len-1, i=len-1
+// substring():
+//    partition on start=0, 0<start<len, start=len
+//    partition on end=0, 0<end<len, end=len
+//    partition on end-start: 0, >0
+```
