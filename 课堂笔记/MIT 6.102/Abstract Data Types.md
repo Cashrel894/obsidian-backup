@@ -112,3 +112,5 @@ class MyString {
 //    partition on end=0, 0<end<len, end=len
 //    partition on end-start: 0, >0
 ```
+
+注意，我们在测试一个抽象数据类型时，我们应当基于 `this` 的**抽象状态**划分输入空间，而不是它的具体表示。我们应该以一个**客户端**的视角进行划分和测试。
