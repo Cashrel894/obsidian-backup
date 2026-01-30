@@ -111,3 +111,51 @@ class RatNum {
     //   timestamp is a mutable Date, so Tweet() constructor and getTimestamp()
     //        make defensive copies to avoid sharing the rep's Date object with clients.
 ```
+
+## What an ADT specifiction may talk about
+![[Pasted image 20260130154050.png]]
+
+使用 ADT 的一大好处在于，我们可以用设计优良的 ADT 来代替复杂的前置和后置条件：
+```ts
+/**
+ * @param set1 is a sorted set of characters with no repeats
+ * @param set2 is likewise
+ * @returns characters that appear in one set but not the other,
+ *  in sorted order with no repeats
+ */
+static exclusiveOr(set1: string, set2: string): string;
+```
+
+可以封装为：
+```ts
+/**
+ * @returns characters that appear in one set but not the other
+ */
+static exclusiveOr(set1: SortedCharSet, set2: SortedCharSet): SortedCharSet;
+```
+
+## How to establish invariants
+在确立不变量时：
+- Creator 和 Producer 需要**确立**新实例的不变量；
+- Mutator、Observer 和 Producer 需要**保护**现有实例的不变量。
+- 没有发生**表示泄露**。
+
+以上三个性质，就可以在数学上充分保证不变量在任何情况下都满足。
+
+## Recipes for programming
+扩展 [[Testing 6102#Test-First Programming]] 的方法，编写一个 ADT 的三个步骤：
+1. **规范**：为 ADT 的所有操作编写规范，包括方法签名、前置条件和后置条件。这个过程中需要定义**抽象值**。
+2. **测试**：根据规范，为所有操作编写测试用例。此时**迭代**的思想依然生效，在编写测试用例时可能发现规范中的错误，进而进行修正。
+3. **实现**：对于 ADT 而言，实现包括以下子步骤：
+	1. 选取**表示**。写下类的**私有字段**，并在注释中描述**表示不变量**和**抽象函数**。
+	2. **断言表示不变量**。编写 `checkRep()` 方法，强制操作检查表示不变量。
+	3. **实现操作**。编写方法的函数体，确保测试全部通过。
+
+进而，我们将编写函数和 ADT 的方法结合起来，形成**编写程序**的方法论：
+1. 选取**ADT**：决定哪些数据是可以修改的，哪些是不可修改的。
+2. 选取**函数**：编写顶层 `main` 函数，并将其分解为多个子步骤。
+3. **规范**：为 ADT 和函数分别编写规范。开发初期应该让 ADT 保持简洁，尽量控制操作的总数。
+4. **测试**：为每个**单元**（包括 ADT 和函数）编写单元测试。
+5. **初步实现**：选择**最简单、暴力**的表示，尽早地将整个程序跑通，忽略高级功能/性能优化/边际情况等复杂任务。
+6. **迭代**：拾起上一步中提及的复杂任务，一步步加以实现。
+

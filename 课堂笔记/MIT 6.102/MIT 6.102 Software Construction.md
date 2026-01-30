@@ -7,7 +7,7 @@
 [[Specification]]
 [[Designing Specifications]]
 [[Abstract Data Types]]
-[[Abstraction Functions & Rep Invariants]]
+[[Abstraction Functions & Rep Invariants]] （IMPORTANT! ）
 
 ## The goals of 6.102
 Our primary goal in this course is learning how to produce software that is:
