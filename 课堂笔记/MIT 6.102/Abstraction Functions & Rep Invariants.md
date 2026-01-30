@@ -45,3 +45,69 @@ class CharSet {
 }
 ```
 这样的注释**非常重要**，特别是当 `AF` 并不明确，或者需要进行团队合作的时候。
+
+同时，在代码运行时，也有必要时刻检查（最好在每个方法的最后都进行检查，只要不严重影响程序效率）自身表示是否符合**表示不变量**，并在不符合时**抛出错误**，以尽快发现问题根源。
+
+## No Null Values in the Rep
+之前提过，函数的前置和后置条件默认数据非 null。**表示不变量也同样需要强调非 null**。表示中涉及到的任何引用，包括 `Array` 等数据结构中，都默认不含 null / undefined 引用。
+
+## Benevolent Side-effects
+一个类型是**不可修改的**当且仅当其**抽象值**不可修改。然而，我们依然可以修改表示值，只要其所对应的抽象值不变即可，这也被称为“善意的副作用”。
+
+例如，对于有理数类：
+```ts
+class RatNum {
+
+    private numerator: bigint;
+    private denominator: bigint;
+
+    // Rep invariant:
+    //   denominator != 0
+
+    // Abstraction function:
+    //   AF(numerator, denominator) = numerator/denominator
+
+    /**
+     * Make a new RatNum = (n / d).
+     * @param n numerator
+     * @param d denominator
+     * @throws Error if d = 0
+     */
+     public constructor(n: bigint, d: bigint) {
+        if (d === 0n) throw new Error("denominator is zero");
+        this.numerator = n;
+        this.denominator = d;
+        checkRep();
+    }
+
+    /**
+	 * @returns a string representation of this rational number
+	 */
+	public toString(): string {
+	    const g = gcd(this.numerator, this.denominator);
+	    this.numerator /= g;
+	    this.denominator /= g;
+	    if (this.denominator < 0n) {
+	        this.numerator = -this.numerator;
+	        this.denominator = -this.denominator;
+	    }
+	    checkRep();
+	    return (this.denominator > 1n) ? (this.numerator + "/" + this.denominator)
+	                             : (this.numerator + "");
+	}
+}
+```
+
+尽管在 `toString` 方法修改了字段的值，但约分并不改变其所对应的有理数值，因此不会改变类型的不可修改性。
+
+## Documenting the AF, RI, and safety from rep exposure
+记录 AF 和 RI 时应力求**精确**，而不是仅仅给出一个宽泛的描述，而是要定义一个严格的、无歧义的映射规则。
+
+同时，也务必记录防范**表示泄露**的具体措施，例如：
+```ts
+// Safety from rep exposure:
+    //   All fields are private;
+    //   author and text are Strings, so are guaranteed immutable;
+    //   timestamp is a mutable Date, so Tweet() constructor and getTimestamp()
+    //        make defensive copies to avoid sharing the rep's Date object with clients.
+```
