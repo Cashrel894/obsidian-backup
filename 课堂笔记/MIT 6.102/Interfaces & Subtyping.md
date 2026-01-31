@@ -70,3 +70,4 @@ function makeMyString(s: string): MyString {
 **泛型**(Generic Type)：规范中需要使用到类型作为参数的类型，例如 `Set<T>` 等。
 
 泛型可以被视为一些相似类型的集合，这些类型依照尖括号中的类型参数而定。
+
