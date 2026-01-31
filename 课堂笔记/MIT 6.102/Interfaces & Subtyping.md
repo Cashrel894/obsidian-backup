@@ -61,3 +61,12 @@ function makeMyString(s: string): MyString {
 - 父类和子类可能意外相互破坏表示不变量。
 
 ## Overriding and Dynamic Dispatch
+子类可以**覆写**(Override) 父类的方法，而当某个对象的方法被调用时，会发生以下步骤：
+1. 检查对象所属的**静态类型**，若该静态类型没有目标方法，静态检查将抛出错误。
+2. 调用对象**动态类型**的目标方法，可能被子类覆写。
+这种检查和方法查找模式，称为**动态调度**(Dynamic Dispatch)。
+
+## Generic Types
+**泛型**(Generic Type)：规范中需要使用到类型作为参数的类型，例如 `Set<T>` 等。
+
+泛型可以被视为一些相似类型的集合，这些类型依照尖括号中的类型参数而定。
