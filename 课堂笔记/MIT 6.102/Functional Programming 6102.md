@@ -1,4 +1,12 @@
 #mit6102 
+## Functional Programming
+所谓**函数式编程**(Functional Programming)，就是使用**不可修改的**数据以及实现**纯函数**的操作建模和实现软件系统。
+
+函数式编程可以让软件：
+- SFB：不可修改的数据可以减少意料之外的副作用。
+- ETU：map、filter、reduce 等序列操作方法允许链式调用，抽象掉 `for` 、`if` 等控制语句，把注意力放在序列操作本身上来。
+- RFC：函数式编程可以使程序员把注意力投射到计算和建模本身，让代码与问题建模协同进化。
+
 ## Abstracting out control
 有时，我们需要对一组数据统一进行操作。传统的方式是组合 `for` 和 `if` 语句，对数据进行逐个判断与处理。
 
@@ -68,7 +76,7 @@ const isNonempty = (s: string) => s.length > 0;
 // returns ["abc", "d"]
 ```
 
-## Reduce
+### Reduce
 **`reduce : Array<‍E> × (F × E → F) × F → F `**
 用一个**二元函数**将序列中的所有元素结合为一个标量元素。同时需要一个**初始值**。
 
@@ -81,4 +89,37 @@ resultn = f(resultn-1, arr[n-1])
 ```
 
 在 ts 中，`reduce` 方法总是从左往右结合元素。也可以使用 `reduceRight` 方法逆序结合，使用方式一致。
+
+
+综合运用这些方法，我们可以这样递归遍历文件树：
+```typescript
+function allFilesIn(folder: string): Array<string> {
+    const children: Array<string> = fs.readdirSync(folder)
+                                      .map(f => path.join(folder, f));
+    const descendants: Array<string> = children
+                                       .filter(f => fs.lstatSync(f).isDirectory())
+                                       .map(allFilesIn)
+                                       .flat();
+    return [
+        ...descendants,
+        ...children.filter(f => fs.lstatSync(f).isFile())
+    ];
+}
+```
+
+在有 `map/filter/reduce` 等序列操作抽象的语言中，我们应该在序列操作中**尽可能避免使用循环**。
+
+## Functional Programming in SQL
+实际上，SQL 语言对关系型数据库的很多操作，本质上都是对数据做 `map/filter/reduce` 操作，例如：
+
+```sql
+select max(pixels) from cameras where brand = "Nikon"
+```
+> `cameras` is a **sequence** (of table rows, where each row has the data for one camera)
+> 
+> `where brand = "Nikon"` is a **filter**
+> 
+> `pixels` is a **map** (extracting just the pixels field from the row)
+> 
+> `max` is a **reduce**
 
