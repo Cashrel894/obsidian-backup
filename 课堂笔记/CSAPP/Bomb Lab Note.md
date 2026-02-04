@@ -178,13 +178,13 @@ Dump of assembler code for function phase_4:
    0x000000000040102e <+34>:	cmpl   $0xe,0x8(%rsp)
    0x0000000000401033 <+39>:	jbe    0x40103a <phase_4+46> // if a > 14 or a < 0, boom.
    0x0000000000401035 <+41>:	call   0x40143a <explode_bomb>
-   0x000000000040103a <+46>:	mov    $0xe,%edx
-   0x000000000040103f <+51>:	mov    $0x0,%esi
-   0x0000000000401044 <+56>:	mov    0x8(%rsp),%edi
-   0x0000000000401048 <+60>:	call   0x400fce <func4>
+   0x000000000040103a <+46>:	mov    $0xe,%edx // edx = 0xe
+   0x000000000040103f <+51>:	mov    $0x0,%esi // esi = 0
+   0x0000000000401044 <+56>:	mov    0x8(%rsp),%edi // edi = a
+   0x0000000000401048 <+60>:	call   0x400fce <func4> // ret = func4(a, 0, 14)
    0x000000000040104d <+65>:	test   %eax,%eax
-   0x000000000040104f <+67>:	jne    0x401058 <phase_4+76>
-   0x0000000000401051 <+69>:	cmpl   $0x0,0xc(%rsp)
+   0x000000000040104f <+67>:	jne    0x401058 <phase_4+76> // If ret != 0, boom
+   0x0000000000401051 <+69>:	cmpl   $0x0,0xc(%rsp) // If b != 0, boom.
    0x0000000000401056 <+74>:	je     0x40105d <phase_4+81>
    0x0000000000401058 <+76>:	call   0x40143a <explode_bomb>
    0x000000000040105d <+81>:	add    $0x18,%rsp
@@ -193,29 +193,48 @@ Dump of assembler code for function phase_4:
 
 一眼看到 `func4`，先反汇编一下：
 ```js
-Dump of assembler code for function func4:
+Dump of assembler code for function func4: // (a, l, r)
    0x0000000000400fce <+0>:		sub    $0x8,%rsp
-   0x0000000000400fd2 <+4>:		mov    %edx,%eax
-   0x0000000000400fd4 <+6>:		sub    %esi,%eax
-   0x0000000000400fd6 <+8>:		mov    %eax,%ecx
-   0x0000000000400fd8 <+10>:	shr    $0x1f,%ecx
-   0x0000000000400fdb <+13>:	add    %ecx,%eax
-   0x0000000000400fdd <+15>:	sar    $1,%eax
-   0x0000000000400fdf <+17>:	lea    (%rax,%rsi,1),%ecx
+   0x0000000000400fd2 <+4>:		mov    %edx,%eax // eax = r
+   0x0000000000400fd4 <+6>:		sub    %esi,%eax // eax -= l, eax = r - l
+   0x0000000000400fd6 <+8>:		mov    %eax,%ecx // ecx = eax = r - l
+   0x0000000000400fd8 <+10>:	shr    $0x1f,%ecx // ecx = sign_of(r - l)
+   0x0000000000400fdb <+13>:	add    %ecx,%eax // eax += ecx
+   0x0000000000400fdd <+15>:	sar    $1,%eax // eax >>= 1, signed. eax = ((r - l) + sign_of(r - l)) >> 1 <-> eax = (r - l) / 2
+   0x0000000000400fdf <+17>:	lea    (%rax,%rsi,1),%ecx // ecx = l + (r - l) / 2, mid
    0x0000000000400fe2 <+20>:	cmp    %edi,%ecx
-   0x0000000000400fe4 <+22>:	jle    0x400ff2 <func4+36>
-   0x0000000000400fe6 <+24>:	lea    -0x1(%rcx),%edx
-   0x0000000000400fe9 <+27>:	call   0x400fce <func4>
-   0x0000000000400fee <+32>:	add    %eax,%eax
+   0x0000000000400fe4 <+22>:	jle    0x400ff2 <func4+36> // If mid <= a, goto .le
+   0x0000000000400fe6 <+24>:	lea    -0x1(%rcx),%edx // .g edx = mid - 1
+   0x0000000000400fe9 <+27>:	call   0x400fce <func4> // ret = func4(a, l, mid - 1)
+   0x0000000000400fee <+32>:	add    %eax,%eax // return 2 * ret
    0x0000000000400ff0 <+34>:	jmp    0x401007 <func4+57>
-   0x0000000000400ff2 <+36>:	mov    $0x0,%eax
+   0x0000000000400ff2 <+36>:	mov    $0x0,%eax // .le eax = 0
    0x0000000000400ff7 <+41>:	cmp    %edi,%ecx
-   0x0000000000400ff9 <+43>:	jge    0x401007 <func4+57>
-   0x0000000000400ffb <+45>:	lea    0x1(%rcx),%esi
-   0x0000000000400ffe <+48>:	call   0x400fce <func4>
-   0x0000000000401003 <+53>:	lea    0x1(%rax,%rax,1),%eax
-   0x0000000000401007 <+57>:	add    $0x8,%rsp
+   0x0000000000400ff9 <+43>:	jge    0x401007 <func4+57> // If ecx >= a, return 0
+   0x0000000000400ffb <+45>:	lea    0x1(%rcx),%esi // esi = mid + 1
+   0x0000000000400ffe <+48>:	call   0x400fce <func4> // ret = func4(a, mid + 1, r)
+   0x0000000000401003 <+53>:	lea    0x1(%rax,%rax,1),%eax // return 2 * ret + 1
+   0x0000000000401007 <+57>:	add    $0x8,%rsp // .end
    0x000000000040100b <+61>:	ret
 ```
 
-发现 `func4` 会调用自身，是递归函数，需要小心分析。
+发现 `func4` 会调用自身，是递归函数，需要小心分析。可以发现，`func_4` 具有明显的二分查找特征，还原为 c 代码：
+```c
+int func4(int a, int l, int r) {
+	int mid = l + (r - l) / 2;
+	
+	if (mid > a) {
+		return func4(a, l, mid - 1) * 2;
+	}
+	else if (mid == a) {
+		return 0;
+	}
+	else {
+		return func4(a, mid + 1, r) * 2 + 1;
+	}
+}
+```
+
+而 `phase_4` 要求 `0 <= a <= 14 && func4(a, 0, 14) == 0 && b == 0`，分析 c 语言代码不难看出 a 取 0 或 1 均满足要求。当 a 取其他值时，必然导致 `func4` 在某一次调用中走 `else` 分支，进而使得最终的返回值大于 0。
+
+综上，答案为 `0 0` 或 `1 0`。
