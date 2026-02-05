@@ -245,8 +245,8 @@ Dump of assembler code for function phase_5:
 => 0x0000000000401062 <+0>:		push   %rbx
    0x0000000000401063 <+1>:		sub    $0x20,%rsp
    0x0000000000401067 <+5>:		mov    %rdi,%rbx
-   0x000000000040106a <+8>:		mov    %fs:0x28,%rax
-   0x0000000000401073 <+17>:	mov    %rax,0x18(%rsp)
+   0x000000000040106a <+8>:		mov    %fs:0x28,%rax // canary value
+   0x0000000000401073 <+17>:	mov    %rax,0x18(%rsp) // 
    0x0000000000401078 <+22>:	xor    %eax,%eax
    0x000000000040107a <+24>:	call   0x40131b <string_length>
    0x000000000040107f <+29>:	cmp    $0x6,%eax
