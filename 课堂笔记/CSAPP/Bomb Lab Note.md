@@ -336,32 +336,32 @@ Dump of assembler code for function phase_6:
    0x00000000004010fa <+6>:		push   %rbp
    0x00000000004010fb <+7>:		push   %rbx
    0x00000000004010fc <+8>:		sub    $0x50,%rsp
-   0x0000000000401100 <+12>:	mov    %rsp,%r13
+   0x0000000000401100 <+12>:	mov    %rsp,%r13 // int nums[6]; r13 = nums
    0x0000000000401103 <+15>:	mov    %rsp,%rsi
-   0x0000000000401106 <+18>:	call   0x40145c <read_six_numbers>
-   0x000000000040110b <+23>:	mov    %rsp,%r14
-   0x000000000040110e <+26>:	mov    $0x0,%r12d
-   0x0000000000401114 <+32>:	mov    %r13,%rbp
-   0x0000000000401117 <+35>:	mov    0x0(%r13),%eax
-   0x000000000040111b <+39>:	sub    $0x1,%eax
+   0x0000000000401106 <+18>:	call   0x40145c <read_six_numbers> // read_six_numbers(input, nums);
+   0x000000000040110b <+23>:	mov    %rsp,%r14 // r14 = nums
+   0x000000000040110e <+26>:	mov    $0x0,%r12d // r12 = 0
+   0x0000000000401114 <+32>:	mov    %r13,%rbp // .outer_loop rbp = r13
+   0x0000000000401117 <+35>:	mov    0x0(%r13),%eax // rax = *r13
+   0x000000000040111b <+39>:	sub    $0x1,%eax // rax --
    0x000000000040111e <+42>:	cmp    $0x5,%eax
-   0x0000000000401121 <+45>:	jbe    0x401128 <phase_6+52>
+   0x0000000000401121 <+45>:	jbe    0x401128 <phase_6+52> // If rax > 5, boom.
    0x0000000000401123 <+47>:	call   0x40143a <explode_bomb>
-   0x0000000000401128 <+52>:	add    $0x1,%r12d
+   0x0000000000401128 <+52>:	add    $0x1,%r12d // r12 ++
    0x000000000040112c <+56>:	cmp    $0x6,%r12d
-   0x0000000000401130 <+60>:	je     0x401153 <phase_6+95>
-   0x0000000000401132 <+62>:	mov    %r12d,%ebx
-   0x0000000000401135 <+65>:	movslq %ebx,%rax
-   0x0000000000401138 <+68>:	mov    (%rsp,%rax,4),%eax
+   0x0000000000401130 <+60>:	je     0x401153 <phase_6+95> // If r12 == 6, goto .outer_loop_end
+   0x0000000000401132 <+62>:	mov    %r12d,%ebx // ebx = r12d
+   0x0000000000401135 <+65>:	movslq %ebx,%rax // .inner_loop rax = (long) ebx
+   0x0000000000401138 <+68>:	mov    (%rsp,%rax,4),%eax // eax = nums[rax]
    0x000000000040113b <+71>:	cmp    %eax,0x0(%rbp)
-   0x000000000040113e <+74>:	jne    0x401145 <phase_6+81>
+   0x000000000040113e <+74>:	jne    0x401145 <phase_6+81> // If r13[rax] == eax, boom
    0x0000000000401140 <+76>:	call   0x40143a <explode_bomb>
-   0x0000000000401145 <+81>:	add    $0x1,%ebx
+   0x0000000000401145 <+81>:	add    $0x1,%ebx // ebx ++
    0x0000000000401148 <+84>:	cmp    $0x5,%ebx
-   0x000000000040114b <+87>:	jle    0x401135 <phase_6+65>
-   0x000000000040114d <+89>:	add    $0x4,%r13
-   0x0000000000401151 <+93>:	jmp    0x401114 <phase_6+32>
-   0x0000000000401153 <+95>:	lea    0x18(%rsp),%rsi
+   0x000000000040114b <+87>:	jle    0x401135 <phase_6+65> // If ebx <= 5, goto .inner_loop
+   0x000000000040114d <+89>:	add    $0x4,%r13 // r13 += 4
+   0x0000000000401151 <+93>:	jmp    0x401114 <phase_6+32> // goto .outer_loop
+   0x0000000000401153 <+95>:	lea    0x18(%rsp),%rsi // .outer_loop_end
    0x0000000000401158 <+100>:	mov    %r14,%rax
    0x000000000040115b <+103>:	mov    $0x7,%ecx
    0x0000000000401160 <+108>:	mov    %ecx,%edx
@@ -418,3 +418,22 @@ Dump of assembler code for function phase_6:
    0x0000000000401203 <+271>:	ret
 ```
 不是哥们怎么这么长🤔不愧是最终 Boss
+
+分析到 +95 为止，能看出有双层循环特征，尝试先把这个模块转换为 c 语言代码：
+```c
+void phase_6(char *input) {
+	int nums[6];
+	read_six_numbers(input, nums);
+	
+	for (int i = 0; ; i ++) {
+		int x = nums[i] - 1;
+		if (x > 5) explode_bomb();
+		
+		if (i == 6) break;
+		for (int j = i; ; j ++) {
+			int t = j;
+			
+		}
+	}
+}
+```
