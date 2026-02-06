@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "课堂笔记/Data8/Correlation.md",
+                "file": "课堂笔记/Data8/The Regression Line.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Correlation"
+              "title": "The Regression Line"
             }
           }
         ]
@@ -171,6 +171,7 @@
   "active": "8c7f2caa69cfc1a5",
   "lastOpenFiles": [
     "课堂笔记/Data8/Prediction.md",
+    "课堂笔记/Data8/Correlation.md",
     "课堂笔记/Data8/Data8.md",
     "课堂笔记/English/Word Book.md",
     "课堂笔记/Data8/Estimation.md",
@@ -207,7 +208,6 @@
     "课堂笔记/MIT 6.102/Static Checking.md",
     "课堂笔记/MIT 6.102/TypeScript basics.md",
     "课堂笔记/MIT 6.102/MIT 6.102 Software Construction.md",
-    "课堂笔记/MIT 6.102/Testing 6102.md",
     "课堂笔记/MIT 6.102",
     "课堂笔记/Bash Scripting"
   ]
