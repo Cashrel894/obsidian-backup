@@ -26,3 +26,5 @@ Tree<Element> = Empty + Node(e: Element, left: Tree<Element>, right: Tree<Elemen
 
 在函数式编程中，数据类型定义又被称为**代数数据类型**(Algebratic Data Type)。
 
+## Static vs. Dynamic Types
+在 ts 中，**变量类型**是编译时决定的，具有静态性；**对象类型**是运行时决定的，具有动态性。但不能说一个变量是否动态或一个对象是否静态。
