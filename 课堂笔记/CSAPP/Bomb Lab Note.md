@@ -456,8 +456,8 @@ void phase_6(char *input) {
 猜测每个结点的第二个值是结点编号 `id`，最后一个值为结点的 ` next ` 字段，第一个暂时不明，姑且认为是 data。可以写出结构体定义：
 ```c
 struct node {
-	long data;
-	long id;
+	int data;
+	int id;
 	node *next;
 }
 ```
@@ -482,41 +482,38 @@ void phase_6(char *input) {
 
 下一段循环：
 ```js
-   0x00000000004011ab <+183>:	mov    0x20(%rsp),%rbx // rbx=nps[0]
-   0x00000000004011b0 <+188>:	lea    0x28(%rsp),%rax // rax=&nps[1]
+   0x00000000004011ab <+183>:	mov    0x20(%rsp),%rbx // rbx=*(rsp+20)=nps[0]
+   0x00000000004011b0 <+188>:	lea    0x28(%rsp),%rax // rax=rsp+28=&nps[1]
    0x00000000004011b5 <+193>:	lea    0x50(%rsp),%rsi
    0x00000000004011ba <+198>:	mov    %rbx,%rcx // rcx=rbx=nps[0]
-   0x00000000004011bd <+201>:	mov    (%rax),%rdx // .loop rdx=nps[1]->data
+   0x00000000004011bd <+201>:	mov    (%rax),%rdx // .loop rdx=nps[i]
    0x00000000004011c0 <+204>:	mov    %rdx,0x8(%rcx) // rcx->next=rdx
    0x00000000004011c4 <+208>:	add    $0x8,%rax // rax+=8
    0x00000000004011c8 <+212>:	cmp    %rsi,%rax
    0x00000000004011cb <+215>:	je     0x4011d2 <phase_6+222> // If rax==rsi, break
    0x00000000004011cd <+217>:	mov    %rdx,%rcx // rcx=rdx
    0x00000000004011d0 <+220>:	jmp    0x4011bd <phase_6+201> // goto .loop
+   0x00000000004011d2 <+222>:	movq   $0x0,0x8(%rdx)
 ```
 
 翻译为 c 代码：
 ```c
 void phase_6(char *input) {
 	...
-	node *b = nps[0];
-	node *c = b;
 	for (int i = 1; i < 6; i ++) {
-		node *a = nps[i];
-		long d = a->data;
-		
+		nps[i - 1]->next = nps[i];
 	}
-	
+	nps[5]->next = NULL;
 	...
 }
 ```
+到目前为止的代码，主要做的就是根据输入的六个数字，将链表重新排序。
 
 ```js
-   0x00000000004011d2 <+222>:	movq   $0x0,0x8(%rdx)
-   0x00000000004011da <+230>:	mov    $0x5,%ebp
-   0x00000000004011df <+235>:	mov    0x8(%rbx),%rax
-   0x00000000004011e3 <+239>:	mov    (%rax),%eax
-   0x00000000004011e5 <+241>:	cmp    %eax,(%rbx)
+   0x00000000004011da <+230>:	mov    $0x5,%ebp // ebp = 5
+   0x00000000004011df <+235>:	mov    0x8(%rbx),%rax // rax = rbx->next
+   0x00000000004011e3 <+239>:	mov    (%rax),%eax // rax = rax->data
+   0x00000000004011e5 <+241>:	cmp    %eax,(%rbx) // If rbx->data < rax->data, boom. 进一步展开，其实就是要验证rbx->data >= rbx->next->data。这里其实就可以猜出来这段代码是干啥的了
    0x00000000004011e7 <+243>:	jge    0x4011ee <phase_6+250>
    0x00000000004011e9 <+245>:	call   0x40143a <explode_bomb>
    0x00000000004011ee <+250>:	mov    0x8(%rbx),%rbx
@@ -529,4 +526,50 @@ void phase_6(char *input) {
    0x00000000004011ff <+267>:	pop    %r13
    0x0000000000401201 <+269>:	pop    %r14
    0x0000000000401203 <+271>:	ret
+```
+
+翻译为 c 代码：
+```c
+void phase_6(char *input) {
+	...
+	node *cur = nps[0];
+	for (int i = 0; i < 5; i ++) {
+		if (cur->data < cur->next->data) explode_bomb();
+		cur = cur->next;
+	}
+}
+```
+这段代码要求我们保证重排后的链表满足 data 字段单调递减。
+
+到此全部代码翻译完毕，下面开始逆推。通过比较 data 字段大小，重排后的链表应为：
+```
+3 -> 4 -> 5 -> 6 -> 1 -> 2
+```
+
+再回味之前重排部分的代码可知，要求的输入序列恰好就是上述结点 id 的顺序！……才怪。注意我们中间有修改过 nums 的值：
+```
+nums[i] = 7 - nums[i];
+```
+
+所以这一步逆推也要考虑上，答案应为：
+```
+4 3 2 1 6 5
+```
+
+## The End
+完结撒炸弹！
+```
+(gdb) run psol.txt 
+Starting program: /home/cashrel/Cashrel/wp/csapp/labs/bomblab/bomb/bomb psol.txt
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+So you got that one.  Try this one.
+Good work!  On to the next...
+Congratulations! You've defused the bomb!
+[Inferior 1 (process 343119) exited normally]
 ```
