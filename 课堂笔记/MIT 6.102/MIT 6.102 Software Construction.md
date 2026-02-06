@@ -11,6 +11,7 @@
 [[Interfaces & Subtyping]]
 [[Functional Programming 6102]]
 [[Equality]]
+[[Recursive Data Types]]
 
 ## The goals of 6.102
 Our primary goal in this course is learning how to produce software that is:
