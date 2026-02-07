@@ -13,10 +13,10 @@
 
 为了定义非终止符可以匹配的值，语法还需要定义 **产生式** (Production)（或规则, rule）的集合。
 
-产生式利用其他非终止符、操作符和终止符来定义一个非终止符。
+产生式利用其他非终止符、操作符和终止符组成的表达式来定义一个非终止符：
 ```parserlib
 nonterminal ::= expression of terminals, nonterminals, and operators 
 ```
 
-一个语法会指定一个非终止符作为它的**根节点**(Root)，
+一个语法会指定一个非终止符作为它的**根节点**(Root)，通常记作 `root` 或 `start` 或 `S`。
 
