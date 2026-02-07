@@ -28,3 +28,8 @@ Tree<Element> = Empty + Node(e: Element, left: Tree<Element>, right: Tree<Elemen
 
 ## Static vs. Dynamic Types
 在 ts 中，**变量类型**是编译时决定的，具有静态性；**对象类型**是运行时决定的，具有动态性。但不能说一个变量是否动态或一个对象是否静态。
+
+## Instanceof
+通常来讲，使用 `instanceof` 判断对象类型非常坏，因为它假定了目标接口的表示方式，会阻碍添加接口的新实现。 
+
+但有一个例外是，在判断 [[Equality]] 时，有必要通过 `instanceof` 确认两个对象是否属于同一类型，进而可以作进一步的判断。
