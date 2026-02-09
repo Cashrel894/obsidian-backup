@@ -25,5 +25,4 @@ countries_reviewed.sort_values(by='len')
 countries_reviewed.sort_values(by='len', ascending=False)
 countries_reviewed.sort_index() # 按下标排序
 countries_reviewed.sort_values(by=['country', 'len']) # 多关键字排序
-
 ```
