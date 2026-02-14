@@ -72,7 +72,7 @@ x ::= [^a-c]  // equivalent to  x ::= 'd' | 'e' | 'f' | ... | '0' | '1' | ... | 
               //                          | ... (all other possible characters)
 ```
 
-## Recursion in Grammars
+### Recursion in Grammars
 此外，产生式还可以递归定义：
 ```parserlib
 url ::= 'http://' hostname (':' port)? '/' 
@@ -81,5 +81,9 @@ port ::= [0-9]+
 word ::= [a-z]+
 ```
 
+## Parse trees
+使用语法匹配字符串，可以生成一棵**解析树**(Parse Tree)，来展示字符串的各个部分与语法的对应关系。
 
+解析树的叶子节点都是终止符，中间结点则为非终止符。每个非终止符的子结点总是符合对应的产生式。
+![[Pasted image 20260214192955.png]]
 
