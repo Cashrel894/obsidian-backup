@@ -3,3 +3,4 @@
 [[State Spaces and Search Problems]]
 [[Uninformed Search]]
 [[Informed Search]]
+[[Local Search]]
