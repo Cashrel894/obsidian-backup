@@ -57,7 +57,7 @@ function EXPAND(problem, node) yields nodes
 
 ### Uniform Cost Search
 **策略**：总是拓展距离初始结点**代价最小**的边境结点。
-**边境的表示**：通常用**优先队列**实现。
+**边境的表示**：通常用**优先队列**实现，优先级由*后向代价*决定。
 **完整性**：完整的。
 **最优性**：当所有边的代价非负时最优。
 **时间复杂度**：假设最优路径长度为 $\displaystyle C*$，相邻结点的最小代价为 $\displaystyle \epsilon$，则时间复杂度为 $\displaystyle O\left( b^ {\frac{C*}{\epsilon}} \right)$
