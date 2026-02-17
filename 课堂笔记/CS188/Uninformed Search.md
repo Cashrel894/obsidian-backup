@@ -38,5 +38,29 @@ function EXPAND(problem, node) yields nodes
 - **最大深度 $\displaystyle m$**
 - **最浅方案的深度 $\displaystyle s$**
 
+以下三种算法，除了边境拓展策略不同以外，基本原理是完全相同的：
 ### Depth-First Search
-策略：总是拓展距离初始结点最深的边境结点。
+**策略**：总是拓展距离初始结点**最深**的边境结点。
+**边境的表示**：通常用**栈**实现。
+**完整性**：不完整，有可能在有环状态空间图上无限循环。
+**最优性**：总是找到最“左”的解，而不关心路径代价，因此不是最优的。
+**时间复杂度**：$\displaystyle O(m)$
+**空间复杂度**：$\displaystyle O(bm)$
+
+### Breadth-First Search
+**策略**：总是拓展距离初始结点**最浅**的边境结点。
+**边境的表示**：通常用**队列**实现。
+**完整性**：完整的。
+**最优性**：同样不关心路径代价，非最优。
+**时间复杂度**：$\displaystyle O(b^s)$
+**空间复杂度**：$\displaystyle O(b^s)$
+
+### Uniform Cost Search
+**策略**：总是拓展距离初始结点**代价最小**的边境结点。
+**边境的表示**：通常用**优先队列**实现。
+**完整性**：完整的。
+**最优性**：当所有边的代价非负时最优。
+**时间复杂度**：假设最优路径长度为 $\displaystyle C*$，相邻结点的最小代价为 $\displaystyle \epsilon$，则时间复杂度为 $\displaystyle O\left( b^ {\frac{C*}{\epsilon}} \right)$
+**空间复杂度**：$\displaystyle O\left( b^ {\frac{C*}{\epsilon}} \right)$
+
+
