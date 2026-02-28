@@ -19,3 +19,13 @@
 - 如果在检查弧 $\displaystyle X_{i}\to X_{j}$ 时， $\displaystyle X_i$ 有至少一个取值被移除，那么就将所有弧 $\displaystyle X_{k}\to X_{i}$ 添加到 $\displaystyle Q$，其中 $\displaystyle X_{k}$ 为任意未赋值变量。如果 $\displaystyle X_{k}\to X_{i}$ 已在队列中，则无需添加。
 - 不断重复直到 $\displaystyle Q$ 空，或者某些变量的定义域变成空集从而造成回溯。
 
+弧一致性通常使用 AC-3 算法实现：
+![[Pasted image 20260228141533.png]]
+
+AC-3 算法的最坏时间复杂度为 $\displaystyle O(ed^3)$，其中 $\displaystyle e$ 为弧的数量，$\displaystyle d$ 为最大定义域的大小。
+
+尽管弧一致性能大大缩减变量定义域，减少回溯，但算法本身就需要更多的计算量，因此选择算法时需要进行权衡。
+
+此外，弧一致性还可以被推广为 **k -一致性**(k-consistency)，即要求对于 CSP 中的每个 k -子集，对于其中每个 (k-1)-子集的一致赋值都能保证剩下一个变量存在一致赋值。
+
+甚至还可以进一步推广为**强 k-一致性**(Strong k-consistency)，不仅要求 CSP 是 k-一致的，还要求满足 (k-1)、(k-2)、……、1-一致。然而，这样做会大大增加计算成本。
