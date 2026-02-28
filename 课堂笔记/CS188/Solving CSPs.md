@@ -31,3 +31,15 @@ AC-3 算法的最坏时间复杂度为 $\displaystyle O(ed^3)$，其中 $\displa
 甚至还可以进一步推广为**强 k-一致性**(Strong k-consistency)，不仅要求 CSP 是 k-一致的，还要求满足 (k-1)、(k-2)、……、1-一致。然而，这样做会大大增加计算成本。
 
 ## Ordering
+在决定赋值顺序时，通常有两大准则：
+- **最少剩余值准则**(Minimum Remaining Values, MRV)：在选择下一个赋值的变量时，使用 MRV 准则，先选择剩余合法取值最少的变量。
+- **最少约束值准则**(Least Constraining Value, LCV)：在选择为变量赋的值时，先选择缩减其他变量定义域值最少的值。
+
+### Structure
+对于具有特殊结构的 CSP 问题，我们可以从结构特点入手降低时间复杂度。
+
+例如，对于树形 CSP 问题（即约束图无环），可以通过以下算法将复杂度从 $\displaystyle O(d^n)$ 降低到 $\displaystyle O(nd^{2})$：
+1. 在约束图上随意选取一个结点作为根结点。
+2. 将图上所有无向边转换为远离结点方向的有向边，进行**拓扑排序**(Topologically Sort)。![[Pasted image 20260228145600.png]]
+3. 进行弧一致性的**反向传播**(Backward Pass)，即从排序后序列中的最后一个结点开始，从后往前，实施所有弧约束 $\displaystyle Parent(X_{i})\to X_{i}$。
+4. 最后，进行**前向赋值**(Forward Assignment)。
