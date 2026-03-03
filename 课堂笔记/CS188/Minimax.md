@@ -17,3 +17,6 @@
 尽管 Minimax 算法简单、最优、合乎直觉，但它的效率很低，复杂度高达 $\displaystyle O(b^m)$，其中 $\displaystyle b$ 为分支系数，$\displaystyle m$ 为终止结点的预估深度。例如，国际象棋中，$\displaystyle b\approx 35$，$\displaystyle m\approx 100$.
 
 因此，我们需要对算法进行优化，称为 $\displaystyle \alpha- \beta$ 剪枝。![[Pasted image 20260303133508.png]]
+
+这一优化可以将复杂度有效降低到平均 $\displaystyle O(b^{m/2})$，允许搜索的深度翻倍了。
+
