@@ -3,3 +3,4 @@
 [[Minimax]]
 [[Expectimax]]
 [[General Games]]
+[[Monto Carlo Tree Search]]
