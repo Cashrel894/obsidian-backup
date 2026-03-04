@@ -2,3 +2,4 @@
 [[Games Introduction]]
 [[Minimax]]
 [[Expectimax]]
+[[General Games]]

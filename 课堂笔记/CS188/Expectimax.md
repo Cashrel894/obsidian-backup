@@ -12,4 +12,3 @@ Expectimax 与 Minimax 的最大不同在于，Minimax 侧重考虑对手行动*
 基础的 Minimax 和 Expectimax 算法要求敌我回合交替进行，然而在很多游戏中并非如此。例如，在吃豆人中，当 Pacman 行动后，可能有多个 Ghost 需要同时选择行动。
 
 此时，假定当前游戏有四个 Ghost，那就可以在 Pacman 的 Maximizer 层后增加四个连续的 Ghost Minimizer。这个时候，所有 Minimizer 就可以自然地开始“合作”，共同最小化状态值。甚至不同的敌对层之间也可以存在差异化，例如有些 Ghost 随机移动，有些 Ghost 则用 Minimizer 采取最优行动。
-
