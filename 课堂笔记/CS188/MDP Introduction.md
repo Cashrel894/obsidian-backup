@@ -13,6 +13,7 @@
 MDP问题也可以像图搜索问题一样，转化为搜索树，而问题中的不确定性使用 **Q-状态** (Q-states, a.k.a action states) 进行建模，本质上等同于 [[Expectimax]] 中的期望结点。Q-状态可以使用元组 $\displaystyle (s, a)$ 进行表示，表示在状态 $\displaystyle s$ 采取行动 $\displaystyle a$ 。
 
 ![[Pasted image 20260305205608.png]]
+上图中绿色的结点即为 Q-状态，用于表示已经接收了行动，但还未转移的中间状态，方便算法进行处理。
 
 ## Finite Horizons and Discounting
 在很多实际问题中，通常会对时间（即总步数）实施一定的限制。

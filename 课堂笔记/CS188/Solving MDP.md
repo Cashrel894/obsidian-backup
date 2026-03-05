@@ -23,3 +23,7 @@ V^*(s)=\max_{a} Q^*(s,a)
 $$
 
 上述方程被称为 **贝尔曼方程**(Bellman Equation)，是 *动态规划方程* 的一个典例。
+
+有了贝尔曼方程，MDP 问题就彻底转换为了 [[Expectimax]] 模型：Q-状态计算子节点的期望 $\displaystyle Q^*(s,a)$，而实际状态则取所有子 Q-状态的最大值 $\displaystyle V^*(s)$。
+
+此外，贝尔曼方程也可以用作确定最优性的条件：如果某个 $\displaystyle V(s)$ 能够满足贝尔曼方程，那么 $\displaystyle V(s)$ 在该 MDP 问题中就是最优值，即 $\displaystyle \forall s \in S,V(s)=V^*(s)$。
