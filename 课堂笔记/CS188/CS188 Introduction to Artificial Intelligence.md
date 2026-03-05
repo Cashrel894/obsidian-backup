@@ -3,3 +3,4 @@
 [[CSPs]]
 [[Games]]
 [[Markov Decision Processes]]
+[[Value Iteration]]
