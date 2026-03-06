@@ -13,3 +13,18 @@ $$
 
 为了方便起见，有时会用 $\displaystyle V_{k+1} \gets BV_{k}$ 来表示上述更新规则，其中 $\displaystyle B$ 被称为 *贝尔曼运算符*。
 
+数列 $\displaystyle V_{k}(s)$ 收敛性的简单证明：![[Pasted image 20260306110941.png]]
+
+也就是说，对于任意两个值函数 $\displaystyle V(s)$ 和 $\displaystyle V'(s)$，经过一次贝尔曼运算符，它们的差之绝对值一定至少收缩 $\displaystyle \gamma$，因此经过无限次贝尔曼运算后必然收敛，极限值为满足贝尔曼方程的不动点 $\displaystyle V^*(s)$。同时，又由于 $\displaystyle V(s)$ 的取值是有限的，因此实际上通过有限次的贝尔曼运算一定可以得到 $\displaystyle V^*(s)$。这就证明了算法的正确性。
+
+## Policy Extraction
+得到了最优状态值 $\displaystyle V^*(s)$ 后，还需要提取出最优策略 $\displaystyle \pi^*$ 供代理使用。
+
+我们只需要在每个状态 $\displaystyle s$ 中，选取可以达到 $\displaystyle V^*(s)$ 的行动 $\displaystyle a$ 即可：
+![[Pasted image 20260306111812.png]]
+
+由于性能因素，通常使用 Q-值 $\displaystyle Q^*(s,a)$ 来提取策略，因为相比使用 $\displaystyle V^*(s)$ 可以减少一层求和运算。
+
+## Q-value Iteration
+实际上，直接使用 $\displaystyle Q^(s)$ 进行值迭代可以得到类似的效果：![[Pasted image 20260306112439.png]]
+
