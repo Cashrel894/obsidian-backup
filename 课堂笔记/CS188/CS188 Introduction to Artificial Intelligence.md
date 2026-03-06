@@ -4,3 +4,4 @@
 [[Games]]
 [[Markov Decision Processes]]
 [[Value Iteration]]
+[[Policy Iteration]]
