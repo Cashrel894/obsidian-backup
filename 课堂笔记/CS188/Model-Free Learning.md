@@ -27,5 +27,9 @@ $$
 
 如果我们将第 $\displaystyle k$ 轮迭代的 $\displaystyle V^\pi(s)$ 值展开：
 $$
-V^\pi_{k}(s)\gets\alpha[(1-\alpha)^{k-1}\cdot sample_{1}+\dots+(1-\alpha)codt
+V^\pi_{k}(s)\gets\alpha[(1-\alpha)^{k-1}\cdot sample_{1}+\dots+(1-\alpha)\cdot sample_{k-1}+sample_{k}]
 $$
+不难注意到：越是陈旧的样本数据，在最终的 $\displaystyle V_{k}(s)$ 中所占的比例呈指数级降低。其合理性在于，旧的样本数据使用了旧的 $\displaystyle V^\pi(s')$ 进行计算，其真实性就越低，因此就越不应该贡献 $\displaystyle V^\pi(s)$！这就充分体现出了 EMA 的巧妙之处。
+
+通过这样一条简单的更新规则，我们可以：
+- 在每一步都能学习，并使用状态转移相关的信息不断迭代
