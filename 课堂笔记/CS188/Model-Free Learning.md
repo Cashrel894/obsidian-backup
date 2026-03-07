@@ -13,4 +13,10 @@
 
 在 [[Policy Iteration]] 中，需要通过解一系列固定策略的贝尔曼方程来评估一个策略。![[Pasted image 20260307151505.png]]
 
-方程的核心在于每个后继状态的 **加权平均值** + 转移奖励。TD 学习试图
+方程的核心在于每个后继状态的 **加权平均值** + 转移奖励。TD 学习试图在不获取权重的情况下 **直接计算**这个加权平均，使用的方法是 **指数移动平均法**(Exponential Moving Average)。
+
+我们先从初始化 $\displaystyle \forall s,V^\pi(s)=0$ 开始，在每个时间戳，代理会从状态 $\displaystyle s$ 出发，选择行动 $\displaystyle \pi(s)$，转移到状态 $\displaystyle s'$，获得奖励 $\displaystyle R(s,\pi(s),s')$。通过加和奖励与策略 pi 下 $\displaystyle s'$ 的当前 (折扣) 值，我们可以得到一个样本值：
+$$
+sample=R(s,a,s')+\gamma V^\pi(s')
+$$
+这个 $\displaystyle sample$ 值就成为 $\displaystyle V_\pi(s)$ 的新估计，将它与过往估计相结合：
