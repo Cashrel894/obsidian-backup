@@ -67,3 +67,26 @@ Q-Learning 依然有改进的空间。例如，如果一个问题的状态空间
 而 **近似 Q-学习**(Approximate Q-Learning) 则为对 Q-学习的一个改进。在该算法中，代理不再学习 **每个**状态，而是将相似的状态归纳为 **情形**(Situation)，以削减所需学习的状态数。
 
 其关键在于每个状态有一个 **基于特征的表示**(Feature-Based Representation)，即将每个状态表示为一个 **特征向量**(Feature Vector)。
+
+使用特征向量，就可以将状态值与 Q-值表示为向量各元素的线性组合：
+$$
+V(s)=w_{1}\cdot f_{1}(s)+w_{2}\cdot f_{2}+\dots+w_{n}\cdot f_{n}(s)=\vec{w}\cdot \vec{f}(s)
+$$
+$$
+Q(s,a)=w_{1}\cdot f_{1}(s,a)+w_{2}\cdot f_{2}(s,a)+\dots+w_{n}\cdot f_{n}(s,a)=\vec{w}\cdot \vec{f}(s,a)
+$$
+其中 $\displaystyle \vec{w}$ 表示权重向量。定义**差分**(difference)：
+$$
+difference=[R(s,a,s')+\gamma \max_{a'}Q(s',a')]-Q(s,a)
+$$
+近似 Q 学习所做的，就是去迭代更新权重向量 $\displaystyle \vec{w}$。更新过程如下：
+$$
+w_{i}\gets w_{i}+\alpha \cdot difference \cdot f_{i}(s,a)
+$$
+像这样得到 $\displaystyle w_{i}$ 之后，就可以轻松计算每个 Q 值，同时由于我们只需要存储特征向量，我们可以大大节约空间成本，提高学习效率。
+
+顺带一提，这与普通的 Q 学习在形式上是相似的，其更新规则可以写成：
+$$
+Q(s,a)\gets Q(s,a)+\alpha \cdot difference
+$$
+可以理解为，算法计算了样本值与当前值的差值，再以学习率 $\displaystyle \alpha$ 的比例使当前值向样本值方向移动。
