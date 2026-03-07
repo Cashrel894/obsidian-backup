@@ -25,3 +25,7 @@ V^\pi(s)\gets(1-\alpha)V^\pi(s)+\alpha \cdot sample
 $$
 其中，$\displaystyle \alpha$ 被称为**学习率**(Learning Rate)，用于指定新样本值对状态值的贡献权重。通常，$\displaystyle \alpha$ 会从 $\displaystyle 1$ 开始，接着随着学习过程逐渐下降到 $\displaystyle 0$。
 
+如果我们将第 $\displaystyle k$ 轮迭代的 $\displaystyle V^\pi(s)$ 值展开：
+$$
+V^\pi_{k}(s)\gets\alpha[(1-\alpha)^{k-1}\cdot sample_{1}+\dots+(1-\alpha)codt
+$$
