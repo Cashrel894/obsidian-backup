@@ -3,5 +3,4 @@
 [[CSPs]]
 [[Games]]
 [[Markov Decision Processes]]
-[[Value Iteration]]
-[[Policy Iteration]]
+[[Reinforcement Learning]]
