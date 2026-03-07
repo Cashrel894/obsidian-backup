@@ -36,3 +36,34 @@ $$
 - 给予更旧的、更不准确的样本指数级降低的权重。
 - 相比于 [[#Direct Evaluation]]，收敛到真实状态值的速度要快得多，使用的回合数也少得多。
 
+## Q-Learning
+[[#Direct Evaluation]] 和 [[#Temporal Difference Learning]] 的目标都是计算**给定策略下的状态值**。然而，我们需要找到的是代理的最优 **策略**，必须计算的是每个状态的 **Q-值**。
+
+因此，以上两种被动强化学习方法通常需要结合一些 [[Model-Based Learning]]，通过估计的 $\displaystyle T$ 和 $\displaystyle R$ 来更新策略。
+
+而主动强化学习方法 **Q-Learning** 则可以**完全绕过**这一过程，无需了解任何有关转移函数、奖励函数甚至状态值的相关信息，是一种纯粹的无模型强化学习方法。
+
+Q-Learning 利用了 **Q 值迭代**(Q-value Iteration)：
+$$
+Q_{k+1}(s,a)\gets\sum_{s'}T(s,a,s')[R(s,a,s')+\gamma \max_{a'}Q_{k}(s',a')]
+$$
+这一算法的核心在于 Q 值迭代与 EMA 的有机结合。
+
+对于每次转移，计算 **Q 样本值**
+$$
+sample=R(s,a,s')+\gamma \max_{a'}Q(s',a')
+$$
+使用 EMA 更新 Q 值：
+$$
+Q(s,a)\gets(1-\alpha)Q(s,a)+\alpha \cdot sample
+$$
+只要我们花费足够的时间进行探索，并以合适的速率降低学习率 $\displaystyle \alpha$，Q-Learning 就会得到每个 $\displaystyle (s,a)$ 的最优 Q-值，从而直接得到最优策略；而 TD 学习和直接评估只能学习特定策略下的状态值，还需要结合其他方法得到最佳策略。
+
+因此，Q-Learning 属于一种 **off-policy learning**，而 TD 学习和直接评估则相对地属于 **on-policy learning**。
+
+## Approximate Q-Learning
+Q-Learning 依然有改进的空间。例如，如果一个问题的状态空间非常庞大，存储**每个 Q-值**可能在时间和空间的角度上都非常低效。
+
+而 **近似 Q-学习**(Approximate Q-Learning) 则为对 Q-学习的一个改进。在该算法中，代理不再学习 **每个**状态，而是将相似的状态归纳为 **情形**(Situation)，以削减所需学习的状态数。
+
+其关键在于每个状态有一个 **基于特征的表示**(Feature-Based Representation)，即将每个状态表示为一个 **特征向量**(Feature Vector)。
