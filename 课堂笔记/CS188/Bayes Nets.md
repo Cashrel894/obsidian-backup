@@ -4,3 +4,4 @@
 [[Structure of Bayes Nets]]
 [[D-Separation]]
 [[Exact Inference in Bayes Nets]]
+[[Approximate Inference in Bayes Nets]]
