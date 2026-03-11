@@ -3,3 +3,4 @@
 [[Bayesian Network Representation]]
 [[Structure of Bayes Nets]]
 [[D-Separation]]
+[[Exact Inference in Bayes Nets]]
