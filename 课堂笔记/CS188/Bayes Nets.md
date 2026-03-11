@@ -2,3 +2,4 @@
 [[Probabilistic Inference]]
 [[Bayesian Network Representation]]
 [[Structure of Bayes Nets]]
+[[D-Separation]]
