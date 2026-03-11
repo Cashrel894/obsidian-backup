@@ -36,4 +36,14 @@ $$
 P(x,y,z)=P(y|x,z)P(x)P(z)
 $$
 
+此时，当 $\displaystyle Y$ *未给定*时，$\displaystyle X$ 与 $\displaystyle Z$ 独立，否则不独立。
 
+## General Case, and D-separation
+**D 分离**(D-Separation)：在贝叶斯网络中，若在给定 $\displaystyle \{ Z_{1},\dots Z_{k} \}$ 的情况下，$\displaystyle X$ 与 $\displaystyle Y$ 相互独立，那么称 $\displaystyle Z_{1},\dots,Z_{k}$ D-分离 $\displaystyle X$ 与 $\displaystyle Y$。
+
+以下是用于判断 D-分离的算法步骤：
+1. 在图中标记 $\displaystyle {Z_{1},\dots Z_{k}}$。
+2. 枚举所有 $\displaystyle X$ 到 $\displaystyle Y$ 的无向路径。
+3. 对于每条路径：
+	1. 枚举所有连续的三个结点，根据上面三种情况判断，得出两边结点都不独立的情况下，称该路径 **D-连接**(D-Connect) $\displaystyle X$ 和 $\displaystyle Y$，$\displaystyle X$ 和 $\displaystyle Y$ 不独立。
+4. 如果没有路径 D-连接 $\displaystyle X$ 和 $\displaystyle Y$，那么 $\displaystyle X$ 和 $\displaystyle Y$ 独立。
