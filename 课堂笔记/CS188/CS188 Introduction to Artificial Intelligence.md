@@ -6,3 +6,4 @@
 [[Reinforcement Learning]]
 [[Bayes Nets]]
 [[Decision Nerwork and VPIs]]
+[[HMMs]]
