@@ -21,4 +21,4 @@ $$
 $$
 U([p_{1},S_{1};\dots ;p_{n},S_{n}])=\sum_{i}p_{i}U(S_{i})
 $$
-而同一种偏好可能存在不同的效益函数 $\displaystyle U$，从而导致代理对于 *风险管理* 有着不同的行为，包含
+而同一种偏好可能存在不同的效益函数 $\displaystyle U$，从而导致代理对于 *风险管理* 有着不同的行为，主要包含 *风险中立型*(Risk Neutral)、*风险规避型*(Risk Averse)、*风险追求型*(Risk Seeking)。
