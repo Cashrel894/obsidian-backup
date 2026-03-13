@@ -35,7 +35,16 @@ $$
 $$
 B'(W_{i+1})=\sum_{w_{i}}P(W_{i+1} \mid w_{i})B(w_{i})
 $$
-接着可以计算 $\displaystyle B(W_{i+1})$:
+接着可以计算 $\displaystyle B(W_{i+1})$:（**时间流逝更新**, Time Elapse Update）
 $$
 B(W_{i+1})=P(W_{i+1}\mid f_{1}, \dots, f_{i+1})=\frac{P(W_{i+1},f_{i+1} \mid f_{1}, \dots, f_{i})}{P(f_{i+1} \mid f_{1}, \dots, f_{i})}
 $$
+接着，我们暂时推迟归一化，有：（**观察更新**, Observation Update）
+$$
+B(W_{i+1})\propto P(f_{i+1} \mid W_{i+1})B'(W_{i+1})
+$$
+因此总表达式为：
+$$
+B(W_{i+1})\propto P(f_{i+1} \mid W_{i+1}) \sum_{w_{i}}P(W_{i+1} \mid w_{i})B(w_{i})
+$$
+最后进行归一化，即可得到 $\displaystyle B(W_{i+1})$。
