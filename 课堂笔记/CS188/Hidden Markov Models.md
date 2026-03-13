@@ -48,3 +48,5 @@ $$
 B(W_{i+1})\propto P(f_{i+1} \mid W_{i+1}) \sum_{w_{i}}P(W_{i+1} \mid w_{i})B(w_{i})
 $$
 最后进行归一化，即可得到 $\displaystyle B(W_{i+1})$。
+
+注意，归一化可以一直推迟到最后一步计算，因为在整个算法过程中 $\displaystyle B(W_{i})$ 之间总是成比例的。
