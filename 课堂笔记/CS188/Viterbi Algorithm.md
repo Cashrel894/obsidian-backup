@@ -14,3 +14,10 @@
 $$
 P(X_{1:N},e_{1:N})=P(X_{1})P(e_{1} \mid X_{1})\prod_{t=2}^{N} P(X_{t} \mid X_{t - 1}) P (e_{t} \mid X_{t})
 $$
+
+定义 $\displaystyle m_{t}[x_{t}]=max_{x_{1:t-1}}P(x_{1:t},e_{1:t})$，表示从任意 $\displaystyle x_{0}$ 开始，根据目前的所有证据，到 $\displaystyle x_{t}$ 的所有路径的最大概率，列出状态转移方程：
+$$
+m_{t}[x_{t}]=\max_{x_{1:t-1}}P(e_{t}\mid x_t)P(x_{t} \mid x_{t-1})P(x_{1:t-1},e_{1:t-1})=P(e_{t}\mid x_{t})\max_{x_{1:t-1}}P(x_{t} \mid x_{t-1})m_{t-1}[x_{t-1}]
+$$
+再定义 $\displaystyle a_{t}[x_{t}]=P(e_{t}\mid x_{t})argmax_{x_{t-1}}P(x_{t}\mid x_{t-1})m_{t-1}[x_{t-1}]=argmax_{x_{t-1}}P(x_{t}\mid x_{t-1})m_{t-1}[x_{t-1}]$，表示状态 $\displaystyle x_{t}$ 的最可能路径的前继状态，从而反推出到 $\displaystyle x_{t}$ 的最优路径：![[Pasted image 20260313130818.png]]
+使用这种算法，我们可以在多项式空间和时间复杂度下解答该问题。
