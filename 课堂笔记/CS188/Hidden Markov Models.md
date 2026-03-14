@@ -31,11 +31,11 @@ $$
 $$
 B'(W_{i+1})=P(W_{i+1} \mid f_{1}, \dots, f_{i})=\sum_{w_{i}}P(W_{i+1} \mid w_{i},f_{1}, \dots, f_{i})P(w_{i}\mid f_{1}, \dots, f_{i})
 $$
-即：
+即：（**时间流逝更新**, Time Elapse Update）
 $$
 B'(W_{i+1})=\sum_{w_{i}}P(W_{i+1} \mid w_{i})B(w_{i})
 $$
-接着可以计算 $\displaystyle B(W_{i+1})$:（**时间流逝更新**, Time Elapse Update）
+接着可以计算 $\displaystyle B(W_{i+1})$:
 $$
 B(W_{i+1})=P(W_{i+1}\mid f_{1}, \dots, f_{i+1})=\frac{P(W_{i+1},f_{i+1} \mid f_{1}, \dots, f_{i})}{P(f_{i+1} \mid f_{1}, \dots, f_{i})}
 $$
