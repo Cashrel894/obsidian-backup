@@ -1,7 +1,7 @@
 #CS188 
 [[HMMs]] 中，精确推理的计算复杂度随着变量定义域的范围增长而增加，在很多情况下是不可接受的。因此，借用 [[Approximate Inference in Bayes Nets]] 的思路，可以使用随机化算法近似估计概率分布。
 
-而在 [[Hidden Markov Models]] 中，这种算法就是 **粒子滤波**(Particle Filtering) 算法。它会模拟一组 *粒子* 在状态图上的运动，从而近似估计随机变量的分布。
+而在 [[Hidden Markov Models]] 中，这种算法就是 **粒子滤波**(Particle Filtering) 算法。它会模拟一组 *粒子* 在状态图上的运动，从而近似估计随机变量的分布。当状态数量非常多时，就特别适合使用该算法。
 
 在算法过程中，我们会追踪 $\displaystyle n$ 个粒子的状态，每个粒子的状态为随机变量 $\displaystyle d$ 个可能取值中的一个（通常 $\displaystyle n \ll d$）。接着，如果我们想知道时间戳 $\displaystyle t$ 中随机变量的分布，只需考查这 $\displaystyle n$ 个粒子在该时间戳的经验分布即可。
 
