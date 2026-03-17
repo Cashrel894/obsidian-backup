@@ -33,4 +33,21 @@ $$
 \frac{\partial}{\partial \theta}\mathcal{L}(\theta)=0
 $$
 
-## Maximum Likelihood for Naive Bayes
+## Smoothing
+尽管 MLE 非常有效，但有时不够充分的训练结果可能带来造成极端参数的产生，从而影响预测结果。例如，如果预测的公式中带有连乘，而连乘中有参数恰好为 0，就会导致极端结果，也可视为一种 **过拟合**(Overfitting)。
+
+**拉普拉斯平滑算法**(Laplace Smoothing) 就适合解决这种 “零概率” 问题。一个*强度* 为 $\displaystyle k$ 的拉普拉斯平滑，会为每个可能结果增加 $\displaystyle k$ 次观察。
+
+例如，如果一个结果 $\displaystyle x$ 可能有 $\displaystyle |X|$ 个不同的取值，样本容量为 $\displaystyle N$，那么原来的算法是：
+$$
+P_{MLE}(x)=\frac{count(x)}{N}
+$$
+施加 $\displaystyle k$ 强度的拉普拉斯平滑：
+$$
+P_{LAP, k}(x) = \frac{count(x)+k}{N+k|X|}
+$$
+处理条件概率时则有：
+$$
+P_{LAP, k}=\frac{count(x,y)+k}{count(y)+k|X|}
+$$
+在这里，$\displaystyle k$ 也是模型的一个超参数，通常需要通过试验确定较优值。
