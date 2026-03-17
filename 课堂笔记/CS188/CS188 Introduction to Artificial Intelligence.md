@@ -7,3 +7,4 @@
 [[Bayes Nets]]
 [[Decision Nerwork and VPIs]]
 [[HMMs]]
+[[Machine Learning]]
