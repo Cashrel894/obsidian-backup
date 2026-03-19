@@ -48,3 +48,29 @@ $$
 
 那么，为什么要加减特征向量，而不是其他的什么东西呢？这是因为，特征向量中绝对值越大的部分对激活值的贡献就越大，![[Pasted image 20260319110459.png]]
 
+## Bias
+目前，我们的模型还只能产生一个 *过原点* 的决策边界，即 $\displaystyle w^{T}f(x)=0$。
+
+但很多情况下，决策边界不一定过原点，因此我们可以给决策边界方程加一个 **偏移量**(Bias)，即 $\displaystyle w^Tf(x)+b=0$。
+
+这等价于增加了一个值恒为 1 的特征，而 $\displaystyle b$ 就是该特征的权重，这样就可以用通用的权重更新算法来估计偏移量了。
+
+## Multiclass Perception
+实际上，我们可以将二分类器拓展为多分类系统。
+
+对于有 $\displaystyle n$ 个类别的分类任务，我们需要维护 $\displaystyle n$ 个权重向量，从而分别对应 $\displaystyle n$ 个类别的激活值，其中激活值最大的类就是预测的结果。
+
+用矩阵的语言描述，若 $\displaystyle W$ 由这 $\displaystyle n$ 个权重向量作为行，特征向量为 $\displaystyle f(x)$，那么预测公式则为：
+$$
+classify(x)=argmax(Wf(x))
+$$
+
+更新规则为：
+- 若 $\displaystyle y=y^*$，则无需更新
+- 否则，我们为 $\displaystyle y^*$ 的权重向量加上当前特征向量 $\displaystyle f(x)$，为 $\displaystyle y$ 的权重向量减去 $\displaystyle f(x)$。即：
+$$
+w_{y^*} \gets w_{y^*}+f(x),w_{y} \gets w_{y} - f(x)
+$$
+直观理解上，这个过程就是在“奖励”正确的权重向量，“惩罚”错误的权重向量，其余的权重则不变。
+
+对于偏移量，只需要为每个特征向量加一个额外的特征 1，再给每个权重向量加一个额外的权重即可，相当于为矩阵增加了一个列。w
