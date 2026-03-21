@@ -3,4 +3,4 @@
 [[Naive Bayes]]
 [[Perceptron]]
 [[Linear Regression]]
-[[Logistic ]]
+[[Logistic Regression]]
