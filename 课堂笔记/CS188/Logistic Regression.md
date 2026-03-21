@@ -15,3 +15,5 @@ $$
 
 通过梯度下降估测未知权重 $\displaystyle w$：
 ![[Pasted image 20260321205035.png]]
+
+## Multi-Class Logistic Regression
