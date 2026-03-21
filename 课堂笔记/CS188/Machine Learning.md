@@ -2,3 +2,5 @@
 [[Machine Learning Introduction]]
 [[Naive Bayes]]
 [[Perceptron]]
+[[Linear Regression]]
+[[Logistic ]]
