@@ -4,3 +4,4 @@
 [[Perceptron]]
 [[Linear Regression]]
 [[Logistic Regression]]
+[[Optimization]]
