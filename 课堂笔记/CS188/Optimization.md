@@ -7,7 +7,7 @@
 
 同理，在最小化一个函数时，沿梯度方向下降最快的方向移动，则称为 **梯度下降**(Gradient Descent)。
 
-## Algorithm
+## Gradient Ascent & Descent
 梯度上升算法过程：
 1. 随机初始化 $\displaystyle w$
 2. 当 $\displaystyle w$ 未收敛时：
@@ -17,5 +17,3 @@ $$
 对于梯度下降，更新函数改为 $\displaystyle w \gets w - \alpha \nabla_{w}f(w)$。
 
 其中 $\displaystyle \alpha$ 表示 **学习率**，即梯度下降中每一步更新的步长。学习率大小需要适中，太大会导致无法收敛，太小则收敛太慢。通常学习率时动态变化的，初始时会使用较大的学习率，随后随着迭代次数增加，学习率逐步减小(Learning Rate Decay)。
-
-
