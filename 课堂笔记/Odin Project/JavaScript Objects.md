@@ -63,3 +63,14 @@ function Player(name, marker) {
 
 通过 `Object.getPrototypeOf(obj)` 或 `Obj.prototype`，我们就可以读取一个对象的原型。注意，`Obj` 指的是一个构造函数，而 `obj` 指的则是由 `Obj` 创建的一个实例。![[Pasted image 20260324171723.png]]
 
+使用 `hasOwnProperty` 方法可以检查一个成员是对象本身的属性还是继承而来的：
+```js
+player1.hasOwnProperty("valueOf"); // false
+Object.prototype.hasOwnProperty("valueOf"); // true
+```
+
+那么 `hasOwnProperty` 方法是从哪里来的呢？
+```js
+Object.prototype.hasOwnProperty("hasOwnProperty"); // true
+```
+
