@@ -59,7 +59,7 @@ function Player(name, marker) {
 ```
 
 ## The prototype
-所有对象都有一个 **原型**(Prototype)，往往使用 `[[Prototype]]` 指涉。对象总是继承自这个原型，并且可以访问该原型的所有属性和方法。
+所有对象都有一个 **原型**(Prototype)，往往使用 `[[Prototype]]` 指涉，表示这是一个无法被直接访问的内部属性。对象总是继承自这个原型，并且可以访问该原型的所有属性和方法。
 
 通过 `Object.getPrototypeOf(obj)` 或 `Obj.prototype`，我们就可以读取一个对象的原型。注意，`Obj` 指的是一个构造函数，而 `obj` 指的则是由 `Obj` 创建的一个实例。![[Pasted image 20260324171723.png]]
 
