@@ -41,6 +41,8 @@ console.log(player.name); // "steve"
 3. 让该对象继承自函数的 `.prototype` 属性。
 4. 执行函数体，最后隐式返回该对象。
 
+注意：默认情况下，函数的 `prototype` 总是会包含一个 `constructor` 属性，其值为函数本身。
+
 ### Safeguarding constructors
 有时我们会忘记使用 `new` 调用构造函数，但解释器不会因此报错，因为 `this` 依然有其他指向，从而造成不可预料的后果。
 
@@ -72,5 +74,43 @@ Object.prototype.hasOwnProperty("valueOf"); // true
 那么 `hasOwnProperty` 方法是从哪里来的呢？
 ```js
 Object.prototype.hasOwnProperty("hasOwnProperty"); // true
+```
+
+可以用以下方法检验一个对象的原型：
+```js
+Array.prototype.isPrototypeOf(y);      // true
+Object.prototype.isPrototypeOf(Array); // true
+
+y instanceof Array; // true
+```
+
+那么怎么方便地进行原型继承呢？可以利用 `Function.prototype.call(thisarg, arg1, ...)` 方法：
+```js
+...
+// Initialize Warrior constructor
+function Warrior(name, level, weapon) {
+  // Chain constructor with call
+  Hero.call(this, name, level);
+
+  // Add a new property
+  this.weapon = weapon;
+}
+
+// Initialize Healer constructor
+function Healer(name, level, spell) {
+  Hero.call(this, name, level);
+
+  this.spell = spell;
+}
+```
+
+然而这还不够，因为子对象的原型不会自动链接到父对象的原型，因而无法访问父对象的方法。因此，需要使用 `setPrototypeOf(x, y)` 来设置原型：
+```js
+...
+Object.setPrototypeOf(Warrior.prototype, Hero.prototype);
+Object.setPrototypeOf(Healer.prototype, Hero.prototype);
+
+// All other prototype methods added below
+...
 ```
 
