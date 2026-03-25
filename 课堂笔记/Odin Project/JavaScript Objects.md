@@ -114,3 +114,32 @@ Object.setPrototypeOf(Healer.prototype, Hero.prototype);
 ...
 ```
 
+## The Value of `this`
+**重要**：无论一个函数在原型链上的任何地方被找到，它所关联的 `this` 指针总是指向 `.` 之前的对象。
+
+因此，虽然方法是共享的，但对象的状态不会。
+
+## for ... in loop
+`for ... in` 循环也会遍历继承的属性。例如：
+```js
+let animal = {
+  eats: true
+};
+
+let rabbit = {
+  jumps: true,
+  __proto__: animal
+};
+
+// Object.keys only returns own keys
+alert(Object.keys(rabbit)); // jumps
+
+// for..in loops over both own and inherited keys
+for(let prop in rabbit) alert(prop); // jumps, then eats
+```
+
+当然，也可以用 `hasOwnProperty(key)` 方法来筛除那些继承的属性。
+
+不过，有些属性描述符 (Property Descriptor) 中的 `enumerable` 为 `false`，就不能被 `for ... in` 列出。
+
+几乎其他所有获取对象所有键/值的方法都会忽略继承的属性，如 `Object.keys`、`Object.values`。
