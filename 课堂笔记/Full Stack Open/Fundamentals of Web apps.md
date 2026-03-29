@@ -1,2 +1,3 @@
 #FullStackOpen 
 [[HTTP GET]]
+[[AJAX]]
