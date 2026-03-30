@@ -115,3 +115,48 @@ export default App
 
 每当 *修改状态的函数* 被调用时，React 会重新渲染组件，即重新执行组件的函数体。此时，`counter` 会被赋予更新后的状态值，接着调用 `setCounter`，渲染组件；如此循环往复。
 
+## Event Handling
+在 React 中，为事件注册处理函数大致是这样的：
+```jsx
+const App = () => {
+  const [ counter, setCounter ] = useState(0)
+
+  const handleClick = () => {
+    console.log('clicked')
+  }
+
+  return (
+    <div>
+      <div>{counter}</div
+      <button onClick={handleClick}>
+        plus
+      </button>
+    </div>
+  )
+}
+```
+
+在这里，将 `onClick` 属性的值设为对代码中定义的 `handleClick` 函数的引用。
+
+也可以直接在赋值中定义：
+```jsx
+const App = () => {
+  const [ counter, setCounter ] = useState(0)
+
+  return (
+    <div>
+      <div>{counter}</div>
+      <button onClick={() => console.log('clicked')}>
+        plus
+      </button>
+    </div>
+  )
+}
+```
+
+注意，`onClick` 属性的值必须是一个 *函数* 对象，不能直接调用函数，这回将被调用函数的返回值存入属性，而不是将函数调用作为回调。
+
+通常，使用 `onSomething` 命名代表时间的 props，用 `handleSomething` 命名相应的处理函数。
+
+## Lifting State Up
+有时，多个组件需要反映相同的变化数据，一个 **最佳实践** 是将共享状态 *提升* 到它们**最近的公共祖先**。
