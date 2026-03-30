@@ -160,3 +160,170 @@ const App = () => {
 
 ## Lifting State Up
 有时，多个组件需要反映相同的变化数据，一个 **最佳实践** 是将共享状态 *提升* 到它们**最近的公共祖先**。
+
+当父组件的一个状态更新时，该组件及其子组件都会被重新渲染，来适应状态的更新。
+
+## Refactor Components
+像这样的组件：
+```jsx
+const Display = (props) => {
+  return (
+    <div>{props.counter}</div>
+  )
+}
+```
+
+可以通过 js 的 *解构* 特性来简化组件定义：
+```jsx
+const Display = ({ counter }) => {
+  return (
+    <div>{counter}</div>
+  )
+}
+```
+
+甚至可以进一步简化：
+```jsx
+const Display = ({ counter }) => <div>{counter}</div>
+```
+
+这样，我们只需要取出组件所需的 `props` 属性，使得组件定义更清晰、简洁。
+
+## Complex states
+如果我们需要更复杂的状态，可以使用 **对象** 表示状态：
+```jsx
+const App = () => {
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  })
+
+  const handleLeftClick = () => {
+    const newClicks = {
+      left: clicks.left + 1,
+      right: clicks.right
+    }
+    setClicks(newClicks)
+  }
+
+  const handleRightClick = () => {
+    const newClicks = {
+      left: clicks.left,
+      right: clicks.right + 1
+    }
+    setClicks(newClicks)
+  }
+
+  return (
+    <div>
+      {clicks.left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
+    </div>
+  )
+}
+```
+
+然而，如果这个对象较为复杂，一遍遍复制未修改的其他属性并不简洁美观。可以使用 **对象展开** 语法：
+```jsx
+const handleLeftClick = () => {
+  const newClicks = {
+    ...clicks,
+    left: clicks.left + 1
+  }
+  setClicks(newClicks)
+}
+
+const handleRightClick = () => {
+  const newClicks = {
+    ...clicks,
+    right: clicks.right + 1
+  }
+  setClicks(newClicks)
+}
+```
+
+这样，原对象未被修改的剩余属性就会被自动赋值到新的对象中。
+
+或者更简洁地：
+```jsx
+const handleLeftClick = () =>
+  setClicks({ ...clicks, left: clicks.left + 1 })
+
+const handleRightClick = () =>
+  setClicks({ ...clicks, right: clicks.right + 1 })
+```
+
+React 推崇函数式编程，如果尝试改变原来的对象属性，可能会导致意想不到的副作用，需要尽可能避免。
+
+## Handling arrays
+```jsx
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+
+      <p>{allClicks.join(' ')}</p>
+    </div>
+  )
+}
+```
+
+注意，这里更新数组使用的是 `concat` 而非 `push`，这依然是函数式风格的做法，返回新状态而非修改旧状态。
+
+## State Updates are Async
+```jsx
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+
+  const [total, setTotal] = useState(0)
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+    setTotal(left + right)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+    setTotal(left + right)
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p>
+
+      <p>total {total}</p>
+    </div>
+  )
+}
+```
+在这里，当 `setLeft(left + 1)` 函数执行后，`left` 并没有立即更新为 `left + 1`，因此后续 `total` 的更新依赖的是旧的 `left` 值，故更新不正确。
+
+在 React 中，所有的状态更新是在 **组件重渲染** 时发生的。
+
+																																																																																																																																																																						
