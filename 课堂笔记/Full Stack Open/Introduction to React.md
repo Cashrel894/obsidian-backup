@@ -89,3 +89,26 @@ export default App
 ```
 无法正常渲染。
 - React 支持直接渲染 Array。
+
+## Stateful component
+一个组件的状态可能随着用户交互等发生变化，当状态更新时，要自动重渲染这些状态，就需要使用 React 的 **状态 hook**（State hook）。
+```jsx
+import { useState } from 'react'
+
+const App = () => {
+  const [ counter, setCounter ] = useState(0)
+
+  setTimeout(
+    () => setCounter(counter + 1),
+    1000
+  )
+
+  return (
+    <div>{counter}</div>
+  )
+}
+
+export default App
+```
+
+`useState(x)` 为组件添加了状态，并将其初始化为 `x`。该函数返回包含两个项目的数组，第一个 ` counter ` 为 *状态初始值*，第二个则为 *修改状态的函数*。
