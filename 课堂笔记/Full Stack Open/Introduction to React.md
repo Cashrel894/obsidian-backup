@@ -326,4 +326,35 @@ const App = () => {
 
 在 React 中，所有的状态更新是在 **组件重渲染** 时发生的。
 
-																																																																																																																																																																						
+## Debugging React App
+### Use `console.log`
+不要：
+```jsx
+console.log('props value is ' + props)
+```
+这样只会输出 `props value is [Object object]`
+
+应该：
+```jsx
+console.log('props value is', props)
+```
+这样就能打印完整的 `props`
+
+## Use `debugger`
+在代码中写下 debugger 命令，就可以在控制台的调试器中打断点，进而进行调试。
+
+或者，使用 Chrome 浏览器的 React 开发者工具拓展，就可以在开发者工具中显示 React 组件状态等信息。![[Pasted image 20260330220030.png]]
+
+## Rules of Hook
+使用状态 Hook 有一些必须遵循的规则：
+- 不能在 **循环、条件表达式或任何不是定义组件的函数** 中调用 `useState` 函数。这是为了确保 Hook 总是以相同的顺序被调用。
+
+## Never define components inside components
+**永远不要在组件内部定义组件**，这会导致很多问题。
+
+## References
+互联网上有很多 React 相关的资料。然而，因为我们使用的是 React 的新风格，所以对于我们来说，网上发现的大部分材料已经过时。
+
+你可能会发现下面的链接很有用：
+- [React官方文档](https://react.dev/learn)值得在某些时候查看，尽管它的大部分内容在课程的后期才会变得相关。另外，基于类的组件有关的一切都与我们无关。
+- [Egghead.io](https://egghead.io/) 上的一些课程，比如 [Start learning React](https://egghead.io/courses/start-learning-react) 的质量很高，最近更新的 [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) 也比较好；两个课程介绍的概念也将在本课程的后面介绍。**注意**前者使用类式组件，后者使用新的函数式组件。
