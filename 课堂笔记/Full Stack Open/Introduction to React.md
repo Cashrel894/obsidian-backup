@@ -358,3 +358,53 @@ console.log('props value is', props)
 你可能会发现下面的链接很有用：
 - [React官方文档](https://react.dev/learn)值得在某些时候查看，尽管它的大部分内容在课程的后期才会变得相关。另外，基于类的组件有关的一切都与我们无关。
 - [Egghead.io](https://egghead.io/) 上的一些课程，比如 [Start learning React](https://egghead.io/courses/start-learning-react) 的质量很高，最近更新的 [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) 也比较好；两个课程介绍的概念也将在本课程的后面介绍。**注意**前者使用类式组件，后者使用新的函数式组件。
+
+## Rendering Collections
+在渲染 Array 时，通常需要用 `map` 将其映射为 HTML 标签的列表。
+
+然而需要注意的是，渲染得到的每个标签/组件需要有各自 **唯一的** `key` 属性，使得 React 可以区分和追踪每个组件，这在重渲染和状态更新中非常重要。
+```jsx
+const App = (props) => {
+  const { notes } = props
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => 
+          <li key={note.id}>
+            {note.content}
+          </li>
+        )}
+      </ul>
+    </div>
+  )
+}
+```
+
+要点：
+- `key` 属性必须是唯一的，否则 React 无法区分各个组件。
+- 不要用数组下标作为 `key`，因为数组本身可能会插入、删除元素，而 React 只会根据 `key` 区分组件，导致 React 误认。
+
+## Refactoring Modules
+将所有组件都定义在 App. jsx 中不是个好习惯。一般而言，对于较小的 app，组件模块会被存储在 `src/components` 目录下，文件名即为组件名。例如：
+```
+src/
+├── main.jsx
+├── App.jsx
+└── components/           # Folder for reusable components
+    ├── Footer.jsx        # File named after the component
+    ├── Note.jsx
+    └── Notification.jsx
+```
+
+在每个组件模块的最后一行，通过 `export` 语句进行导出：
+```jsx
+export default Note
+```
+
+在使用该组件的模块中，使用 `import` 进行导入：
+```jsx
+import Note from `./components/Note`
+```
+这里可以看出，模块文件拓展名 `.jsx` 是可省略的。
