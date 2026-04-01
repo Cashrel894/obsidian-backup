@@ -408,3 +408,109 @@ export default Note
 import Note from `./components/Note`
 ```
 这里可以看出，模块文件拓展名 `.jsx` 是可省略的。
+
+## Forms
+也可以在组件中定义 HTML 表单元素，让组件变得可交互：
+```jsx
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+
+
+  const addNote = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+  }
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
+        )}
+      </ul>
+
+      <form onSubmit={addNote}>
+        <input />
+        <button type="submit">save</button>
+      </form>   
+    </div>
+  )
+}
+```
+
+其中，`addNote` 为表单提交时的处理函数，`event.preventDefault()` 是为了防止表单提交的默认行为，其中包括防止页面刷新。
+
+## Controlled Component
+那么，我们如何访问表单的 `input` 元素呢？
+
+一个方式是添加一个状态，专门用于存储用户输入：
+```jsx
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState(
+    'a new note...'
+  ) 
+
+  const addNote = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+  }
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
+        )}
+      </ul>
+      <form onSubmit={addNote}>
+
+        <input value={newNote} />
+        <button type="submit">save</button>
+      </form>   
+    </div>
+  )
+}
+```
+嘣！控制台发出警告，我们的 `input` 变成了只读元素。事实上，当我们将组件状态作为 `value` 属性时，该组件就 **控制** 了 `input` 组件的行为。
+
+为了让被控制的 `input` 组件能被编辑，我们需要指定 `onChange` 对应的处理函数。
+```jsx
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState(
+    'a new note...'
+  ) 
+
+  // ...
+
+
+  const handleNoteChange = (event) => {
+    console.log(event.target.value)
+    setNewNote(event.target.value)
+  }
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
+        )}
+      </ul>
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+
+          onChange={handleNoteChange}
+        />
+        <button type="submit">save</button>
+      </form>   
+    </div>
+  )
+}
+```
+注意，这里的 `onChange` 属性的处理函数 *不需要* 调用 `event.preventDefault()`，因为这个事件没有默认行为。
+
