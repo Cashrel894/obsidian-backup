@@ -51,4 +51,36 @@ axios
 
 ## Effect Hooks
 除了 `state` 钩子之外，React 还引入了 `effect` 钩子。`effect` 钩子用于将组件连接并同步到外部系统，这包括处理网络、浏览器 DOM、动画、使用不同 UI 库编写的组件以及其他非 React 的代码。
+```jsx
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import Note from './components/Note'
+
+
+const App = () => {
+  const [notes, setNotes] = useState([])
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(true)
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+  }, [])
+  console.log('render', notes.length, 'notes')
+
+  // ...
+}
+```
+在*默认*情况下， `useEffect` 中的回调函数会在组件被渲染后立即执行。
+
+而第二个参数用于指定 `effect` 钩子触发的时机，传入空数组就表示 `effect` 只会在组件 **首次** 渲染时被触发。对于从服务器获取数据而言，这种用法就足够了。
+
+## The development runtime environment
+到目前为止，我们所学的应用架构如下图所示：
+![[Pasted image 20260402100904.png]]
 
