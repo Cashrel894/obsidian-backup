@@ -66,3 +66,8 @@ export default {
 import noteService from './services/notes'
 ```
 
+由于 JS 的对象字面量特性，可以写成：
+```js
+export default { getAll, create, update }
+```
+这种简洁的性质。
