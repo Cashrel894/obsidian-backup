@@ -71,3 +71,7 @@ import noteService from './services/notes'
 export default { getAll, create, update }
 ```
 这种简洁的性质。
+
+## Promises and Errors
+有时，前端向后端发出的请求可能失败，此时后端会向前端发送相关的状态码（如 404），前端需要根据回复的错误向用户做出合适的反馈。
+
