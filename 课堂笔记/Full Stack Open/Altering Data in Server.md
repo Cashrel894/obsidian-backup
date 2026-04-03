@@ -75,3 +75,27 @@ export default { getAll, create, update }
 ## Promises and Errors
 有时，前端向后端发出的请求可能失败，此时后端会向前端发送相关的状态码（如 404），前端需要根据回复的错误向用户做出合适的反馈。
 
+使用 Promise，可以通过 `catch` 方法绑定错误处理的回调函数：
+```jsx
+axios
+  .get('http://example.com/probably_will_fail')
+  .then(response => {
+    console.log('success!')
+  })
+  .catch(error => {
+    console.log('fail')
+  })
+```
+
+对于一个 Promise Chain，`catch` 通常放在链的末尾，可以捕捉链上的所有异常：
+```jsx
+axios
+  .get('http://example.com/probably_will_fail')
+  .then(response => {
+    console.log('success!')
+  })
+  .catch(error => {
+    console.log('fail')
+  })
+```
+
