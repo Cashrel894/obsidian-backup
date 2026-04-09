@@ -51,3 +51,57 @@ app.listen(PORT, () => {
 接着，我们定义了两个路由 (route)，第一个用于处理到根路径的路由。回调函数中，`request` 参数包含 HTTP 请求的所有的所有信息，`response` 参数则用于定义响应请求的信息。
 
 在 `res.send` 中，express 自动将 `Content-Type` 设为 `text/html`，并将状态码设为 200，最后自动调用 `end` 方法发送响应。
+
+而 `res.json` 类似，只不过将 `Content-Type` 设为 `application/json`，并调用 `JSON.stringify` 序列化传入的对象。
+
+## Restful API
+![[Pasted image 20260409104134.png]]
+
+## Fetching a single resource
+在路由中，我们可以定义 *参数*：
+```js
+app.get('/api/notes/:id', (request, response) => {
+  const id = request.params.id
+  const note = notes.find(note => note.id === id)
+  response.json(note)
+})
+```
+这里，我们用 `:xxx` 来表示路由中的参数，并可以通过 ` request.params.xxx ` 来访问特定的参数。
+
+然而这段代码有一定问题，如果我们访问了不存在的资源，`res.json` 就会被传入 `undefined`，进而响应一个 `Content-Length` 为 0 、响应体为空的成功响应。而我们应该响应的是 `404 not found`。
+
+```js
+app.get('/api/notes/:id', (request, response) => {
+  const id = request.params.id
+  const note = notes.find(note => note.id === id)
+  
+  if (note) {
+    response.json(note)
+  } else {
+    response.status(404).end()
+  }
+})
+```
+
+附：如果要覆盖 express 默认的状态信息，可以利用原生的 http 库：
+```js
+// Source - https://stackoverflow.com/a/36507614
+// Posted by mamacdon
+// Retrieved 2026-04-09, License - CC BY-SA 3.0
+
+function(req, res) {
+    res.statusMessage = "Current password does not match";
+    res.status(400).end();
+}
+```
+
+## Delete
+```js
+app.delete('/api/notes/:id', (request, response) => {
+  const id = request.params.id
+  notes = notes.filter(note => note.id !== id)
+
+  response.status(204).end()
+})
+```
+通常，`delete` 请求的响应状态码为 `204 no content`，响应体为空。有时也可能返回 `404 not found`。
