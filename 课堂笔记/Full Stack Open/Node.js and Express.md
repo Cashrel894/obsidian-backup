@@ -50,3 +50,4 @@ app.listen(PORT, () => {
 
 接着，我们定义了两个路由 (route)，第一个用于处理到根路径的路由。回调函数中，`request` 参数包含 HTTP 请求的所有的所有信息，`response` 参数则用于定义响应请求的信息。
 
+在 `res.send` 中，express 自动将 `Content-Type` 设为 `text/html`，并将状态码设为 200，最后自动调用 `end` 方法发送响应。
