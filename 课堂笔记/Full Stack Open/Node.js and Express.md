@@ -23,3 +23,30 @@ console.log(`Server running on port ${PORT}`)
 
 ## Express
 Node 内置的 http 服务器足以实现一个服务器，但有时过于笨重、难以扩大规模。Express 是一个流行的后端开发框架，可以大大简化服务器开发流程。
+
+```js
+const express = require('express')
+const app = express()
+
+let notes = [
+  ...
+]
+
+app.get('/', (request, response) => {
+  response.send('<h1>Hello World!</h1>')
+})
+
+app.get('/api/notes', (request, response) => {
+  response.json(notes)
+})
+
+const PORT = 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+```
+
+在这段代码中，我们首先导入 `express` 构造函数，随即用其创建一个服务器对象 `app`。
+
+接着，我们定义了两个路由 (route)，第一个用于处理到根路径的路由。回调函数中，`request` 参数包含 HTTP 请求的所有的所有信息，`response` 参数则用于定义响应请求的信息。
+
