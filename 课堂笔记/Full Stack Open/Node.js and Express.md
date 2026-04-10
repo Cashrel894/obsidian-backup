@@ -105,3 +105,25 @@ app.delete('/api/notes/:id', (request, response) => {
 })
 ```
 通常，`delete` 请求的响应状态码为 `204 no content`，响应体为空。有时也可能返回 `404 not found`。
+
+## Receiving data
+要创建新的资源，前端需要向后端发送 HTTP POST 请求，并将新资源的相关信息用 JSON 格式存储在请求体中。
+
+后端想要解析发来的 JSON，可以使用 Express 的 json-parser 中间件：
+```js
+const express = require('express')
+const app = express()
+
+app.use(express.json())
+
+//...
+
+app.post('/api/notes', (request, response) => {
+  const note = request.body
+  console.log(note)
+  response.json(note)
+})
+```
+
+在这里，在路由处理请求之前，json-parser 就先使用请求的 JSON 数据，将其转换为 JS 对象，并赋值给 req 对象的 body 属性。
+
