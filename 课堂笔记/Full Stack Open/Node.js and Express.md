@@ -138,4 +138,29 @@ HTTP 请求类型需要满足一定的要求，例如在 HTTP 标准中：
 
 先前的 json-parser 属于一种 Express **中间件**(Middleware)，它从 `request` 对象中提取出原始数据，接着将其解析为 JS 对象，最后赋值给 `request` 对象的 `body` 属性。
 
+中间件可以有很多个，会依照代码顺序一个个执行。
+```js
+const requestLogger = (request, response, next) => {
+  console.log('Method:', request.method)
+  console.log('Path:  ', request.path)
+  console.log('Body:  ', request.body)
+  console.log('---')
+  next()
+}
+```
+中间件接受三个参数：`request`、`response` 和 `next`。其中，`next` 被传入了下一个中间件，当前中间件可以控制下一中间件的执行。
+
+通过 `app.use` 插入中间件：
+```js
+app.use(requestLogger)
+```
+
+如果我们想要让路由事件处理器自动执行中间件，那么中间件应当在路由定义之前被插入。但有时，我们会在路由定义之后插入中间件，用于处理任何未被路由处理的请求。例如：
+```js
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
+```
 
