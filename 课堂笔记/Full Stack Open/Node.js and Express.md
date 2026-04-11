@@ -127,3 +127,15 @@ app.post('/api/notes', (request, response) => {
 
 在这里，在路由处理请求之前，json-parser 就先使用请求的 JSON 数据，将其转换为 JS 对象，并赋值给 req 对象的 body 属性。
 
+## About HTTP request types
+HTTP 请求类型需要满足一定的要求，例如在 HTTP 标准中：
+- HTTP GET 和 HEAD 请求应当是 **安全的**。即，GET 只应该从服务器获取数据，不能有任何其他更改。
+- 所有除 HTTP POST 之外的请求都应当是 **幂等的**。即，任意 $\displaystyle N>0$ 个相同的请求等效于单个请求。GET、HEAD、PUT、DELETE 都应当满足此要求。
+可以发现，HTTP POST 请求既不安全，也不幂等。
+
+## Middleware
+中间件是一种用于处理 `request` 和 `response` 对象的函数。
+
+先前的 json-parser 属于一种 Express **中间件**(Middleware)，它从 `request` 对象中提取出原始数据，接着将其解析为 JS 对象，最后赋值给 `request` 对象的 `body` 属性。
+
+
