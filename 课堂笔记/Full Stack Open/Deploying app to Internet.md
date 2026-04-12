@@ -30,3 +30,34 @@ const cors = require('cors')
 
 app.use(cors())
 ```
+
+## Frontend Production Build
+目前，我们都以开发模式运行 React 代码。要让应用部署到互联网上，就需要构建一个生产版本。
+
+使用 Vite，只需要 `npm run build` ，即可创建一个叫作 `dist` 的目录，只包含应用的 HTML 文件及相关资源。所有 JS 代码也被压缩到了单个文件，被称为 **极简** 版本。
+
+## Serving static files from the backend
+一个前端部署策略是，将前端的生产版本复制到后端应用的根目录下，再配置后端使其主页面直接显示为前端的主页面（`dist/index.html`）。
+
+接着，使用 Express 内置的 `static` 中间件：
+```js
+app.use(express.static('dist'))
+```
+
+每当 Express 收到 HTTP GET 请求时，它就会首先检查 dist 目录是否包含对应请求路径的文件。如果有，Express 就会返回它。
+
+此时，对 `www.serversaddress.com/index.html` 或 `www.serversaddress.com` 的请求都将响应 `dist/index.html`，而对 `/api/notes` 的请求则会被后端正常处理。
+
+用这种方式部署时，前后端都在相同的地址，因此可以直接用相对路径进行通信：
+```js
+import axios from 'axios'
+const baseUrl = '/api/notes'
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+// ...
+```
+
