@@ -1,6 +1,6 @@
 #csapp 
 ## Strategy Overview
-- **Free Block Tracking:** Segregated Free List
+- **Free Block Tracking:** Explicit Free List (For now)
 - **Placement Policy:** First Fit
 - **Splitting and Coalescing**: Split if the remains is larger than minimum; Coalescing on Freeing using boundary tags
 
