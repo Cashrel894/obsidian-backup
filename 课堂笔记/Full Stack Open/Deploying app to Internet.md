@@ -65,3 +65,39 @@ const getAll = () => {
 而在生产环境，浏览器、前端、后端的关系如图所示：
 ![[Pasted image 20260413211804.png]]
 
+## Streamlining deploying of the frontend
+在后端的 `package.json` 中加入以下命令，可以自动完成前端构建和后端部署的过程。如果使用 Render 部署应用，那么每次 commit 到 Github 仓库时应用都会自动重新部署，非常方便。
+```json
+{
+  "scripts": {
+    //...
+    "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+  }
+}
+```
+
+## Proxy
+由于将前端中后端 api 的路径改为了相对路径，而开发模式下前端与后端的端口不一样，导致应用无法在开发模式下正常运行。
+
+所幸，我们可以通过 Vite 设置代理。在 `vite.config.js` 中：
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    }
+  },
+})
+```
+
+此时，所有发向 `localhost:5173/api` 的请求都将自动转接到 `localhost:3001`，方便前后端完成通信。
