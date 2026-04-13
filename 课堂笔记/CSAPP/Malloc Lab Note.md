@@ -7,6 +7,22 @@
 ### Boundary tags
 - Both Header & Footer for Free blocks, only Header for Allocated blocks.
 - Tag = Block Size (Aligned by 8) + prev_allocated? + a/f
+- Prologue Block & Epilogue Block (Marked as Allocated)
 
-## Implementation
-### Explicit Free List
+## Data Structure
+### Block
+**Free**:
+- Header Tag
+- Prev Pointer
+- Next Pointer
+- Padding (Optional)
+- Footer Tag
+**Minimum:** 16 bytes
+
+**Allocated**:
+- Header Tag
+- Payload (At least 4 bytes)
+- Padding (Optional)
+**Minimum:** 8 bytes
+
+## Explicit Free List
