@@ -103,3 +103,6 @@ export default defineConfig({
 此时，所有发向 `localhost:5173/api` 的请求都将自动转接到 `localhost:3001`，方便前后端完成通信。
 
 此时，在前端的视角来看，所有的请求都是发向 `localhost:5173` 的，因此不会被同源策略限制，后端的 `cors` 中间件也就不需要了。
+
+## Debugging
+使用 `node --inspect index.js` 启动后端应用，即可在 Chrome 开发者工具
