@@ -100,3 +100,66 @@ noteSchema.set('toJSON', {
 ```
 
 此外，直接在 schema 定义的时候指定 `toJSON` 也是可以的。
+
+## Moving db config to its own module
+一般而言，数据库相关操作应当独立为单独的模块使用。这里，在后端根目录新建目录 `models`，添加一个 `note.js` 文件：
+```js
+const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
+
+const url = process.env.MONGODB_URI
+
+console.log('connecting to', url)
+mongoose.connect(url, { family: 4 })
+
+  .then(result => {
+    console.log('connected to MongoDB')
+  })
+  .catch(error => {
+    console.log('error connecting to MongoDB:', error.message)
+  })
+
+const noteSchema = new mongoose.Schema({
+  content: String,
+  important: Boolean,
+})
+
+noteSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
+module.exports = mongoose.model('Note', noteSchema)
+```
+其中，`MONGODB_URI` 被定义在环境变量中，可防止 url 和密钥泄露。
+
+## Defining env vars using the dotenv lib
+一种更复杂的定义环境变量的方式是使用 `dotenv` 库。我们在项目根目录创建一个 `.env` 文件：
+```js
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0
+PORT=3001
+```
+
+注意，这里将服务器端口 `PORT` 也编码进了 `.env` 中。
+
+**`.env` 文件必须被 gitignored！**
+
+只需要 `require('dotenv').config()`，我们就可以像访问系统环境变量一样访问 `.env` 中的变量：
+```js
+require('dotenv').config()
+const express = require('express')
+const Note = require('./models/note')
+
+const app = express()
+// ..
+
+const PORT = process.env.PORT
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+```
+在这个例子中，应当确保 `dotenv` 在 `Note` 导入之前被导入。
