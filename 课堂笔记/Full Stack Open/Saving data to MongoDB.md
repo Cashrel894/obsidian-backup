@@ -168,7 +168,7 @@ app.listen(PORT, () => {
 It is again time for the exercises. The complexity of our app has now taken another step since besides frontend and backend we also have a database. There are indeed really many potential sources of error.
 
 So we should once more extend our oath:
-
+	
 Full stack development is _extremely hard_, that is why I will use all the possible means to make it easier
 
 - I will have my browser developer console open all the time
