@@ -86,3 +86,17 @@ Note.find({}).then(result => {
 ```
 
 也可以在 `{}` 添加一些约束条件，详见 https://www.mongodb.com/docs/manual/tutorial/query-documents/ 。
+
+## Connecting the backend to a database
+有时我们想指定数据对象转换为 JSON 的格式，可以修改 schema 的 `toJSON` 方法：
+```js
+noteSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+```
+
+此外，直接在 schema 定义的时候指定 `toJSON` 也是可以的。
