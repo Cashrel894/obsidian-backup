@@ -64,3 +64,29 @@ pXa26xhMWaC2SvDotA4r9EgZkulOeSBW
 
 完整版可见 https://www.reddit.com/r/linuxquestions/comments/ku3agh/question_about_find_comand_and_finding_humand/
 
+## Level 7
+```sh
+bandit6@bandit:~$ find / -size 33c -user bandit7 -group bandit6 2>/dev/null
+/var/lib/dpkg/info/bandit7.password
+bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
+Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
+```
+
+密码为 `Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3`
+
+## Level 8 
+```sh
+andit7@bandit:~$ cat data.txt | grep "millionth"
+millionth	VR1ljMayciFxbnUokuQmJFw6QC9VKtub
+```
+
+密码为 `VR1ljMayciFxbnUokuQmJFw6QC9VKtub`
+
+## Level 9
+```sh
+bandit8@bandit:~$ cat data.txt | sort | uniq -c | sort -n | head -n 1
+      1 EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl
+```
+
+密码为 `EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl`
+
