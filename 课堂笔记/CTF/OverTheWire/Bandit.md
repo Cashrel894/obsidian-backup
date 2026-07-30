@@ -90,3 +90,14 @@ bandit8@bandit:~$ cat data.txt | sort | uniq -c | sort -n | head -n 1
 
 密码为 `EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl`
 
+## Level 10
+```sh
+bandit9@bandit:~$ strings data.txt | grep -E "==+"   
+cL0========== the
+========== password
+>========== is
+R========== B0s2khmbT9u0geKuOoVGW3JZKhndE3BG
+```
+密码为 `B0s2khmbT9u0geKuOoVGW3JZKhndE3BG`
+
+## Level 11
