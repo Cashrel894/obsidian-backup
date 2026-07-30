@@ -151,3 +151,33 @@ The password is qQYQiHOBPR8zR61qxYqX45quvihF2uzk
 密码为 `qQYQiHOBPR8zR61qxYqX45quvihF2uzk`
 
 ## Level 14
+```sh
+❯ scp -P 2220 bandit13@bandit.labs.overthewire.org:"~/sshkey.private" .
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-0
+bandit13@bandit.labs.overthewire.org's password: 
+sshkey.private                                        100% 2602     5.6KB/s   00:00    
+```
+
+```sh
+❯ chmod 600 sshkey.private
+❯ ssh bandit14@bandit.labs.overthewire.org -p 2220 -i sshkey.private
+```
+
+```sh
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14 
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14 
+aaWecNkG4FhxJQxz07uiwzVP6bJiYS65
+```
+密码为 `aaWecNkG4FhxJQxz07uiwzVP6bJiYS65`
+
+## Level 15
