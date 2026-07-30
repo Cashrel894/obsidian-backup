@@ -135,3 +135,5 @@ bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ cat gz | bzip2 -d | xxd
 ```sh
 
 ```
+
+密码为 `qQYQiHOBPR8zR61qxYqX45quvihF2uzk`
