@@ -326,3 +326,16 @@ Read: 4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
 Password matches, sending next password
 bW9kBv5WC3P4yoDyf12LSdGuNz5ka6hY
 ```
+密码为 `bW9kBv5WC3P4yoDyf12LSdGuNz5ka6hY`
+
+## Level 22
+```sh
+bandit21@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit22.sh
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+bandit21@bandit:/etc/cron.d$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+RYVux2rHEm9tiXHmLFzuR7Vhx6AZQMEz
+```
+密码为 `RYVux2rHEm9tiXHmLFzuR7Vhx6AZQMEz`
+
