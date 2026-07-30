@@ -108,3 +108,30 @@ bandit11@bandit:~$ tr < data.txt 'A-Za-z' 'N-ZA-Mn-za-m'
 The password is GROozWPO8QyN0mGrjUkID0WCYkZiQxrN
 ```
 密码为 `GROozWPO8QyN0mGrjUkID0WCYkZiQxrN` 
+
+## Level 13
+```sh
+bandit12@bandit:~$ mktemp -d
+/tmp/tmp.CsPOtwmHVw
+bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ cp ~/data.txt .
+bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ cat data.txt
+00000000: 1f8b 0808 b2f0 3b6a 0203 6461 7461 322e  ......;j..data2.
+...
+```
+这里 `1f8b` 是 `gzip` 压缩文件的魔数，应该先反 `hexdump` 后解压缩。
+```sh
+bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ xxd -r data.txt | gzip -d | xxd    
+00000000: 425a 6839 3141 5926 5359 dc09 6683 0000  BZh91AY&SY..f...
+...
+```
+解压缩出来又是一个二进制文件，`xxd` 后发现开头为 `425a`，是 `bzip2` 压缩文件的魔数。
+```sh
+bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ xxd -r data.txt | gzip -d > gz
+bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ cat gz | bzip2 -d | xxd
+00000000: 1f8b 0808 b2f0 3b6a 0203 6461 7461 342e  ......;j..data4.
+...
+```
+依旧是 `gzip` 魔数。
+```sh
+
+```
