@@ -181,3 +181,17 @@ aaWecNkG4FhxJQxz07uiwzVP6bJiYS65
 密码为 `aaWecNkG4FhxJQxz07uiwzVP6bJiYS65`
 
 ## Level 15
+```sh
+bandit14@bandit:~$ telnet localhost 30000
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+aaWecNkG4FhxJQxz07uiwzVP6bJiYS65
+Correct!
+pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
+
+Connection closed by foreign host.
+```
+答案为 `pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7`
+
+## Level 16
