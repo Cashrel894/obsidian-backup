@@ -112,28 +112,42 @@ The password is GROozWPO8QyN0mGrjUkID0WCYkZiQxrN
 ## Level 13
 ```sh
 bandit12@bandit:~$ mktemp -d
-/tmp/tmp.CsPOtwmHVw
-bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ cp ~/data.txt .
-bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ cat data.txt
-00000000: 1f8b 0808 b2f0 3b6a 0203 6461 7461 322e  ......;j..data2.
-...
+/tmp/tmp.tTsXzwBJZC
+bandit12@bandit:~$ cd /tmp/tmp.tTsXzwBJZC
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ cp ~/data.txt .
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ xxd -r data.txt > d0   
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file d0
+d0: gzip compressed data, was "data2.bin", last modified: Wed Jun 24 14:58:58 2026, max compression, from Unix, original size modulo 2^32 578
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ cat d0 | gzip -d > d1
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file d1
+d1: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ cat d1 | bzip2 -d > d2
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file d2
+d2: gzip compressed data, was "data4.bin", last modified: Wed Jun 24 14:58:58 2026, max compression, from Unix, original size modulo 2^32 20480
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ cat d2 | gzip -d > d3
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file d3
+d3: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ tar xvf d3
+data5.bin
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file data5.bin
+data5.bin: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ tar xvf data5.bin
+data6.bin
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file data6.bin
+data6.bin: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ cat data6.bin | bzip2 -d > d4
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file d4
+d4: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ tar xvf d4
+data8.bin
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file data8.bin
+data8.bin: gzip compressed data, was "data9.bin", last modified: Wed Jun 24 14:58:58 2026, max compression, from Unix, original size modulo 2^32 49
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ cat data8.bin | gzip -d > d5
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ file d5
+d5: ASCII text
+bandit12@bandit:/tmp/tmp.tTsXzwBJZC$ cat d5
+The password is qQYQiHOBPR8zR61qxYqX45quvihF2uzk
 ```
-这里 `1f8b` 是 `gzip` 压缩文件的魔数，应该先反 `hexdump` 后解压缩。
-```sh
-bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ xxd -r data.txt | gzip -d | xxd    
-00000000: 425a 6839 3141 5926 5359 dc09 6683 0000  BZh91AY&SY..f...
-...
-```
-解压缩出来又是一个二进制文件，`xxd` 后发现开头为 `425a`，是 `bzip2` 压缩文件的魔数。
-```sh
-bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ xxd -r data.txt | gzip -d > gz
-bandit12@bandit:/tmp/tmp.CsPOtwmHVw$ cat gz | bzip2 -d | xxd
-00000000: 1f8b 0808 b2f0 3b6a 0203 6461 7461 342e  ......;j..data4.
-...
-```
-依旧是 `gzip` 魔数。
-```sh
-
-```
-
 密码为 `qQYQiHOBPR8zR61qxYqX45quvihF2uzk`
+
+## Level 14
