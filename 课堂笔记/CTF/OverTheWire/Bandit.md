@@ -339,3 +339,54 @@ RYVux2rHEm9tiXHmLFzuR7Vhx6AZQMEz
 ```
 密码为 `RYVux2rHEm9tiXHmLFzuR7Vhx6AZQMEz`
 
+## Level 23
+```sh
+bandit22@bandit:/etc/cron.d$ cat cronjob_bandit23 
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+bandit22@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit23.sh 
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+```
+
+```sh
+❯ echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+8ca319486bfbbc3663ea0fbe81326349
+```
+
+```sh
+bandit22@bandit:/etc/cron.d$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+gKXDTAXnIz3OBxiPjRZ2uqutUlPZrBsw
+```
+
+答案为 `gKXDTAXnIz3OBxiPjRZ2uqutUlPZrBsw`
+
+## Level 24
+```sh
+bandit23@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit24.sh 
+#!/bin/bash
+
+shopt -s nullglob
+
+myname=$(whoami)
+
+cd /var/spool/"$myname"/foo || exit 
+echo "Executing and deleting all scripts in /var/spool/$myname/foo:"
+for i in * .*;
+do
+    if [ "$i" != "." ] && [ "$i" != ".." ];
+    then
+        echo "Handling $i"
+        owner="$(stat --format "%U" "./$i")"
+        if [ "${owner}" = "bandit23" ] && [ -f "$i" ]; then
+            timeout -s 9 60 "./$i"
+        fi
+        rm -rf "./$i"
+    fi
+```
