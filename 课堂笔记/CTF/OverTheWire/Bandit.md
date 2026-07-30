@@ -20,4 +20,17 @@ cat ./-
 ```
 密码为 `PK8fYLZg2hnHSz83plBL1iEPKdD3QToB`
 
+## Level 3
+```sh
+cat ./'--spaces in this filename--'
+```
+密码为 `7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME`
 
+## Level 4
+```sh
+ls -a
+cat ...Hiding-From-You
+```
+密码为 `xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq`
+
+## Level 5
