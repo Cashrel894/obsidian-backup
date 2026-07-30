@@ -14,3 +14,10 @@ cat readme
 
 密码为 `6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR`
 
+## Level 2
+```sh
+cat ./-
+```
+密码为 `PK8fYLZg2hnHSz83plBL1iEPKdD3QToB`
+
+
