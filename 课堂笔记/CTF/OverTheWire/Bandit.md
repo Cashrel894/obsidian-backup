@@ -312,3 +312,17 @@ bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20
 4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
 ```
 密码为 `4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA`
+
+## Level 21
+```sh
+❯ echo "4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA" | nc -l 6894 &
+[1] 373527 373528
+❯ ssh -R 7894:localhost:6894 bandit20@bandit.labs.overthewire.org -p 2220
+```
+
+```sh
+bandit20@bandit:~$ ./suconnect 7894
+Read: 4pIjcunZ0fK2vmp3IwfG8Vf7VhxD6pOA
+Password matches, sending next password
+bW9kBv5WC3P4yoDyf12LSdGuNz5ka6hY
+```
