@@ -34,3 +34,33 @@ cat ...Hiding-From-You
 密码为 `xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq`
 
 ## Level 5
+```sh
+bandit4@bandit:~/inhere$ find . -type f | xargs file -i
+./-file06: application/octet-stream; charset=binary
+./-file09: application/octet-stream; charset=binary
+./-file01: application/octet-stream; charset=binary
+./-file08: application/octet-stream; charset=binary
+./-file00: application/octet-stream; charset=binary
+./-file03: application/octet-stream; charset=binary
+./-file07: text/plain; charset=us-ascii
+./-file02: application/octet-stream; charset=binary
+./-file05: application/octet-stream; charset=binary
+./-file04: application/octet-stream; charset=binary
+bandit4@bandit:~/inhere$ cat ./-file07 
+6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG
+```
+密码为 `6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG`
+
+## Level 6
+```sh
+bandit5@bandit:~/inhere$ find . -size 1033c
+./maybehere07/.file2
+bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
+pXa26xhMWaC2SvDotA4r9EgZkulOeSBW
+```
+这里发现只有一个匹配项，所以另外两个条件是多余的。
+
+密码为 `pXa26xhMWaC2SvDotA4r9EgZkulOeSBW`
+
+完整版可见 https://www.reddit.com/r/linuxquestions/comments/ku3agh/question_about_find_comand_and_finding_humand/
+
