@@ -195,3 +195,14 @@ Connection closed by foreign host.
 答案为 `pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7`
 
 ## Level 16
+```sh
+bandit15@bandit:~$ openssl s_client -connect localhost:30001
+...
+pbLYuZtTg4MgaqfJx8jbA9gKKGqM68A7
+Correct!
+kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V
+
+closed
+```
+答案为 `kS0Hf0u5HiXFwKMKFqXvPdOTNGGa0X8V`
+
