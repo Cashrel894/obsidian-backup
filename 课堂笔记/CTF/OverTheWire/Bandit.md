@@ -4,14 +4,12 @@ https://overthewire.org/wargames/bandit/
 ```sh
 ssh -p 2220 bandit0@bandit.labs.overthewire.org
 ```
-
 密码直接输入 `bandit0`
 
 ## Level 1
 ```sh
 cat readme
 ```
-
 密码为 `6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR`
 
 ## Level 2
@@ -71,7 +69,6 @@ bandit6@bandit:~$ find / -size 33c -user bandit7 -group bandit6 2>/dev/null
 bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
 Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
 ```
-
 密码为 `Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3`
 
 ## Level 8 
@@ -79,7 +76,6 @@ Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3
 andit7@bandit:~$ cat data.txt | grep "millionth"
 millionth	VR1ljMayciFxbnUokuQmJFw6QC9VKtub
 ```
-
 密码为 `VR1ljMayciFxbnUokuQmJFw6QC9VKtub`
 
 ## Level 9
@@ -87,7 +83,6 @@ millionth	VR1ljMayciFxbnUokuQmJFw6QC9VKtub
 bandit8@bandit:~$ cat data.txt | sort | uniq -c | sort -n | head -n 1
       1 EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl
 ```
-
 密码为 `EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl`
 
 ## Level 10
@@ -101,3 +96,15 @@ R========== B0s2khmbT9u0geKuOoVGW3JZKhndE3BG
 密码为 `B0s2khmbT9u0geKuOoVGW3JZKhndE3BG`
 
 ## Level 11
+```sh
+bandit10@bandit:~$ base64 -d data.txt 
+The password is pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro
+```
+密码为 `pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro`
+
+## Level 12
+```sh
+bandit11@bandit:~$ tr < data.txt 'A-Za-z' 'N-ZA-Mn-za-m'
+The password is GROozWPO8QyN0mGrjUkID0WCYkZiQxrN
+```
+密码为 `GROozWPO8QyN0mGrjUkID0WCYkZiQxrN` 
