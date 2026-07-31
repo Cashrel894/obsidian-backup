@@ -682,3 +682,26 @@ error: failed to push some refs to 'ssh://bandit.labs.overthewire.org:2220/home/
 ```
 密码为 `pWuj5jBQ6IgV0NXwiH6g1pXRF8S1YvbT`
 
+## Level 33
+```sh
+> $0
+$ ls
+uppershell
+$ cat /etc/bandit_pass/bandit33
+u4P2CyPOwPGLe94RdD9Uo2FxFwvnFswM
+```
+密码为 `u4P2CyPOwPGLe94RdD9Uo2FxFwvnFswM`
+
+## Level 34
+```sh
+bandit33@bandit:~$ cat README.txt 
+Congratulations on solving the last level of this game!
+
+At this moment, there are no more levels to play in this game. However, we are constantly working
+on new levels and will most likely expand this game with more levels soon.
+Keep an eye out for an announcement on our usual communication channels!
+In the meantime, you could play some of our other wargames.
+
+If you have an idea for an awesome new level, please let us know!
+```
+完结撒花🥳🎉
