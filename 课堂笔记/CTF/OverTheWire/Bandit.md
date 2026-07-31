@@ -390,3 +390,8 @@ do
         rm -rf "./$i"
     fi
 ```
+
+```sh
+#!/bin/bash
+
+```
