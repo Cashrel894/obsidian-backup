@@ -450,3 +450,100 @@ export TERM=linux
 exec more ~/text.txt
 exit 0
 ```
+这说明登陆 `bandit26` 后会启动 `more ~/text.txt` 作为默认 `shell`，随后退出。
+
+而 `more` 指令在终端窗口足够大时不会进入交互模式，导致连接立即断开。
+
+因此，可以缩小终端窗口，进入交互模式，随后按 `v` 使用 `vim` 打开 `text.txt`。
+
+而 `vim` 可以通过 `:set shell=...` 更改 `shell`，也可以 `:shell` 打开终端。因此，在 `vim` 中：
+```sh
+:set shell="/bin/bash"
+:shell
+```
+
+就可以正常进入 `bash`。然后愉快地获取 `bandit26` 的密码：
+```sh
+bandit26@bandit:~$ cat /etc/bandit_pass/bandit26
+jHdv2ELQhT22BkprMNDjybZDAkw1zeBJ
+```
+密码为 `jHdv2ELQhT22BkprMNDjybZDAkw1zeBJ`
+
+## Level 27
+本关主要用来逃离登陆繁琐的 `Level 26`：
+```sh
+bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27 
+STJLJBRRphMxKB392CT4iOr5CbzPU9ER
+```
+密码为 `STJLJBRRphMxKB392CT4iOr5CbzPU9ER`
+
+## Level 28
+```sh
+❯ git clone ssh://bandit27-git@bandit.labs.overthewire.org:2220/home/bandit27-git/repo
+Cloning into 'repo'...
+...
+❯ cd repo
+❯ ls
+README
+❯ cat README
+The password to the next level is: y8Yd2ssKcpHpud7UvOSOxwamRMzIGIeQ
+```
+密码为 `y8Yd2ssKcpHpud7UvOSOxwamRMzIGIeQ`
+
+## Level 29
+```sh
+❯ git clone ssh://bandit28-git@bandit.labs.overthewire.org:2220/home/bandit28-git/repo
+Cloning into 'repo'...
+...
+❯ cd repo
+❯ ls
+README.md
+❯ cat README.md
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+```
+
+这时候不难猜想真实密码藏在提交历史中，所以 `git log` 一下：
+```sh
+commit e2e1de5396037bafb23e9bb37c12ebea9b911cfd (HEAD -> master, origin/master, origin/HEAD)
+Author: Morla Porla <morla@overthewire.org>
+Date:   Wed Jun 24 14:59:20 2026 +0000
+
+    fix info leak
+
+commit 2678cfadd8f2a347bc23e1ea491f702e5b184709
+Author: Morla Porla <morla@overthewire.org>
+Date:   Wed Jun 24 14:59:20 2026 +0000
+
+    add missing data
+
+commit 9530d526c22b9e6e6ae11070ef8ff8ee21eb2e02
+Author: Ben Dover <noone@overthewire.org>
+Date:   Wed Jun 24 14:59:20 2026 +0000
+
+    initial commit of README.md
+```
+
+看样子应该是 `add missing data` 这次提交里包含了密码，`checkout` 过去：
+```sh
+❯ git checkout 2678cf
+❯ cat README.md
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: Em7eGtqaMySwNFjCpwzzHhLhospOcdt0
+```
+密码为 `Em7eGtqaMySwNFjCpwzzHhLhospOcdt0`
+
+## Level 30
+```sh
+
+```
