@@ -437,3 +437,16 @@ Correct!
 The password of user bandit25 is SoHfqMOEqIX2IYKVciZxvgpR9a2Djx4P
 ```
 密码为 `SoHfqMOEqIX2IYKVciZxvgpR9a2Djx4P`
+
+## Level 26
+```sh
+bandit25@bandit:~$ cat /etc/passwd | grep "bandit26"
+bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext
+bandit25@bandit:~$ cat /usr/bin/showtext
+#!/bin/sh
+
+export TERM=linux
+
+exec more ~/text.txt
+exit 0
+```
