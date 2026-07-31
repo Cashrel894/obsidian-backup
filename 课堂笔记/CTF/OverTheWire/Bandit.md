@@ -545,5 +545,140 @@ Some notes for level29 of bandit.
 
 ## Level 30
 ```sh
+❯ git clone ssh://bandit29-git@bandit.labs.overthewire.org:2220/home/bandit29-git/repo
+Cloning into 'repo'...
+...
+❯ cat README.md
+# Bandit Notes
+Some notes for bandit30 of bandit.
 
+## credentials
+
+- username: bandit29
+- password: <no passwords in production!>
 ```
+
+通过 `git log` 发现密码并不在拉下来的这个仓库里，结合 `no passwords in production` 的提示，考虑寻找远程分支。
+
+```sh
+❯ git remote show origin
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-0
+bandit29-git@bandit.labs.overthewire.org's password: 
+* remote origin
+  Fetch URL: ssh://bandit29-git@bandit.labs.overthewire.org:2220/home/bandit29-git/repo
+  Push  URL: ssh://bandit29-git@bandit.labs.overthewire.org:2220/home/bandit29-git/repo
+  HEAD branch: master
+  Remote branches:
+    dev         tracked
+    master      tracked
+    sploits-dev tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+```
+
+```sh
+❯ git branch -r
+origin/HEAD -> origin/master
+origin/dev
+origin/master
+origin/sploits-dev
+```
+
+```sh
+❯ git checkout origin/dev
+❯ cat README.md
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: jq9Dfg2rXsfYsWMgFuKlXhphjdH7USgX
+```
+
+密码为 `jq9Dfg2rXsfYsWMgFuKlXhphjdH7USgX`
+
+## Level 31
+```sh
+❯ git clone ssh://bandit30-git@bandit.labs.overthewire.org:2220/home/bandit30-git/repo
+Cloning into 'repo'...
+...
+❯ git tag
+secret
+❯ git show secret
+82NkymblpGBYmIXG6ZQ8YldBYstHpfUf
+```
+密码为 `82NkymblpGBYmIXG6ZQ8YldBYstHpfUf`
+
+## Level 32
+```sh
+❯ git clone ssh://bandit31-git@bandit.labs.overthewire.org:2220/home/bandit31-git/repo
+Cloning into 'repo'...
+...
+❯ cd repo
+❯ ls
+README.md
+❯ cat README.md
+This time your task is to push a file to the remote repository.
+
+Details:
+    File name: key.txt
+    Content: 'May I come in?'
+    Branch: master
+```
+照做即可。
+
+注意隐藏文件 `.gitignore` 中设置了 `*.txt`，在暂存 `key.txt` 前需要先干掉 `.gitignore` 。
+```sh
+❯ rm .gitignore
+❯ git add key.txt
+❯ git commit -m "Beg remote to let me in"
+[master 22a8ba6] Beg remote to let me in
+ 1 file changed, 1 insertion(+)
+ create mode 100644 key.txt
+❯ git push
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-0
+bandit31-git@bandit.labs.overthewire.org's password: 
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 24 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 333 bytes | 333.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: ### Attempting to validate files... ####
+remote: 
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+remote: 
+remote: Well done! Here is the password for the next level:
+remote: pWuj5jBQ6IgV0NXwiH6g1pXRF8S1YvbT 
+remote: 
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+remote: 
+To ssh://bandit.labs.overthewire.org:2220/home/bandit31-git/repo
+ ! [remote rejected] master -> master (pre-receive hook declined)
+error: failed to push some refs to 'ssh://bandit.labs.overthewire.org:2220/home/bandit31-git/repo'
+```
+密码为 `pWuj5jBQ6IgV0NXwiH6g1pXRF8S1YvbT`
+
