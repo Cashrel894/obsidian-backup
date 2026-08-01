@@ -74,3 +74,13 @@ mallory:9urtcpzBmH
 密码为 `K30JrSRHzjxq3paUQuwozY4MNvmNFyhI`
 
 ## Level 4
+访问 `http://natas3.natas.labs.overthewire.org/robots.txt`
+```plain
+User-agent: *
+Disallow: /s3cr3t/
+```
+不让进的说明有秘密，访问 `http://natas3.natas.labs.overthewire.org/s3cr3t/user.txt`
+```plain
+natas4:JDrPnuZAKyl6MkiqQGFIddrqpvgOASth
+```
+密码为 `JDrPnuZAKyl6MkiqQGFIddrqpvgOASth`
