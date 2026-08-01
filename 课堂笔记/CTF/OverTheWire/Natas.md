@@ -62,3 +62,15 @@ PS: 这关本意应该是防止在浏览器中右键进入开发者工具，但�
 
 ## Level 3
 访问 `http://natas2.natas.labs.overthewire.org/files/`，发现 `users.txt`。
+```plain
+# username:password
+alice:BYNdCesZqW
+bob:jw2ueICLvT
+charlie:G5vCxkVV3m
+natas3:K30JrSRHzjxq3paUQuwozY4MNvmNFyhI
+eve:zo4mJWyNj2
+mallory:9urtcpzBmH
+```
+密码为 `K30JrSRHzjxq3paUQuwozY4MNvmNFyhI`
+
+## Level 4
