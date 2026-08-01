@@ -61,3 +61,4 @@ next level on this page, but rightclicking has been blocked!
 PS: 这关本意应该是防止在浏览器中右键进入开发者工具，但我这里一直用 curl 没注意。
 
 ## Level 3
+访问 `http://natas2.natas.labs.overthewire.org/files/`，发现 `users.txt`。
