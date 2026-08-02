@@ -194,3 +194,10 @@ EGAgHwQ1IxYYMSQYGSZxTUk7NgRJbnEVDCE8GwQwcU1JYTURDSQ1EUk/
 密码为 `EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng`
 
 ## Level 13
+阅读源代码，发现服务端处理文件的逻辑是：
+1. 在 `upload` 目录下生成随机路径，且保证不与既有文件重合；
+```plain
+$target_path = "upload/<unique random string>.<ext>"
+```
+注意到，其中的 `<ext>` 来自表单的 `filename` 字段，这为我们提供了突破口。
+2. 
