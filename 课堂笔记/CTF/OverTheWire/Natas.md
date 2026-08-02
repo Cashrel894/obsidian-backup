@@ -150,3 +150,10 @@ if($key != "") {
 密码为 `EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv`
 
 ## Level 11
+构造字符串 `"" /etc/natas_webpass/natas11`，可得到
+```plain
+/etc/natas_webpass/natas11:VUMQDmuITOEHzhviLE5V0VG9cPMQkyxd
+```
+
+密码为 `VUMQDmuITOEHzhviLE5V0VG9cPMQkyxd`
+
