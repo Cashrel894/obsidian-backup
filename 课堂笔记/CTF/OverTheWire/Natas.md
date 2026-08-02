@@ -242,3 +242,12 @@ echo $content;
 密码为 `A0xXu2x9FW8rb8OSQ4ei6n5VBbLUz8h8`
 
 ## Level 15
+可 sql 注入，构造 `username`：
+```sql
+123
+```
+以及 `password`：
+```sql
+456 UNION SELECT * from users
+```
+
