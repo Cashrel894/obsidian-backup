@@ -157,3 +157,40 @@ if($key != "") {
 
 密码为 `VUMQDmuITOEHzhviLE5V0VG9cPMQkyxd`
 
+## Level 12
+通过查看网页存储，发现 Cookie：
+```plain
+data: EGAgHwQ1IxYYMSQYGSZxTUksPFVHYDEQCC0%2FGBlgaVVIJDURDSQ1VRY%3D
+```
+其中有字符进行了 url 编码：
+```plain
+%2B: +
+%2F: /
+%3D: =
+```
+因此还原为 base 64 编码：
+```plain
+EGAgHwQ1IxYYMSQYGSZxTUksPFVHYDEQCC0/GBlgaVVIJDURDSQ1VRY=
+```
+通过手动编码 `array( "showpassword"=>"no", "bgcolor"=>"#ffffff")`，会得到：
+```
+eyJzaG93cGFzc3dvcmQiOiJubyIsImJnY29sb3IiOiIjZmZmZmZmIn0=
+```
+由于异或的性质：
+```plain
+enc = plain ^ key -> key = enc ^ plain
+```
+因此将两个编码异或处理：
+```plain
+kBSwkBSwkBSwkBSwkBSwkBSwkBSwkBSwkBSwkBSwk
+```
+不难看出 `key` 为 `kBSw`。这样就可以编码 `array( "showpassword"=>"yes", "bgcolor"=>"#ffffff")` 了：
+```plain
+EGAgHwQ1IxYYMSQYGSZxTUk7NgRJbnEVDCE8GwQwcU1JYTURDSQ1EUk/
+```
+
+修改 Cookie 并刷新，就可以看到密码了。
+
+密码为 `EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng`
+
+## Level 13
