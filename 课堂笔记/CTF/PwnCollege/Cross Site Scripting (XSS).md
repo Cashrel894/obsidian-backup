@@ -7,4 +7,4 @@
 ## Reflective XSS
 反射型 XSS 则略有不同，这要求受害者必须主动访问一个带有特殊参数的 url，从而触发脚本执行攻击。
 
-## 
+## Cross-Site Request Forgery
