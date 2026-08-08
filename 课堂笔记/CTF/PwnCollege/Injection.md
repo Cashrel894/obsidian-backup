@@ -24,3 +24,5 @@ hacker@web-security~path-traversal-1:~$ curl --path-as-is -v challenge.localhost
 > [!note]
 > 由于 `curl` 默认会自动处理 `/./` 和 `/../` 路径，发送请求前需要显式关闭。
 
+## Command Injection (CMDi)
+有些程序会根据用户输入构造 Shell 指令，并运行具有高级权限的外部程序，而攻击者则可以利用复杂的 Shell 语法构造攻击输入。
