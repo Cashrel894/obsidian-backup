@@ -66,6 +66,9 @@ Cookie 可以指定多种属性：
 #### Path
 指定允许附带 Cookie 的请求路径（及其任意子路径）
 
+#### httponly
+当设置了 `httponly` 属性时，Cookie 只能在 HTTP 请求头中被访问。这也就意味着无法通过 JS 访问 Cookie。
+
 ### Cross-Origin Resource Sharing (CORS)
 跨源资源共享是浏览器提供的一种允许或限制跨源 HTTP 请求的机制。
 
