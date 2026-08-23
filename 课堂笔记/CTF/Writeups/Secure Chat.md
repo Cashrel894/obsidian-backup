@@ -15,3 +15,7 @@
 这一次 Sharon 会在向 Bob 发送 Flag 后删号跑路，前一次的解法就行不通了。于是可以想到利用 Alice 与 Bob 的通信，伪装成 Alice 获取 Bob 发送的 Flag。
 
 但是这里面临一个问题：Alice 的账号 `alice` 为管理员，只能从服务器本地地址（即 Alice 的 host ）登录。
+
+此时注意到 `chat_server` 提供了修改用户 `username`、`password`、`admin` 的功能，那么只需要让管理员 Alice 主动去除自身的 `admin` 权限，就可以登录 `alice` 与 Bob 加密通信了。
+
+而 Alice 会在
