@@ -21,7 +21,7 @@
 而 Alice 初始会不断检查与 Mallory 的通信，直到收到 `I heard someone shared the flag with Bob!` 为止。于是可以想到先以 Mallory 的名义对 Alice 发动 XXS 攻击，使得 Alice 修改自身的 `admin` 权限（以及 `password`，方便后续登录 `alice`，同时阻止 Alice 本人登录，污染与 Bob 的通信）。
 
 于是具体攻击流程如下：
-- 发动 XSS 攻击：SQL 注入登录 `mallory`，向 `alice` 发送 XXS 攻击脚本，再发送 `I heard someone shared the flag with Bob!` 启动Alice与Bob的加密通信。
+1. 发动 XSS 攻击：SQL 注入登录 `mallory`，向 `alice` 发送 XXS 攻击脚本，再发送 `I heard someone shared the flag with Bob!` 启动Alice与Bob的加密通信。
 ```html
 <script>
     fetch("/user/alice/modify", {
@@ -37,4 +37,6 @@
     });
 </script>
 ```
-- 通信身份伪装：用修改的密码登录 `alice`，根据 `run` 的通信流程与 `bob` 建立 DH-AES 加密信道，获取 Bob 发送的 Flag。
+2. 通信身份伪装：用修改的密码登录 `alice`，根据 `run` 的通信流程与 `bob` 建立 DH-AES 加密信道，获取 Bob 发送的 Flag。
+
+## Secure Chat 3
