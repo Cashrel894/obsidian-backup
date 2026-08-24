@@ -40,3 +40,31 @@
 2. 通信身份伪装：用修改的密码登录 `alice`，根据 `run` 的通信流程与 `bob` 建立 DH-AES 加密信道，获取 Bob 发送的 Flag。
 
 ## Secure Chat 3
+这一次 Bob 不会再向 Alice 发送 flag 了，必须另寻他计。
+
+观察代码可以发现，唯一能提取 flag 的地方只剩下 Bob 与 Sharon 的通信，而虽然 Sharon 已经删号，只要 Bob 没有删号，数据库仍然会保留她与 Bob 的通信内容。
+
+而通过对 `/login` 进行 SQL 注入，可以泄露 `encrypted_chats` 的任意数据，例如这样注入：
+```sql
+1' UNION SELECT encrypted_contents, '123456', FALSE FROM encrypted_chats WHERE encrypted_username_1 IS NULL OR encrypted_username_2 IS NULL --
+```
+就可以获得含有 flag 的那条通信内容。
+
+问题在于，这条消息受到 AES-ECB 加密保护，密钥来自服务端的 secret_key，常规手段无法获取，如何解决？
+
+借由 ECB 的特点，不难想到可以发动前缀填充攻击，而 `/user/<username>/modify` 为我们提供了攻击的锚点。修改用户名时，会一并修改目标用户参与的所有加密消息中的前缀 `<username>: `；而删除用户时则不会对原消息加以改动。
+
+但 Sharon 已经销号，怎么让 `modify` 定位到那条消息呢？可以先把 Bob 的用户名改为 Sharon 的原用户名，这样服务端就会误以为是原 `bob` 发送了那条前缀为 `<Sharon原用户名>: ` 的消息，此时再修改 Bob 的用户名为想要的前缀即可。
+
+这里又引发一个问题：只有管理员才有权限修改用户名，我们必须借由对管理员 Alice 的 XSS 攻击才能做到，而若使用 2 中的方法，Alice 在获取 Sharon 完整用户名前需要剥除自己的管理员权限，这样就没办法改用户名了。
+
+于是为了在保留 `alice` 权限的前提下获取 Sharon 用户名，就必须修改收发方式：不是以 `alice` 的身份登录，而是通过 XSS 发送，同时用 `bob` 的账号接收。为防止 Alice 本人上号污染通信，在开始前需要 XSS 修改 `alice` 的密码。
+
+PS：这里试错了很久才想到这样做，此前尝试过建一个假号、用 XSS 把用户名改成 `alice`，但若不修改密码会有污染问题，修改密码则会导致假 `alice` 获得管理员权限/真 `alice` 失去管理员权限，尝试很久未能解决，所以应该不是好方法。
+
+于是我们现在获得了所有不同长度 padding 的加密消息，接下来考虑如何得到任意 `block` 的加密。其实可以沿用之前获得加密消息的思路，以明文创建账号、向自己发送消息、SQL 注入获取收发用户相同通信的加密用户名 1、删除账号（此时那条消息也会从数据库中抹除，不用担心与后续的加密竞争）：
+```sql
+1' UNION SELECT encrypted_username_1, '123456', FALSE FROM encrypted_chats WHERE encrypted_username_1=encrypted_username_2 --
+```
+
+综上，我们就具备了 CPA 攻击的全部条件，执行解密即可。
