@@ -69,4 +69,10 @@ PS：这里试错了很久才想到这样做，此前尝试过建一个假号、
 
 综上，我们就具备了 CPA 攻击的全部条件，执行解密即可。
 
-## Secure
+## Secure Chat 4
+这次 `/user/<username>/modify` 对于修改用户名/权限多了一层 `admin_pin` 检查，而反汇编 `check_admin_pin` 发现程序通过 `gets` 获取用户输入，可以通过缓冲区溢出将 `main` 的返回地址覆写为 `grant_access` 的地址，从而通过检查。
+
+其余与前一关无异。
+
+## Secure Chat 5
+这关与上一关的唯一区别是删除了 `app.config.update(SESSION_COOKIE_HTTPONLY=False)`，然而之前的解法本来就没有用到 Session Cookie，因此再跑一遍即可通过。
